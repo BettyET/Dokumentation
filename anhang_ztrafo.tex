@@ -1,0 +1,377 @@
+%-------------------------------------------------------------------------------
+% $HeadURL: http://hb9etc.ch/svn/pluess/tex/da_doku/anhang_ztrafo.tex $
+% $Revision: 861 $
+% $Author: tobias $
+% $Date: 2013-12-23 21:15:48 +0100 (Mon, 23 Dec 2013) $
+%-------------------------------------------------------------------------------
+
+
+\chapter{z-Transformation} \index{z-Transformation|(}
+Auf den folgenden Seiten soll kurz und knapp die Theorie über die
+z-Transformation aufgefrischt werden. Um das ganze möglichst kompakt zu halten,
+werden sämtliche Beispiele und weitere Erläuterungen zu den gemachten Sätzen
+weggelassen, es wird aber dennoch versucht, die z-Transformation so vollständig
+wie möglich zu erklären. Für weitergehende Informationen hierzu sei auf
+\cite{Frey2008, Lunze2, Froriep} verwiesen.
+
+Die z-Transformation entspricht der Laplace-Transformation, ist jedoch für
+diskrete Signale vorgesehen.
+Die bilaterale z-Transformation ist mit
+\begin{equation}
+  X(z) = \sum \limits_{k=-\infty}^{\infty} x[k] \, z^{-k}
+\end{equation}
+definiert. Meist -- auch in der vorliegenden Arbeit -- wird aber die
+unilaterale z-Transformation benutzt; diese wird
+auch rechtsseitige oder einseitige z-Transformation genannt. Sie ist mit
+\begin{equation}
+  X(z) = \sum \limits_{k=0}^{\infty} x[k] \, z^{-k}
+\end{equation}
+definiert. In beiden Fällen ist $z \in \mathbb{C}$.
+
+Die Funktion $X(z)$ heisst Bildfunktion, $x[k]$ heisst
+Originalfunktion. Die z-Transformation kann mit $\lap{ x[k] }{ X(z) }$
+geschrieben werden; ebenso ist auch $X(z) = \ztransz{x[k]}$ möglich.
+
+
+\section{Konvergenzbereich} \index{z-Transformation!Konvergenzbereich}
+
+Die z-Transformierte einer Funktion $x[k]$ existiert nicht zwangsweise für
+jeden beliebigen Wert von $z$, sondern es gibt auch hier ähnlich wie bei der
+Laplace-Transformation bestimmte Bereiche, wo die z-Transformierte existiert
+und solche Bereiche, wo sie nicht existiert. Man spricht auch hier wieder vom
+sogenannten Konvergenzbereich.
+
+Zunächst führt man sich die formale Definition der (unilateralen)
+z-Transformation
+\[
+X(z) = \sum \limits_{k=0}^{\infty} x[k] \, z^{-k}
+\]
+noch einmal vor Augen. Da $z$ eine beliebige Zahl ist, die auch komplex sein
+kann, kann sie i.A. als
+\begin{equation}
+  z = a \, \E^{\j\,b}
+\end{equation}
+geschrieben werden mit $a,b \in \mathbb{R}$. In diesem Fall ist dann
+$a=\abs{z}$ und $b=\arc{z}$. Für $z^{-k}$ gilt:
+\begin{equation}
+  z^{-k} = a^{-k} \, \E^{-\j\,b\,k}
+\end{equation}
+Man erkennt sofort: wenn $a>1$ ist, dann wird für wachsende $k$ die
+Potenz $a^{-k}$ immer kleiner, und zwar in exponentiellem Masse. Sofern $x[k]$
+höchstens eine exponentiell wachsende Funktion ist, muss die z-Transformierte
+also auf jeden Fall existieren, und zwar für alle $z$, für die $\abs{z}>1$ gilt.
+Man erkennt hieraus also: für rechtsseitige Funktionen ist der Konvergenzbereich
+der z-Transformierten die gesamte komplexe Ebene ausserhalb des Einheitskreises.
+
+Für Funktionen, die zeitlich begrenzt sind, d.h. nur in einem Intervall
+$[k_0, k_1]$ verschieden von 0 sind, und ausserhalb dieses Intervalls
+verschwinden (wie z.B. eine Rechteckfunktion), existiert die z-Transformierte
+sogar auf der gesamten komplexen Ebene, ausgenommen dem Ursprung. Für eine
+solche Funktion lautet die z-Transformierte nämlich:
+\begin{equation}
+  X(z) = \sum \limits_{k=k_0}^{k_1} x[k] \, z^{-k} = x[k_0] \, z^{-k_0} +
+  x[k_0 + 1] \, z^{-k_0 - 1} + x[k_0 + 2] \, z^{-k_0 - 2} + \ldots +
+  x[k_1] \, z^{-k_1}
+\end{equation}
+Es gibt also endlich viele Glieder, und daher muss die z-Transformierte auf
+jeden Fall konvergieren. Da die Exponenten von $z$ jedoch allesamt negativ sind,
+gehört der Ursprung der komplexen Ebene aufgrund der Beziehung
+\begin{equation}
+  z^{-k} = \frac{1}{z^k}
+\end{equation}
+nicht zum Konvergenzbereich dazu aufgrund der Division durch 0.
+
+Die Funktion $x[k]$ muss allerdings auch noch bestimmten Bedingungen genügen,
+damit die z-Transformierte existiert. Und zwar darf $x[k]$ höchstens von
+exponentiellem Typ sein. Dies heisst: sei
+\begin{equation}
+  x[k] < a \, \E^{b\,k}
+\end{equation}
+und wenn nun für jeses $k$ ein $a$ und ein $b$ existiert, für die diese
+Bedingung wahr ist, dann existiert auch die z-Transformierte. Also:
+\begin{equation}
+\exists ~ a,b \Leftrightarrow x[k] < a \, \E^{b\,k} ~ \forall k
+\end{equation}
+Etwas einfacher
+kann man diese
+Regel auch so formulieren: wenn $x[k]$ nicht schneller als eine
+Exponentialfunktion wächst, dann wird auch eine z-Transformierte existieren.
+Funktionen wie $x[k]=k!$ oder $x[k]=\E^{k^2}$ sind daher nicht
+z-Transformierbar, da sie schneller als jede Exponentialfunktion wachsen.
+
+\italictitle{Anmerkung}
+Für linksseitige Funktionen $x[k]$ die nur für $k<0$ verschieden von 0 sind,
+kann eine ähnliche Überlegung angestellt werden wie für die rein rechtsseitigen
+Funktionen. Für eine solche linksseitige Funktion gilt nämlich für die
+z-Transformierte:
+\[
+X(z) = \sum \limits_{k=-\infty}^{0} x[k] \, z^{-k}
+\]
+die Exponenten von $z$ sind somit allesamt positiv. Eine solche unendliche
+Reihe kann aber nur dann überhaupt konvergieren, wenn $\abs{z}<1$ ist. Daher ist
+der Konvergenzbereich einer solchen linksseitigen Funktion das innere des
+Einheitskreises.
+
+
+\section{Eigenschaften der z-Transformation}
+\index{z-Transformation!Eigenschaften}
+
+\subsection{Linearität} \index{z-Transformation!Linearität}
+Die z-Transformation ist eine lineare Transformation. D.h., es ist:
+\begin{equation}
+  \ztransz{ a\,x[k] + b\,y[k] } = \ztransz{ a\,x[k] } + \ztransz{ b\,y[k] }
+\end{equation}
+Zudem gilt auch:
+\begin{equation}
+  \ztransz{ a\,x[k] } = a \cdot \ztransz{ x[k] }
+\end{equation}
+
+\subsection{Verschiebungssatz} \index{z-Transformation!Verschiebungssatz}
+Bei einer Verschiebung der Originalfunktion um $k_0$ Zeiteinheiten nach rechts
+muss die Bildfunktion entsprechend mit $z^{-k_0}$ multipliziert werden:
+\begin{equation}
+  \ztransz{ x[k - k_0] } = z^{-k_0} \cdot \ztransz{ x[k] }
+\end{equation}
+Dies gilt jedoch nur, wenn $x[k] = 0$ für $k < 0$ ist. Wenn dies nicht zutrifft,
+dann gilt folgendes:
+\begin{equation}
+  \ztransz{ x[k - k_0] } = z^{-k_0} \cdot \left( X(z) + \sum \limits_{i=1}^{k_0} x[-i] \, z^i \right)
+\end{equation}
+Der Grund hierfür ist, dass bei einer Verschiebung nach rechts auf der linken
+Seite noch weitere Funktionswerte hinzukommen. Da allerdings i.d.R. nur die
+unilaterale z-Transformation benutzt wird und damit $x[k] = 0$ für $k < 0$ ist,
+ist diese Regel eher von untergeordneter Bedeutung.
+
+Bei einer Verschiebung nach links gilt allerdings immer:
+\begin{alignat}{2}
+  \ztransz{ x[k] } &= X(z) \\
+  \ztransz{ x[k + 1] } &= z \cdot \left( X(z) - x[0] \right) \\
+  \ztransz{ x[k + 2] } &= z^2 \cdot \left( X(z) - x[0] - x[1] \, z^{-1} \right) \\
+  \ztransz{ x[k + 3] } &= z^3 \cdot \left( X(z) - x[0] - x[1] \, z^{-2} - x[2] \, z^{-3} \right)
+\end{alignat}
+oder allgemein:
+\begin{equation}
+  \ztransz{ x[k + k_0] } = z^{k_0} \cdot \left( X(z) - \sum \limits_{i=0}^{k - 1} x[k] \, z^{-i} \right)
+\end{equation}
+
+\subsection{Dämpfungssatz} \index{z-Transformation!Dämpfung}
+Bei einer Dämpfung eines Signals im Zeitbereich muss folgende Regel beachtet
+werden: sei \lap{$X(z)}{x[k]}$, dann gilt
+\begin{equation}
+  \ztransz{ a^{-k} \, x[k] } = X(a \, z)
+\end{equation}
+was direkt durch Einsetzen in die Formel für die z-Transformation folgt:
+\[
+  \ztransz{ a^{-k} \, x[k] } =
+  \sum \limits_{k=0}^{\infty} x[k] \, a^{-k} \, z^{-k} =
+  \sum \limits_{k=0}^{\infty} x[k] \cdot \left(a \, z \right)^{-k}
+\]
+Dies hat allerdings einen Einfluss auf den Konvergenzbereich. Denn damit die
+Summe konvergieren kann, muss $\abs{a\,z} > 1$ sein. Daher ist der
+Konvergenzbereich der z-Transformierten: $z>\abs{\frac{1}{a}}$.
+
+\subsection{Lineare Gewichtung} \index{z-Transformation!lineare Gewichtung}
+Bei einer linear mit der Zeit gewichteten Funktion gilt folgender Satz:
+\begin{equation}
+  \ztransz{ k \, x[k] } = -z \cdot \frac{d}{dz} \, X(z)
+\end{equation}
+Denn die z-Transformierte einer solch gewichteten Funktion lautet
+\begin{alignat*}{2}
+  \ztransz{ k \, x[k] } &= \sum \limits_{k=0}^{\infty} k\,x[k]\,z^{-k} &&\\
+  &= 0 + x[1]\,z^{-1} + 2\,x[2]\,z^{-2} + 3\,x[3]\,z^{-3} + \ldots &&
+\end{alignat*}
+während für die nicht gewichtete Funktion
+\begin{alignat*}{2}
+  X(z) &= \sum \limits_{k=0}^{\infty} x[k]\,z^{-k} &&\\
+  &= x[0] + x[1]\,z^{-1} + x[2]\,z^{-2} + x[3]\,z^{-3} + \ldots && \quad\vline \frac{d}{dz} \\
+  &= 0 - x[1]\,z^{-2} - 2\,x[2]\,z^{-3} - 3\,x[3]\,z^{-4} + \ldots && \quad\vline \cdot (-z) \\
+  &= 0 + x[1]\,x^{-1} + 2\,x[2]\,z^{-2} + 3\,x[3]\,z^{-3} + \ldots &&
+\end{alignat*}
+gilt. Daraus folgt:
+\[
+ \underbrace{ 0 + x[1]\,z^{-1} + 2\,x[2]\,z^{-2} + 3\,x[3]\,z^{-3} + \ldots }_{ \ztransz{k\,x[k]}} =
+ -z \cdot \frac{d}{dz} \, \ztransz{ x[k] }
+\]
+
+\subsection{Zeitinversion}\index{z-Transformation!Zeitinversion}
+Für negative $k$ gilt:
+\begin{equation}
+  \ztransz{ x[-k] } = X\left(\frac{1}{z}\right)
+\end{equation}
+Denn es ist
+\[
+  \ztransz{ x[-k] } = \sum \limits_{i=-\infty}^{0} x[k] \, z^{k}
+\]
+und da
+\[
+  z^k = \frac{1}{z^{-k}}
+\]
+ist, folgt hieraus der Zeitinversionssatz.
+
+\subsection{Diskrete Ableitung}\index{z-Transformation!diskrete Ableitung}
+Die diskrete Ableitung ist mit
+\begin{equation}
+  \frac{d}{dz} \, x[k] = x[k] - x[k-1]
+\end{equation}
+definiert. Für die z-Transformierte davon gilt:
+\begin{equation}
+  \ztransz{ x[k] - x[k-1] } = X(z) \cdot \frac{z-1}{z}
+\end{equation}
+Dies geht aus der folgenden Überlegung mit Hilfe des Zeitverschiebungssatzes
+hervor.
+\begin{alignat*}{2}
+  \ztransz{ x[k] - x[k - 1]} &= \sum \limits_{k=0}^{\infty} \left( x[k] - x[k-1] \right) \, z^{-k} &&\\
+  &= \sum \limits_{k=0}^{\infty} x[k]\, z^{-k} - \sum \limits_{k=0}^{\infty} x[k-1]\, z^{-k} &&\\
+  &= X(z) \cdot X(z) \, z^{-1} &&\\
+  &= X(z) \cdot \left( 1 - z^{-1} \right) &&\\
+  &= X(z) \cdot \left( 1 - \frac{1}{z} \right) &&\\
+  &= X(z) \cdot \frac{z-1}{z} &&
+\end{alignat*}
+
+\subsection{Diskrete Integration}\index{z-Transformation!diskrete Integration}
+Das diskrete Integral $I[k]$ einer Funktion $x[k]$ ist wie folgt definiert:
+\begin{equation}
+  I[k] = \sum \limits_{i=0}^k x[i]
+\end{equation}
+Die z-Transformierte davon lautet wie folgt:
+\begin{equation}
+  \ztransz{ \sum \limits_{i=0}^k x[i] } = X(z) \cdot \frac{z}{z-1}
+\end{equation}
+Dies kann damit begründet werden, dass die Integration als die Faltung
+\begin{equation}
+  I = x[k] \ast 1
+\end{equation}
+dargestellt werden kann\footnote{Man beachte: das neutrale Element der Faltung
+ist nicht 1, sondern $\delta[k]$.}. Unter Anwendung des Faltungssatzes erhält man so:
+\begin{equation}
+  \ztransz{ x[k] \ast 1 } = \underbrace{X(z) \vphantom{\frac{z}{z}} }_{\ztransz{x[k]}}
+  \cdot \underbrace{ \frac{z}{z-1} }_{\ztransz{1}}
+\end{equation}
+
+
+\subsection{Faltungssatz} \index{z-Transformation!Faltung}
+Bei einer diskreten Faltung zweier Signale im Zeitbereich werden die
+Bildfunktionen miteinander Multipliziert:
+\begin{equation}
+  \ztransz{ x[k] * y[k] } = \ztransz{ x[k] } \cdot \ztransz{ y[k] }
+\end{equation}
+
+
+\subsection{Anfangswertsatz} \index{z-Transformation!Anfangswertsatz}
+Ist die z-Transformierte $x(z)$ einer Funktion $x[k]$ bekannt, so kann direkt
+ohne vorgängige Rücktransformation der Anfangswert $x[0]$ mit dem
+Anfangswertsatz berechnet werden:
+\begin{equation}
+  \lim \limits_{k \rightarrow 0} x[k] = \lim \limits_{z \rightarrow \infty} X(z)
+\end{equation}
+Dies folgt unmittelbar durch Einsetzen in die Formel für die z-Transformation:
+\[
+  \lim \limits_{z\rightarrow\infty} X(z) =
+  \lim \limits_{z\rightarrow\infty} \sum \limits_{k=0}^{\infty} x[k] \, z^{-k} =
+  x[0]
+\]
+wenn $z$ gegen unendlich geht, dann nimmt nämlich die Folge $z^{-k}$ so rasant
+ab, dass in der Summe nur noch das 1. Glied $x[0]$ übrig bleibt und alle anderen
+Glieder zu 0 werden.
+
+\subsection{Endwertsatz} \index{z-Transformation!Endwertsatz}
+Analog zum Anfangswertsatz gibt es auch eine Möglichkeit, den Endwert der
+Funktion $x[k]$ ohne vorherige Rücktransformation zu berechnen. Dazu dient die
+folgende Beziehung:
+\begin{equation}
+  \lim \limits_{k \rightarrow \infty} x[k] =
+  \lim \limits_{z \rightarrow 1} \left(z - 1\right) \cdot X(z)
+\end{equation}
+Ist  der Endwert der Sprungantwort gesucht, dann kann dieser wie folgt berechnet
+werden:
+\begin{equation}
+  \lim \limits_{z \rightarrow 1} \cancel{ \left(z - 1\right) } \cdot \frac{z}{\cancel{ z - 1} } \cdot X(z)
+  = \lim \limits_{z \rightarrow 1} X(z)
+\end{equation}
+Dies liegt darin begründet dass die Heaviside-Funktion ja die z-Transformierte
+$\frac{z}{z-1}$ hat. Die Sprungantwort erhält man somit durch Multiplikation mit
+$\frac{z}{z-1}$.
+
+
+\section{Inverse z-Transformation} \index{z-Transformation!inverse}
+
+\subsection{Geschlossene Lösung}
+
+Die inverse z-Transformation kann theoretisch mit
+\begin{equation}
+  x[k] = \frac{1}{2\,\pi\,\j} \oint \limits_{(C)} X(z) \, z^{k-1} \, dz
+\end{equation}
+berechnet werden. Dabei ist die Kurve $C$ eine beliebige geschlossene Kurve in
+der komplexen Ebene, die komplett innerhalb des Konvergenzbereichs der
+z-Transformierten liegen muss und die den Ursprung sowie alle Pole der 
+z-Transformierten $X(z)$ umschliesst.
+Dies ist jedoch sehr aufwendig. Man behilft sich daher mit
+ähnlichen Verfahren wie bei der Laplace-Transformation, d.h. die Bildfunktion
+wird mittels Partialbruchzerlegung in bekannte Bildfunktionen zerlegt, die dann
+einfach zurücktransformiert werden können.
+
+Dabei ist es oft von Vorteil, nicht direkt die Bildfunktion $X(z)$ zurück zu
+transformieren, sondern die Funktion $\tilde{X}(z) = \frac{X(z)}{z}$. Man
+zerlegt also $\tilde{X}(z)$ in Partialbrüche. Anschliessend werden die
+einzelnen Partialbrüche wieder mit $z$ multipliziert und dann erst kann die
+Rücktransformation der Partialbrüche erfolgen.
+
+Der Grund für diesen Umweg ist die im Vergleich zur Laplace-Transformation
+prinzipiell andere Form der z-Transformierten. I.d.R. ist es nicht sehr einfach,
+eine z-Transformierte direkt rückzutransformieren, mit diesem Umweg wird diese
+Angelegenheit aber etwas vereinfacht.
+
+
+\subsection{Rekursive Rücktransformation} \index{z-Transformation!inverse, rekursive}
+Nicht in allen Fällen gelingt eine exakte Rücktransformation einer
+z-Transformierten, weil u.U. die Partialbruchzerlegung nicht möglich oder zu
+aufwendig ist, oder aber man ist nur an den numerischen Werte interessiert,
+nicht aber an der geschlossenen Form der Rücktransformierten.
+In einem solchen Fall kann auf die rekursive Rücktransformation
+zurückgegriffen werden. Wohl liefert sie die einzelnen diskreten Werte der
+Rücktransformierten, aber man erhält keinen geschlossenen Term zur Beschreibung
+des Resultats.
+
+Für die rekursive Rücktransformation einer Funktion $X(z)$ muss die
+z-Transformierte zunächst in eine Form wie die folgende gebracht werden:
+\begin{equation}
+  X(z) = \frac{ \sum \limits_{i=0}^M b_i \, z^i }{ \sum \limits_{i=0}^N a_i \, z^i }
+  = \frac{ b_0 + b_1\,z + b_2\,z^2 + b_3\,z^3 + \ldots + b_M\,z^M}{a_0 + a_1\,z + a_2\,z^2 + a_3\,z^3 + \ldots + a_N\,z^N}
+  \label{zform}
+\end{equation}
+Die Exponenten von $z$ müssen also allesamt positiv sein. Ist dieser Schritt
+vollzogen, dann kann die rekursive Rücktransformation mit folgender Vorschrift
+vorgenommen werden:
+\begin{equation}
+  x[k] = \begin{cases}
+  0 & k < 0 \\
+  \frac{1}{a_R} \cdot \left( b_{R-k} - \sum \limits_{i=1}^R a_{R-i} \, x[k - i] \right) & k \geq 0
+  \end{cases}
+\end{equation}
+Hierbei ist $R$ die Anzahl der Koeffizienten. Ist der Zählergrad $M$ verschieden
+vom Nennergrad $N$, dann gilt:
+\begin{equation}
+  R = \max \left\{ M, N \right\} \label{nwert}
+\end{equation}
+Mit dieser rekursiven Rücktransformation ist es nun also möglich, die
+numerischen Werte der einzelnen Stützstellen einer Funktion im Zeitbereich zu
+berechnen. Voraussetzung hierfür ist dann allerdings, dass man die
+vorhergehenden Stützstellen bereits berechnet hat. Werte $x[k]$ für $k < 0$
+werden einfach zu 0 angenommen, damit ist dies eine unilaterale
+Rücktransformation.
+
+
+\section{Gängige Korrespondenzen der z-Transformation}
+\begin{table}
+  \centering
+  \begin{tabular}{l l l l l} \toprule
+  Zeitbereich                     & Bildbereich                   && Zeitbereich                      & Bildbereich \\ \midrule
+  $\displaystyle 1$               & $\displaystyle \frac{z}{z-1}$ && $\displaystyle k$                & $\displaystyle \frac{z}{\left(z-1\right)^2}$ \\[1.1em]
+  $\displaystyle a^k$             & $\displaystyle \frac{z}{z-a}$ && $\displaystyle \E^{\alpha\,k}$   & $\displaystyle \frac{z}{z-\E^{\alpha}}$ \\[1.1em]
+  $\displaystyle a^{k-1}$         & $\displaystyle \frac{1}{z-a}$ && $\displaystyle \cos \omega\,k$  & $\displaystyle \frac{z^2 - z\cos\omega}{z^2 -2\,z\cos\omega + 1}$ \\[1.1em]
+  $\displaystyle \delta[k]$       & $1$                           && $\displaystyle \sin\omega\,k$   & $\displaystyle \frac{z\sin\omega}{z^2 - 2\,z\cos\omega + 1}$ \\ \bottomrule
+  \end{tabular}
+  \caption{Gängige Korrespondenzen}
+\end{table}
+
+\index{z-Transformation|)}

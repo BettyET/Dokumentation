@@ -1,0 +1,162 @@
+%-------------------------------------------------------------------------------
+%
+% Eine \LaTeX-Vorlage zum Buch-Style des Springer-Verlages (svmono.cls)
+% für die deutsche Sprache
+%
+% Idealerweise zu verwenden mit pdfLatex / Miktex unter Windows
+% zusammen mit TexnicCenter
+%
+% Anm.: Das Template entspricht zu 95 % dem Template für Diplomarbeiten gem.
+% http://www.formbuch.de , eine ausführliche Anleitung zum Gebrauch findet sich
+% im Buch "Form der wissenschaftlichen Ausarbeitung"  (Springer-Verlag)
+%
+% Autor:            Tilo Gockel
+% Versionsnummer:   0.901
+% Datum:            12. Mai 2010
+%
+% Kontakt:          Hochschule Aschaffenburg, Forschungsreferat
+%
+%                   info@formbuch.de
+%                   http://www.formbuch.de
+%
+%-------------------------------------------------------------------------------
+
+%\documentclass[envcountsame, envcountchap, openany, deutsch, vecarrow]{svmono}
+\documentclass[envcountsame, envcountchap, deutsch, vecarrow]{svmonosf}
+%-------------------------------------------------------------------------------
+
+% fonts and the like
+\usepackage{lmodern}
+\usepackage{avant}
+\usepackage{fouriernc}
+
+\usepackage{svmonoext}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{longtable}
+
+\usepackage{setspace} 
+\usepackage{caption}	% Beschriftungen in Breite einschränken
+\usepackage{wrapfig}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage[rightcaption]{sidecap}	%Beschriftungen neben Bildern
+\usepackage[]{mcode}				% Einbindung von Matlab-Code
+%-------------------------------------------------------------------------------
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings}
+
+%-------------------------------------------------------------------------------
+
+\def \doctitle {Shock Detection für vernetzte Uhren }
+\def \docauthor {Bettina Wyss}
+\def \docsubject {Subjekt}
+\def \docsubtitle {Pipapo}
+\def \doclocation {Luzern}
+\def \dockeywords {{Stichworte} {Stichworte} {Stichworte}}
+
+\def \doccomment {Hier kann eine Widmung oder ein Spruch eingefügt werden.}
+
+%-------------------------------------------------------------------------------
+
+\hyperrefsetup{colorlinks=false}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\lstset{%
+    basicstyle=\ttfamily,%
+    keywordstyle=\color{blue},%
+    columns=fixed,basewidth=.5em,%
+    commentstyle=\color[RGB]{0,127,0},%
+    linewidth=\linewidth,%
+    captionpos=b,%
+    frame = none,%
+    backgroundcolor = \color[RGB]{230,230,230},%
+    aboveskip=\intextsep,%
+    belowskip = \floatsep,%
+    showstringspaces = false,%
+    stringstyle = \color[RGB]{163,21,21},%
+    tabsize=2,%
+    float=[htbp]}
+
+%-------------------------------------------------------------------------------
+
+\makeindex
+
+\bibliographystyle{bibliografie/ka-style}
+
+\begin{document}
+\onehalfspacing
+%\nocite{*}                     % vollständige bibliographie anzeigen
+
+%-------------------------------------------------------------------------------
+
+\include{titelblatt}
+%\include{sperr}
+\include{erklaerung}
+\include{abstract}
+
+
+\cleardoublepage
+\tableofcontents
+
+\include{vorwort}
+
+\part{Grundlagen}
+\include{content/anforderungen}
+\include{content/physik}
+\include{lösungsansätze}
+\include{beschleunigungsmessung}
+\include{messmethoden}
+
+\part{Klärung der Machbarkeit}
+\include{content/machbarkeit_piezo}
+\include{content/machbarkeit_mems}
+\include{content/machbarkeit_fazit}
+
+\part{Umsetzung}
+
+
+\part{Schlussteil}
+\include{schluss}
+
+
+
+
+\begin{appendix}
+\part{Anhang}
+%\include{anhang_ztrafo}
+\include{anhang_glossar}                 % anhang d, glossar (?)
+\end{appendix}
+
+{
+\raggedright
+\setlength{\bibsep}{3mm}
+\interlinepenalty=10000
+\bibliography{bibliografie/bibliografie}
+\interlinepenalty=100
+}
+
+\newpage
+\clearpage
+
+\listoftables                            % tabellenverzeichnis
+\addcontentsline{toc}{chapter}{\listtablename}
+\clearpage
+
+\listoffigures                           % bilderverzeichnis
+\addcontentsline{toc}{chapter}{\listfigurename}
+\clearpage
+
+%\lstlistoflistings
+%\addcontentsline{toc}{chapter}{Listing-Verzeichnis}
+%\clearpage
+
+
+
+\linespread{0.99}
+\printindex                              % sachverzeichnis
+
+\end{document}
+
+%-------------------------------------------------------------------------------

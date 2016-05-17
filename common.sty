@@ -1,0 +1,62 @@
+\providecommand{\arc}{\operatorname{arc}} %arcus
+\renewcommand{\j}{\mathrm{j}} %j
+\providecommand{\cis}{\operatorname{cis}} %cos und j sin
+\renewcommand{\Re}{\operatorname{\mathfrak{Re}}} %realteil \Re{z}
+\renewcommand{\Im}{\operatorname{\mathfrak{Im}}} %imaginärteil \Im{z}
+\providecommand{\conjz}[1]{{#1}^{\star}} %konjugiert komplexe zahl \conjz{z}
+\providecommand{\matr}[1]{\mathbf{#1}} %definiert eine matrix \matr{A}
+\providecommand{\mgrad}{\operatorname{grad}}                        % gradient
+\providecommand{\mdiv}{\operatorname{div}}                          % divergenz
+\providecommand{\sgn}{\operatorname{sgn}} % signum
+\providecommand{\mrot}{\operatorname{rot}}                          % rotation
+\providecommand{\tran}[1]{#1^{\mathrm{T}}}                          % matrix trans.
+\providecommand{\spur}{\operatorname{sp}}                           % matrix spur
+\providecommand{\rang}{\operatorname{rg}}                           % matrix rang
+\providecommand{\arsinh}{\operatorname{arsinh}}                     % arsinh
+\providecommand{\arcosh}{\operatorname{arcosh}}                     % arcosh
+\providecommand{\artanh}{\operatorname{artanh}}                     % artanh
+\providecommand{\arcoth}{\operatorname{arcoth}}                     % artanh
+\providecommand{\fourierf}[1]{\mathscr{F}\left\{#1\right\}}         % fouriertrafo
+\providecommand{\invfourierf}[1]{\mathscr{F}^{-1}\left\{#1\right\}} % inverse ft
+\providecommand{\laplacel}[1]{\mathscr{L}\left\{#1\right\}}         % laplacetrafo
+\providecommand{\invlaplacel}[1]{\mathscr{L}^{-1}\left\{#1\right\}} % inverse lt
+\providecommand{\ztransz}[1]{\mathscr{Z}\left\{#1\right\}}          % ztrafo
+\providecommand{\invztransz}[1]{\mathscr{Z}^{-1}\left\{#1\right\}}  % inverse zt
+\newcommand{\lap}[2]{#1 ~ \laplace ~ #2}
+\newcommand{\invlap}[2]{#1 ~ \Laplace ~ #2}
+\providecommand{\E}{\mathrm{e}}                                     % euler
+\providecommand{\italictitle}[1]{\medskip\emph{#1}\\}               % kl. titel
+\providecommand{\abs}[1]{\left|#1\right|}                           % betrag
+\providecommand{\norm}[1]{\left|\left|#1\right|\right|}             % norm
+\providecommand{\unitc}[1]{\ensuremath{\left[\mathrm{#1}\right]}}   % eckige kammern für einheiten
+\providecommand{\unit}[1]{\ensuremath{\mathrm{#1}}}                 % einheiten
+\providecommand{\negs}[1]{\ensuremath{\mathrm{\overline{#1}}}}      % negierung
+\providecommand{\grd}{°}
+\newcommand{\sinc}{\operatorname{sinc}}
+\newcommand{\si}{\operatorname{si}}
+\providecommand{\grdc}{\mbox{°C}}
+\providecommand{\equ}{\widehat{=}}
+\providecommand{\xref}[1]{\autoref{#1} auf Seite \pageref{#1}}
+\providecommand{\adj}{\operatorname{adj}}
+\providecommand{\diago}{\operatorname{diag}}
+\providecommand{\mrm}[1]{\mathrm{#1}}
+
+\renewcommand{\arraystretch}{1.3}  % bessere matrizen und vektoren
+
+\setlength{\tabcolsep}{0.8em}
+
+\addto\extrasngerman{%
+   \def\subsectionautorefname{Abschnitt}%
+   \def\subsubsectionautorefname{Abschnitt}%
+}
+
+% oberflächenintegral
+\newcommand*\oiint{%
+  \, \tikz \node[draw, rectangle, rounded corners = 2.3pt, inner xsep=-2.4pt, inner ysep=-8.75pt, outer xsep=90] {$\displaystyle\iint$};%
+~\,\vphantom{\int}}
+
+% volumenintegral
+\newcommand*\oiiint{%
+  \, \tikz \node[draw, rectangle, rounded corners = 2.3pt, inner xsep=-2.3pt, inner ysep=-8.75pt] {$\displaystyle\iiint$};%
+~\,\vphantom{\int}}
+

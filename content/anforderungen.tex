@@ -1,0 +1,54 @@
+\chapter{Anforderungen}
+
+Die folgende Liste zeigt die zu Beginn der Arbeit mit dem Industriepartner definierten
+Anforderungen. Diese sind in Anforderungen an die Machbarkeitsstudie, und die Anforderungen an das
+Produkt unterteilt. Die Anforderungen an das Produkt sind für die Machbarkeitsstudie noch nicht
+relevant.
+\\
+\begin{longtable}{p{0.5cm} p{0.5cm} p{8.5cm} p{2cm} } \toprule
+	\textbf{Nr.}	&  &\textbf{Anforderung} & \textbf{Priorität} \\	
+	\midrule
+	\endhead
+	\multicolumn{3}{l}{\emph{Fortsetzung auf nächster Seite}}	\\ \bottomrule \endfoot \endlastfoot
+	\\
+	  &		&\multicolumn{2}{l}{\textbf{Anforderungen an die Machbarkeitsstudie}}							
+	\\
+	1 & 	&	Es ist zu überprüfen, ob mit einem Beschleunigungssensor 
+				Vandalismus an einer Uhr (Beschädigung Scheibe, Uhrwerk) 
+				erkannt werden kann												& Forderung \\ 
+	2 &  	& 	Der Vandalismus muss von Windböen und der Sog-Druckwelle 
+				eines Zuges unterschieden werden können. 						& Forderung \\		
+	3 & 	& 	Es sollen verschiedene Schock-Situationen getestet werden.		& Forderung \\
+	  & 3.1	&	Es soll ein geeigneter Messaufbau entwickelt werden, um 
+				die Schock-Situationen zu simulieren. 							& Forderung \\
+	  & 3.2 & 	Der Messaufbau muss so gewählt werden, dass die Messungen 
+				reproduzierbar sind. 											& Forderung \\
+	4 & 	&	Falls die Detektion möglich ist, soll ein geeigneter 
+				Algorithmus entwickelt werden (z.B. in MATLAB). 				& Forderung \\
+	5 & 	& 	Es soll abgeklärt werden, ob die Implementierung auf dem
+				vorhandenem ATMEL- Kontroller realisiert werden kann.			& Forderung \\
+	  &	5.1	&	Falls die Implementierung auf dem ATMEL- Kontroller nicht
+				realisiert werden kann, muss abgeklärt werden, welche
+				anderen Komponenten benötigt werden.							& Forderung \\
+	6 &		& 	Der Stromverbrauch der Produkterweiterung soll abgeklärt und
+				dokumentiert werden.											& Forderung \\
+	7 & 	& 	Es soll abgeklärt werden, ob eine vorhandene Schnittstelle 
+				(SPI, I2C, UART) verwendet werden kann.							& Forderung \\
+	\\
+	 &		&\multicolumn{2}{l}{\textbf{Anforderungen an das Produkt}}								
+	\\
+	1 &		& 	Die Sensorik darf von aussen nicht sichtbar sein.				& Forderung \\
+	2 & 	& 	Der Alarm soll mittels SNMP über die bestehende Uhrsteuerung
+				abgesetzt werden können.										& Forderung \\
+	3 &		&	Die Kosten für den Sensor liegen im Breich von 5 bis maximal 10 Fr.
+				pro Stück.														& Forderung \\
+	4 & 	& 	Das Sensormodul soll einfach in der Uhr montiert werden können.
+				Die Platzverhältnisse sind insofern beschränkt, dass die
+				Beleuchtung der Uhr nicht gestört wird (siehe Anforderung
+				Produkt Nr. 1)													& Forderung \\
+	5 & 	&	Das Produkt muss bei einer Betriebstemperatur von -30 bis +70°C 
+				arbeiten.  														& Forderung \\
+	\bottomrule					 	
+	\caption{Anforderungen an die Machbarkeitsstudie und an das Produkt} 
+	\label{tab:Anforderungen}
+\end{longtable}

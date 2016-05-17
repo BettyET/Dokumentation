@@ -1,0 +1,68 @@
+% this is my first package
+% 
+% (c) Buffalo Bill
+% LPPL LaTeX Public Project License
+%  
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{svmonoext}[2011/01/11 v0.01 LaTeX package for my own purpose]
+
+%-------------------------------------------------------------------------------
+% eingebundene pakete
+%-------------------------------------------------------------------------------
+
+\RequirePackage[latin1]{inputenc}   % ermöglicht direkte eingabe von umlauten
+\RequirePackage[bottom]{footmisc}   % fussnoten ans ende der seite
+\RequirePackage[ngerman]{babel}     % silbentrennung
+\RequirePackage[babel,german=quotes]{csquotes}        % \enquote befehl
+\RequirePackage{lipsum}             % lorem ipsum texte
+\RequirePackage{booktabs}           % vielseitigere tabellen
+\RequirePackage{float}              % bietet option [H] für verankern von bildern
+\RequirePackage{amsmath}            % für erw. formeloptionen
+\RequirePackage{amstext}            % bietet befehl \text{} für text in formeln
+\RequirePackage{amsfonts}           % bietet mengensymbole z.b. $\mathbb{R}$
+\RequirePackage{mathrsfs}           % script-schrift für laplace-L usw.
+\RequirePackage{trfsigns}           % mathematische korrespondenzen
+\RequirePackage{amssymb}
+\RequirePackage{bm}                 % fettdruck im mathemodus
+\RequirePackage{enumitem}
+%\RequirePackage{enumerate}          % verbessert aufzählungen
+%\RequirePackage{array}              % bindet tabular-umgebung ein
+\RequirePackage{pdfpages}           % einbindung kompletter pdf-seiten
+\RequirePackage{parskip}            % eine knappe leerzeile statt hängender einzüge
+\RequirePackage{indentfirst}        % rückt in der bibl. auch ersten absatz ein
+\RequirePackage{makeidx}            % indexerstellung
+\RequirePackage{eurosym}            % euro symbol
+\RequirePackage{xcolor}             % farbiger Text
+\RequirePackage{multicol} 	        % zur indexerstellung in zwei spalten
+\RequirePackage[babel=true]{microtype}          % besseres kerning, interword spacing etc.
+\RequirePackage[numbers,square]{natbib}          % professionelle bibliographie
+\RequirePackage{tikz}               % erstellen von graphiken
+\RequirePackage{cancel}             % kürzen von brüchen
+\RequirePackage{subfigure}          %
+\RequirePackage{epstopdf}           % konvertieren von eps nach pdf
+\RequirePackage{gnuplottex} % gnuplot
+\RequirePackage{listings}           % für codefragmente
+\RequirePackage{colortbl}           % farbige tabellen
+\RequirePackage[a4paper, right=3cm, left=3cm, top=3cm, bottom=3.5cm]{geometry}
+\RequirePackage[a4,center]{crop}
+\RequirePackage[plainpages=false,hypertexnames=false]{hyperref}  % hyperlinks im pdf
+\RequirePackage[all]{hypcap}        % bei links zu bildern vollst. bild anzeigen
+\RequirePackage{common}
+
+\crop[]
+
+\providecommand{\hyperrefsetup}[1]{\hypersetup{%
+    #1,
+    citecolor=red,%
+    filecolor=red,%
+    linkcolor=red,%
+    urlcolor=red,%
+    linkbordercolor={1 0 0},%
+    citebordercolor={1 0 0},%
+    urlbordercolor={1 0 0},%
+    pdfauthor=\docauthor,%
+    pdfstartview=FitV,%
+    pdftitle=\doctitle,%
+    pdfsubject=\docsubject,%
+    pdfkeywords=\dockeywords}}
+
