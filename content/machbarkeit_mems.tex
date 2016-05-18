@@ -171,30 +171,33 @@
 		zusammengeführt werden (Zeile 10). Der so interpretierte Wert ist nun, da nur 12 Bit lang, eigentlich um den 
 		Faktor 16 zu gross. Dieser Faktor kann beispielsweise in die Umrechnung in m/s$^2$ integriert 
 		werden. 
-	
 	\section{Versuch mit dem Datenlogger}
 		\paragraph{Vorgehensweise}
-		\begin{wrapfigure}[10]{r}{8.5cm}
-			\centering
-			\vspace{-0.8cm}
-			\includegraphics[width=8.5cm]{img/mems_montage.jpg}
-			\caption{Montage des MEMS-Sensors und des pizeoelektrischen Sensors am Uhrwerk}
-			\label{fig:mems_montage}
-		\end{wrapfigure}
+	
 		Der MEMS-Sensor wird am Uhrwerk mit doppelseitigem Klebeband befestigt. Zusätzlich wird mit dem 
 		piezoelektrischen Sensor gemessen (vgl. \autoref{chap:piezo}) um einen Referenzwert zu erhalten. 
 		Die \autoref{fig:mems_montage} zeigt die beiden Sensoren montiert in der Uhr. Wie im \autoref{chap:piezo}
 		wird die Stahlkugel mit einer Masse von 537g mittig aus einem Meter Höhe auf die Uhr fallen gelassen. 
-		
-		
+		\newpage
 		\paragraph{Messresultate}
-		Die \autoref{fig:vergl_mems_piezo} zeigt die Beschleunigungssignale am Uhrwerk gemessen mit dem piezoelektrischen 
-		Sensor wie in \autoref{chap:piezo} und jenen gemessen mit dem MEMS-Sensor. Die beiden Messungen unterscheiden sich 
-		in der Abtastrate. Der Signalverlauf der piezoelektrischen Sensoren wird mit dem Oszilloskop mit einer Abtastfrequenz von
-		500kHz abgetastet. Die Abtastrate des MEMS-Sensor kann maximal 1kHz betragen. Diesen Unterschied erkennt man 
-		darin, dass die sehr kurzen, hohen Beschleunigungspeaks mit dem MEMS-Sensor nicht erfasst werden. Mit einer Abtastrate des MEMS-Sensors von 
-		400Hz wird jedoch die für diese Anwendung interessante Eigenfrequenz des Ziffernblattes 
-		von 50Hz erfolgreich sichtbar. 
+		\begin{wrapfigure}[17]{r}{9cm}
+			\centering
+			\vspace{-0.8cm}
+			\includegraphics[width=8.5cm]{img/mems_montage2.jpg}
+			\caption{Montage des MEMS-Sensors und des pizeoelektrischen Sensors am Uhrwerk}
+			\label{fig:mems_montage}
+		\end{wrapfigure}
+		Die \autoref{fig:vergl_mems_piezo} zeigt die Beschleunigungssignale am Uhrwerk gemessen mit dem
+		piezoelektrischen Sensor (blau) wie in \autoref{chap:piezo} und jenen gemessen mit dem MEMS-Sensor
+		(rot). Die beiden Messungen unterscheiden sich in der Abtastrate. Der Signalverlauf des
+		piezoelektrischen Sensors wird mit dem Oszilloskop mit einer Frequenz von 500kHz abgetastet. Die
+		Abtastrate des MEMS-Sensor hingegen kann maximal 1kHz betragen. Das Beschleunigungssignal gemessen
+		mit dem piezoelektrischen Sensor hat Frequenzanteile, welche durch die tiefere Abtastrate des
+		MEMS- Sensors nicht mehr vorhanden sind. Diesen Unterschied erkennt man darin, dass die sehr
+		kurzen, hohen Beschleunigungspeaks mit dem MEMS-Sensor nicht erfasst werden. Mit der Abtastrate
+		des MEMS-Sensors von 400Hz wird jedoch die für diese Anwendung interessante Eigenfrequenz des
+		Ziffernblattes von 50Hz erfolgreich sichtbar. Nach dem Nyquist-Shannon-Abtasttheorem muss die
+		Abtastfrequenz mindestens doppelt so hoch sein wie die maximale im Signal vorkommende Frequenz. 
 		\begin{SCfigure}
 			\centering
 			\vspace{-1cm}
@@ -202,10 +205,21 @@
 			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g aus einer Höhe von einem Meter gemessen mit piezoelektrischem Sensor (500kHz, blau)  und dem MEMS-Sensor (400Hz, rot)}
 			\label{fig:vergl_mems_piezo}
 		\end{SCfigure}
-	
+		\newpage
+		\paragraph{Fazit}
+		Mit dem MEMS-Sensor kann mit einer minimalen Abtastfrequenz von 400Hz ein Schock, beispielsweise
+		ausgelöst durch einen Steinschlag, detektiert werden. Der Versuch zeigt, dass der mit dem
+		MEMS-Sensor aufgezeichnete Beschleunigungsverlauf mit jenem des piezoelektrischen Sensors überein
+		stimmt. Die kurzen und sehr hohen Beschleunigungspeaks werden nicht mehr erfasst. Der Messbereich
+		wird dadurch kleiner. Es werden dennoch bei diesem Versuch dennoch Beschleunigungen bis zu 100g
+		gemessen. Die für die Anwendung interessanten Frequenzanteile von 50Hz sind im Signal enthalten.
+		Für die Anwendung sollte ein Sensor mit einer minimalen Abtastrate von 400Hz und einem Minimalen
+		Messbereich von $\pm 200g$ eingesetzt werden. Somit kann der halb so teure Sensor aus der gleichen
+		Produktreihe H3LIS200DLTR eingesetzt werden. Dieser hat einen Messbereich bis $\pm 200g$ und 
+		eine maximale Abtastfrequenz von 1kHz. Ausserdem ist dieser mit dem für den Versuch verwendeten 
+		Sensor H3LIS100DLTR pinkompatibel. 
 
 	
-	
-	
+			
 	
 	

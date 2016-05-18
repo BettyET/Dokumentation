@@ -8,25 +8,48 @@
 	Dies sind Vorgehen, Messresultate und Fazit.  
 
 	\section{Versuchsaufbau mit piezoelektrsichen Sensoren} \label{chap:Versuchsaufbau}
-	An der Versuchsuhr werden drei piezoelektrische Beschleunigungssensoren befestigt. Die Positionen 
-	der Sensoren sind in der \autoref{fig:Sensorpositionen} ersichtlich.  
+	\begin{wrapfigure}[10]{r}{6.5cm}
+		\centering
+		\vspace{-1cm}
+		\includegraphics[width=6cm]{img/ks93.png}
+		\caption{Miniatursensor KS93}
+		\label{fig:ks93}
+	\end{wrapfigure}
+	Für die ersten Versuche werden piezoelektrische Sensoren des Typs KS93 verwendet. Dieser
+	Miniatur-Beschleunigungsaufnehmer hat einen Messbereich von $\pm 6000$g und einen linearen
+	Frequenzbereich bis 22kHz. Am Sensorausgang ändert sich je nach Beschleunigung die Ladung Q. Diese
+	muss mit einem Ladungsverstärker in eine Spannung umgewandelt und verstärkt werden. Der
+	Ladungsübertragungsfaktor beträgt 4.875 pC/g. Weiter Eigenschaften des Sensors sind dem Datenblatt
+	zu entnehmen \cite{KS93}.
 	
-	\begin{SCfigure}
+	Der Aufbau mit Versuchsuhr, Ladeverstärker und Oszilloskop ist in der
+	\autoref{fig:versuchsaufbau_piezo} dargestellt. Die Versuchsuhr ist liegend an der Wand befestigt,
+	so dass die Prüfmassen auf die Uhr fallen gelassen werden können. Im Innenraum der Uhr werden drei
+	Sensoren befestigt. Die Positionen dieser sind in der \autoref{fig:Sensorpositionen} ersichtlich.
+	Das Signal mit wird mit dem Ladungsverstärker gewandelt. Der Signalverlauf wird mit einem
+	Oszilloskop aufgezeichnet. 	Die aufgenommenen Beschleunigungssignale werden als Bild und als Daten
+	für Matlab exportiert. Auf dem Computer können die Messungen ausgewertet werden.
+	\begin{figure}
 		\centering
 		%\vspace{-1cm}
+		\captionsetup{width=7cm}
+		\includegraphics[width=7cm]{img/versuchsaufbau_piezo.png}
+		\caption{Versuchsaufbau mit piezoelektrischen Sensoren}
+		\label{fig:versuchsaufbau_piezo}
+	\end{figure}
+
+	\begin{figure}
+		\centering
+		\captionsetup{width=7cm}
+		\vspace{0.5cm}
 		\includegraphics[width=7cm]{img/PosSensoren.png}
 		\caption{Sensorpositionen:\\\\
 			1) An der Montageleiste der Uhr innen, nahe der Konsole (Channel 1, grün)\\\\
 			2) Am Uhrwerk, welches am Ziffernblatt befestigt ist (Channel 2, rot)\\\\
 			3) Am Rahmen der Uhr aussen (Channel 3, blau)}
 		\label{fig:Sensorpositionen}
-	\end{SCfigure}
-	An den Sensoren ändert sich je nach Beschleunigung die Ladung Q. Diese muss mit einem Ladungsverstärker
-	in eine Spannung umgewandelt und verstärkt werden. Dann werden die drei Signale direkt an ein Oszilloskop 
-	angeschlossen. Die aufgenommenen Beschleunigungssignale werden als Bild und als Daten für Matlab exportiert. 
-	Auf dem Computer können die Messungen ausgewertet werden. 
+	\end{figure}
 	
-	Verwendete Sensoren und Geräte: 
 	\begin{longtable}{p{3cm} p{5cm} p{3cm}} \toprule
 		\textbf{Gerät}	& \textbf{Bezeichnung} & \textbf{Serinummer} \\	
 		\midrule
@@ -40,11 +63,12 @@
 		\label{tab:SensorenGeräte}
 	\end{longtable}
 	
-	Die auf dem Oszilloskop aufgenommenen Bilder werden als Matlab-Daten exportiert um Sie dann in Matlab
-	zu verarbeiten. Für die Verarbeitung der Daten wurden zwei Funktionen geschrieben: readOszData() und 
+	\newpage
+	
+	Für die Verarbeitung der Daten in Matlab wurden zwei Funktionen geschrieben: readOszData() und 
 	volt2acc(). Erstere liest die exportierten Daten des Oszilloskopes für jeden Kanal ein und speichert 
 	diese in einer Datenstruktur. Die zweite rechnet die gemessenen Spannungen in die Beschleunigung in 
-	g um. Dabei kann die verwendete Verstärkung am Ladungsverstärker als Parameter mitgegeben werden. 
+	g um. Dabei kann die eingestellte Verstärkung am Ladungsverstärker als Parameter mitgegeben werden. 
 	\lstset{
 		basicstyle=\small\ttfamily,
 		language=Matlab,               	    % choose the language of the code
@@ -66,8 +90,8 @@
 	}
 	\lstinputlisting{code/readOszData.m}
 	\lstinputlisting{code/volt2acc.m}
-		
-\section{Ergebnisse mit piezoelektrischen Sensoren}
+\newpage		
+\section{Ergebnisse der Versuche mit piezoelektrischen Sensoren}
 	\subsection{Zu erwartende Signale bei Vandalismus} \label{subsec:signale}
 		\paragraph{Vorgehensweise}
 		Unter Vandalismus wird die mutwillige Zerstörung verstanden, bei der es um eine Zerstörungslust

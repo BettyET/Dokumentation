@@ -1,8 +1,6 @@
 %Function [meas]=readOszData(folder, nrOfMeas)
 %
-%Liest die Daten des Oszilloskopes ein (3 Kanäle). Die Daten werden pro
-%Kanal in einer Strukturvariable gespeichert: CH_1, CH2 und CH_3. Diese
-%besteht aus dem Feld time und value. 
+%Liest die Daten des Oszilloskopes ein (3 Kanäle). 
 %
 %ARGUMENTS: folder      - String Name des Ordner, in welchem sich die Daten
 %                         befinden
