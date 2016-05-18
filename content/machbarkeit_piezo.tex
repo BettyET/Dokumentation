@@ -1,4 +1,4 @@
-\chapter{Versuche mit piezoelektrischen Sensoren} 
+\chapter{Versuche mit piezoelektrischen Sensoren} \label{chap:piezo}
 	In einem ersten Schritt wurden Versuche mit piezoelektrischen Sensoren durchgeführt. Der Versuchsaufbau 
 	wird in \ref{chap:Versuchsaufbau} beschrieben. Es folgen drei Versuche: der erste hat das Ziel, 
 	eine Vorstellung von zu messenden Beschleunigungssignalen bei Vandalismus zu geben. Der zweite 
@@ -45,7 +45,25 @@
 	volt2acc(). Erstere liest die exportierten Daten des Oszilloskopes für jeden Kanal ein und speichert 
 	diese in einer Datenstruktur. Die zweite rechnet die gemessenen Spannungen in die Beschleunigung in 
 	g um. Dabei kann die verwendete Verstärkung am Ladungsverstärker als Parameter mitgegeben werden. 
-	
+	\lstset{
+		basicstyle=\small\ttfamily,
+		language=Matlab,               	    % choose the language of the code
+		numbers=left,                   % where to put the line-numbers
+		stepnumber=1,                   % the step between two line-numbers.        
+		numbersep=5pt,                  % how far the line-numbers are from the code
+		backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+		showspaces=false,               % show spaces adding particular underscores
+		showstringspaces=false,         % underline spaces within strings
+		showtabs=false,                 % show tabs within strings adding particular underscores
+		tabsize=2,                      % sets default tabsize to 2 spaces
+		captionpos=b,                   % sets the caption-position to bottom
+		breaklines=true,                % sets automatic line breaking
+		breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
+		frameround=tttt,
+		frame=single,
+		%basicstyle=\small,
+		title=\lstname,                 % show the filename of files included with \lstinputlisting;
+	}
 	\lstinputlisting{code/readOszData.m}
 	\lstinputlisting{code/volt2acc.m}
 		
@@ -83,7 +101,7 @@
 			\hspace{-0.8cm}
 			\vspace{-1cm}
 			\includegraphics[width=10cm]{img/msg5/max.png}
-			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einem Gewicht von 537g und aus einem Meter Höhe. \\\\
+			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus einem Meter Höhe. \\\\
 			Grün: Sensor Rahmen innen \\
 			Rot: Sensor Uhrwerk \\
 			Blau: Sensor Rahmen aussen	}
@@ -94,7 +112,7 @@
 			\centering
 			\captionsetup{width=14cm}
 			\includegraphics[width=15.5cm]{img/msg5/spektrum.png}
-			\caption{Spektren der Sensoren bei Aufprall einer Stahlkugel mit einem Gewicht von 537g und aus einem Meter Höhe. \\\\
+			\caption{Spektren der Sensoren bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus einem Meter Höhe. \\\\
 				Grün: Spektrum Sensor Rahmen innen \\
 				Rot: Spektrum Sensor Uhrwerk \\
 				Blau: Spektrum Sensor Rahmen aussen}
@@ -112,7 +130,7 @@
 			\centering
 			\vspace{-1cm}
 			\includegraphics[width=10cm]{img/msg2/break.png}
-			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einem Gewicht von 537g und aus zwei Meter Höhe. Die Scheibe bricht 
+			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus zwei Meter Höhe. Die Scheibe bricht 
 					 in Folge des Aufpralls.}
 			\label{fig:bruch}
 		\end{SCfigure}

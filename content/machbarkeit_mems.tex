@@ -1,76 +1,211 @@
-\chapter{Versuche mit dem MEMS-Sensor} 
-	In einem weiteren Schritt soll ein MEMS-Sensor in Betrieb genommen werden, welcher im Produkt angewendet wird. 
-	\section{Versuchsaufbau}
-	Die Versuche mit den piezoelektrischen Sensoren \ref{subsec:signale} haben gezeigt, dass
-	Beschleunigungen über 100g gemessen werden. Deshalb wurde besonders auf einen grossen
-	Dynamikbereich geachtet. Ausserdem muss die Abtastfrequenz über 100Hz liegen. Es wurde der Sensor
-	H3LIS331DL von STMicroelectronics eingesetzt. Dieser hat einen einstellbaren Bereich von $\pm100g$,
-	$\pm200g$ und $\pm400g$. Die Daten werden digitalisiert. Es kann über I2C oder SPI mit dem Sensor
-	kommuniziert werden. Die Abtastfrequenz kann zwischen 0.5Hz bis 1kHz konfiguriert werden. Der
-	Sensor ist mit der Grösse von 3x3x1mm$^2$ sehr klein. Zwei Interruptausgänge können konfiguriert
-	werden. Eine Möglichkeit ist beispielsweise, dass ein Überschreiten eines Schwellwerts angezeigt
-	wird. Weitere Eigenschaften des Sensors können dem Datenblatt \cite{H3L} entnommen werden.
+\chapter{Versuche mit dem MEMS-Sensor Datenlogger} 
+	In einem weiteren Schritt soll ein MEMS-Sensor in Betrieb genommen werden, welcher im Produkt
+	angewendet wird. 
 	
-	Als zweite Komponente wurde ein FRDM-K64F Freedom Board verwendet. Dieses bietet neben der 
-	Konfiguration des Sensors die Möglichkeit, die ausgelesenen Daten auf einer SD-Karte zu speichern. 
+	\section{Hardware} 
+		Die Versuche mit den piezoelektrischen Sensoren in \autoref{subsec:signale} haben gezeigt, dass
+		Beschleunigungen über 100g gemessen werden. Deshalb wurde besonders auf einen grossen
+		Dynamikbereich geachtet. Ausserdem muss die Abtastfrequenz über 100Hz liegen. Es wurde der Sensor
+		H3LIS331DL von STMicroelectronics eingesetzt. Dieser hat einen einstellbaren Bereich von $\pm100g$,
+		$\pm200g$ und $\pm400g$. Die Daten werden digitalisiert. Es kann über I2C
+			\footnote{engl. \emph{Inter-Integrated Circuit}. I2C ist ein serieller Datenbus. Es
+				werden zwei Leitungen verwendet, Clock (SCL) und Daten (SDA) } 
+		oder SPI 
+			\footnote{engl. \emph{Serial Peripheral Interface}. SPI ist ebenfalls ein serieller Datenbus, 
+				dabei werden vier Leitungen verwendet: Clock (SCLK), Master Output Slave Input (MOSI), 
+				Master Input Slave Output (MISO) und Chip Select (CS). }
+		mit dem Sensor kommuniziert werden. Die Abtastfrequenz kann zwischen 0.5Hz bis 1kHz konfiguriert
+		werden. Der Sensor ist mit der Grösse von 3x3x1mm$^2$ sehr klein. Zwei Interruptausgänge können
+		konfiguriert werden. Eine Möglichkeit ist beispielsweise, dass ein Überschreiten eines Schwellwerts
+		angezeigt wird. Weitere Eigenschaften des Sensors können dem Datenblatt \cite{H3L} entnommen
+		werden. Als zweite Komponente wurde ein FRDM-K64F Freedom Board verwendet. Dieses bietet neben der
+		Konfiguration des Sensors die Möglichkeit, die ausgelesenen Daten auf einer SD-Karte zu speichern.
+		Mit einer Power Bank kann das Freedom Board und der Sensor gespeist werden. So bleibt die
+		Messeinheit mobil. In der \autoref{fig:mems_aufbau} sind die drei Komponenten des Aufbaus
+		dargestellt.
+		
+		\begin{figure}
+			\centering
+			%\vspace{-1cm}
+			\includegraphics[width=15cm]{img/mems_aufbau.png}
+			\caption{Der Aufbau mit Power Bank, Freedom Board und MEMS-Sensor}
+			\label{fig:mems_aufbau}
+		\end{figure}
 	
-	Mit einer Power Bank kann das Freedom Board und der Sensor gespeist werden. So bleibt die Messeinheit
-	mobil. 
-	\begin{figure}
-		\centering
-		%\vspace{-1cm}
-		\includegraphics[width=15cm]{img/mems_aufbau.png}
-		\caption{Der Aufbau mit MEMS-Sensor, Freedom Board und Power Bank}
-		\label{fig:mems_aufbau}
-	\end{figure}
+	\section{Logging Software}
+		Für die Software wurde FreeRTOS präemptiv verwendet. Die Software ist in vier Tasks aufgebaut. Der
+		Idle-Task wird immer dann ausgeführt, wenn kein anderer Task die CPU benötigt. Dieser wird
+		automatisch kreiert. Der Main-Task hat die Aufgabe, die Tasten zu pollen und die Events zu handeln.
+		Wichtiger für den Aufbau der Software ist der Sensor-Task und der SD-Karten-Task. Der Sensor-Task
+		kommuniziert über I2C mit dem Sensor und liest Daten, falls vorhanden, vom Sensor aus. Er speichert
+		ausserdem diese Daten in einer Queue
+			\footnote{Eine Liste mit Einträgen, welche abgearbeitet werden sollen. Eine Queue kann
+				einen Aufrufer blockieren, falls sie voll oder leer ist. }.
+		Der SD-Karten-Task wiederum liest die Daten aus der
+		Queue, speichert diese in einem Buffer als String. Ist der Buffer voll, wird dieser auf die
+		SD-Karte gespeichert. Der Grund dieser Aufteilung ist, dass der Zugriff auf die SD-Karte lange
+		dauern kann. Wird jeder Beschleunigungswert einzeln auf die SD-Karte geschrieben, kann nicht mit
+		400Hz abgetastet werden. Die Software kann den Sensor nicht genug schnell auslesen und die
+		Beschleunigungsdaten werden im Datenregister des Sensors überschrieben. Werden die
+		Beschleunigungsdaten jedoch in einem Buffer gespeichert und dieser als Ganzes auf die SD-Karte
+		geschrieben, ist dies effizienter und die Abtastung mit 400Hz möglich.
+		
+		Im Sensor-Task und im SD-Karten-Task werden Zustandsautomaten durchgearbeitet. Diese können einerseits
+		durch Tastendrücke oder Interne Signale beeinflusst werden. Die Kommunikation zwischen dem Main-Task,
+		dem Sensor-Task und dem SD-Karten-Task erfolgt dabei mittels Task Notifications. 
+		
+		Task Notifications gibt es ab FreeRTOS V8.2.0 (Release 16. Januar 2015). Sie dienen dienen der
+		Inter-Task-Kommunikation und Synchronisation, ähnlich den Semaphoren. Jeder Task hat dabei einen
+		32-bit Notification Value. Jedes dieser Bits des Notification Values kann von einem anderen Task
+		gesetzt, überschrieben oder inkrementiert werden. Es können auch mehrere Bits gleichzeitig
+		modifiziert werden. Task Notifications sind effizienter als Semaphoren \cite{TaskNotification}.
+		
+		In dieser Anwendung wurde jeweils ein Bit des Notification Values einem Tastendruck oder einem
+		internen Signal zugewiesen. Der Main-Task setzt beispielsweise bei einem Tastendruck des Buttons 2
+		das erste Bit BTN2\_BIT im Notification Value des Sensor-Tasks. Der Sensor-Task wechselt seinen
+		Zustand von "'IDLE"' in "'MEASURE"', wenn dieses Bit gesetzt wurde.
 	
-	\subsection{Aufbau der Software}
-	Für die Software wurde FreeRTOS verwendet. Die Software ist in drei Tasks aufgebaut. Der Idle-Task
-	wird immer dann ausgeführt, wenn kein anderer Task die CPU benötigt. Der Main-Task hat die Aufgabe,
-	die Tasten zu pollen und die Events zu handeln. Wichtiger für den Aufbau der Software ist der
-	Sensor-Task und der SD-Karten-Task. Der Sensor-Task kommuniziert über I2C mit dem Sensor und liest
-	Daten, falls vorhanden, vom Sensor aus. Er speichert ausserdem diese Daten in einer Queue. Der
-	SD-Karten-Task wiederum liest die Daten aus der \index{Queue}, speichert diese in einem Buffer als String.
-	Ist der Buffer voll, wird dieser auf die SD-Karte gespeichert.
+		Die \autoref{fig:sm_sensor} und \autoref{fig:sm_sd} veranschaulichen die beiden Zustandsautomaten im 
+		Sensor-Task und SD-Karten-Task. 
+		\begin{figure}
+			\centering
+			%\vspace{-1cm}
+			\includegraphics[width=15cm]{img/sm_sensor.png}
+			\caption{Zustandsdiagramm Sensor-Task}
+			\label{fig:sm_sensor}
+		\end{figure}
+		
+		\paragraph{Sensor-Task}
+		Der Zustandsautomat durchläuft den Zustand "'INIT ACCEL"' in welchem der Sensor konfiguriert 
+		wird. Zuerst wird getestet, ob der Sensor antwortet. Dann werden der Messbereich, die Abtastrate, 
+		der Power-Modus und die Art der Datenaufbereitung eingestellt. Der Sensor kann im Normal Powermodus
+		betrieben werden, oder aber in verschiedenen Low Powermoden. In den Low Powermoden ist die 
+		Abtastrate nicht konfigurierbar und tiefer als im Normal Powermodus. 
+		
+		Nachdem der Sensor konfiguriert ist, wechselt der Zustandsautomat in den Zustand "'STARTUP"'. Hier wird
+		so lange gewartet, bis der SD-Karten-Task mit einer Task Notification bekannt gibt, dass er das File 
+		System gemountet hat und dieses nun verfügbar ist. Dann wird der Zustand "'IDLE"' erreicht.
+		
+		Hier sind zwei Optionen möglich. Ein Tastendruck des Buttons 2 startet die Messung. Dabei wird
+		an den SD-Karten-Task eine Task Notification gesendet, dass die Messung begonnen hat. Der 
+		Zustandsautomat verlässt den Zustand "'MEASURE"' erst dann, wenn der Button 2 erneut gedrückt 
+		wird. 
+		
+		Die zweite Option ist die Kalibrierung des Sensors. Dazu muss der Button 2 länger als eine Sekunde gedrückt
+		werden. Mit einem roten Blinken wird der Kalibriermodus dem Benutzer bestätigt. Der Sensor 
+		muss nach oben gerichtet werden. Ein Tastendruck des Buttons 3 löst dann eine Messreihe von 10 
+		Messungen aus, über die gemittelt wird. Nun muss der Sensor nach unten gerichtet werden und 
+		erneut mit einem Tastendruck des Buttons 3 bestätigt werden. Nun wiederholt sich die Messreihe. 
+		Jetzt wird der Beschleunigungswert gemessen in Ausrichtung nach unten dem Beschleunigungswert
+		gemessen nach oben abgezogen und mit zwei dividiert. So erhält man den Wert, der einer Beschleunigung
+		von 1g entspricht. Wird der Button 3 jeweils nicht innerhalb von 60s gedrückt, wechselt der Zustand zurück zu "'IDLE"'.
+		
+		\paragraph{SD-Karten-Task}
+		Der Zustandsautomat durchläuft zu Beginn den Zustand "'STARTUP"', in welchem das File System gemountet 
+		wird. Nachdem dies gelungen ist, wird eine Task Notification an den Sensor-Task gesendet und in den 
+		Zustand "'IDLE"` gewechselt. 
+		
+		Dieser Zustand wird verlassen, falls die Messung gestartet wurde und dies dem SD-Karten-Task durch eine 
+		Task Notification vom Sensor-Task mitgeteilt wird. Der Zustandsautomat erreicht den Zustand "'OPEN FilE"'
+		in welchem entweder ein bereits vorhandenes Text Dokument geöffnet oder sonst ein neues angelegt. Danach 
+		wird in den Zustand "'Buffer"' gewechselt. 
+		
+		In diesem werden die Beschleunigungsdaten aus der Queue gelesen und mit Carriage Return und Line Feed
+		Steuerzeichen ergänzt in einen Buffer gespeichert. Ist der Buffer voll, wird in den nächsten 
+		Zustand gewechselt, ansonsten werden die Beschleunigungsdaten weiter ausgelesen und in den 
+		Buffer abgefüllt. 
+		
+		Im Zustand "'SAVE ON DISK"' wird der volle Buffer auf die SD-Karte geschrieben. Dann wird erneut in 
+		den Zustand "'BUFFER"' gewechselt. Dies wiederholt sich so lange, bis der Sensor-Task mittels
+		einer Task Notification das Ende der Messung anzeigt. 
+		\begin{figure}
+			\centering
+			%\vspace{-1cm}
+			\includegraphics[width=13cm]{img/sm_sd.png}
+			\caption{Zustandsdiagramm SD-Karten-Task}
+			\label{fig:sm_sd}
+		\end{figure}
+		
+		\paragraph{Sensor Treiber}
+		Mittels I2C oder SPI kann auf die Register des Sensors H3LIS331DL zugegriffen werden. Die Register
+		dienen einerseits der Konfiguration des Sensors, anderseits um die Beschleunigungsdaten und 
+		den Status des Sensors auszulesen. Für die Datenloggeranwendung wurde ein Treiber erstellt. Dieser
+		enthält Funktionen, um die Sensor internen Register zu beschreiben oder auszulesen. Hier soll an zwei Beispielen 
+		gezeigt werden, wie die Treiberfunktionen aufgebaut sind. 
+		
+		Beim ersten Beispiel soll der Messbereich des Sensors konfiguriert werden. Einstellbar sind
+		$\pm100g$, $\pm200g$ und $\pm400g$. Dies kann mittels beschreiben der Bits 4 (FS0) und 5 (FS1) des
+		Kontrollregisters CTRL\_REG4 erreicht werden. Dieses Register wird über die Registeradresse 0x23
+		angesprochen. 
+		
+		\begin{figure}
+			\centering
+			%\vspace{-1cm}
+			\includegraphics[width=13cm]{img/kontrollregister.png}
+			\caption[Kontrollregister 4, Ausschnitt aus dem Datenblatt des H3LIS331DL]{Kontrollregister 4, Ausschnitt aus dem Datenblatt des H3LIS331DL \cite{H3L}}
+			\label{fig:sm_sd}
+		\end{figure}
 	
-	Im Sensor-Task und im SD-Karten-Task werden Zustandsautomaten durchgearbeitet. Diese können einerseits
-	durch Tastendrücke oder Interne Signale beeinflusst werden. Die Kommunikation zwischen dem Main-Task,
-	dem Sensor-Task und dem SD-Karten-Task erfolgt dabei mittels Task Notifications. 
+		Damit die anderen Bits des Registers nicht fälschlicherweise überschrieben werden, wird das Register zuerst ausgelesen (Zeile 6). 
+		Nach jedem Lese- oder Schreibzugriff wird geprüft, ob dieser erfolgreich verlief (Zeile 7-9). Die nicht
+		zu beschreibenden Bits werden ausmaskiert (Zeile 10). Der der Funktion als Parameter übergebene Wert
+		rg muss nun noch nach links geschoben werden. Bit 4 und 5 werden nun beschrieben (Zeile 11). 
+		Zuletzt muss der neue Wert für das Kontrollregister an den Sensor gesendet werden (Zeile 14). 
+		
+		\lstset{language=C}
+		\lstinputlisting{code/setRange.c}
+		
+		Im zweiten Beispiel werden die Beschleunigungsdaten für die Z-Richtung ausgelesen. Die Daten werden 
+		in zwei Registern gespeichert. Sie sind als Zweierkomplement dargestellt. Ein Beschleunigungswert
+		ist 12 Bit lang. Dieser wird linksbündig gespeichert. 
+		
+		\lstinputlisting{code/getRawData.c}
+		
+		Wenn man mehr als ein Register auf einmal auslesen will, kann man das in der Registeradresse 
+		signalisieren, indem man das MSB \footnote{engl. \emph{most significant bit}. Hier Bit 7.} auf
+		eins setzt. Zusätzlich muss angegeben werden, wie viele Register ausgelesen werden sollen (Zeile 1 \& 6). 
+		
+		Damit die Daten richtig interpretiert werden, müssen die ausgelesenen Register zuerst in einem 
+		unsigned Typ gespeichert werden. Dann wird das High Byte um 8 Stellen nach links geschoben und in einem 
+		unsigned Typ gespeichert. Jetzt müssen die beiden Register durch eine bitweise Oder-Verknüpfung
+		zusammengeführt werden (Zeile 10). Der so interpretierte Wert ist nun, da nur 12 Bit lang, eigentlich um den 
+		Faktor 16 zu gross. Dieser Faktor kann beispielsweise in die Umrechnung in m/s$^2$ integriert 
+		werden. 
 	
-	Task Notifications gibt es ab FreeRTOS-Version V8.2.0 (16. Januar 2015). Sie dienen dienen der
-	Inter-Task-Kommunikation und Synchronisation, ähnlich den Semaphoren. Jeder Task hat dabei einen
-	32-bit notification value. In dieser Anwendung wurde jeweils ein Bit des notification values einem
-	Tastendruck oder einem internen Signal zugewiesen. Der Main-Task setzt beispielsweise bei einem
-	Tastendruck des Button 2 das erste Bit im notification value. Der Sensor-Task wechselt seinen
-	Zustand von "'IDLE"' in "'MEASURE"', wenn dieses Bit gesetzt wurde. Task Notifications sind
-	effizienter als Semaphoren \cite{TaskNotification}. 
+	\section{Versuch mit dem Datenlogger}
+		\paragraph{Vorgehensweise}
+		\begin{wrapfigure}[10]{r}{8.5cm}
+			\centering
+			\vspace{-0.8cm}
+			\includegraphics[width=8.5cm]{img/mems_montage.jpg}
+			\caption{Montage des MEMS-Sensors und des pizeoelektrischen Sensors am Uhrwerk}
+			\label{fig:mems_montage}
+		\end{wrapfigure}
+		Der MEMS-Sensor wird am Uhrwerk mit doppelseitigem Klebeband befestigt. Zusätzlich wird mit dem 
+		piezoelektrischen Sensor gemessen (vgl. \autoref{chap:piezo}) um einen Referenzwert zu erhalten. 
+		Die \autoref{fig:mems_montage} zeigt die beiden Sensoren montiert in der Uhr. Wie im \autoref{chap:piezo}
+		wird die Stahlkugel mit einer Masse von 537g mittig aus einem Meter Höhe auf die Uhr fallen gelassen. 
+		
+		
+		\paragraph{Messresultate}
+		Die \autoref{fig:vergl_mems_piezo} zeigt die Beschleunigungssignale am Uhrwerk gemessen mit dem piezoelektrischen 
+		Sensor wie in \autoref{chap:piezo} und jenen gemessen mit dem MEMS-Sensor. Die beiden Messungen unterscheiden sich 
+		in der Abtastrate. Der Signalverlauf der piezoelektrischen Sensoren wird mit dem Oszilloskop mit einer Abtastfrequenz von
+		500kHz abgetastet. Die Abtastrate des MEMS-Sensor kann maximal 1kHz betragen. Diesen Unterschied erkennt man 
+		darin, dass die sehr kurzen, hohen Beschleunigungspeaks mit dem MEMS-Sensor nicht erfasst werden. Mit einer Abtastrate des MEMS-Sensors von 
+		400Hz wird jedoch die für diese Anwendung interessante Eigenfrequenz des Ziffernblattes 
+		von 50Hz erfolgreich sichtbar. 
+		\begin{SCfigure}
+			\centering
+			\vspace{-1cm}
+			\includegraphics[width=10cm]{img/msg8/vergl_sensoren.png}
+			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g aus einer Höhe von einem Meter gemessen mit piezoelektrischem Sensor (500kHz, blau)  und dem MEMS-Sensor (400Hz, rot)}
+			\label{fig:vergl_mems_piezo}
+		\end{SCfigure}
+	
 
-	Die \autoref{fig:sm_sensor} und \autoref{fig:sm_sd} veranschaulichen die beiden Zustandsautomaten. 
-	\begin{figure}
-		\centering
-		%\vspace{-1cm}
-		\includegraphics[width=15cm]{img/sm_sensor.png}
-		\caption{Zustandsdiagramm Sensor-Task}
-		\label{fig:sm_sensor}
-	\end{figure}
 	
-	Der Zustandsautomat durchläuft den Zustand "'INIT ACCEL"' in welchem der Sensor konfiguriert 
-	wird. Zuerst wird getestet, ob der Sensor antwortet. Dann werden der Messbereich, die Abtastrate, 
-	der Power-Modus und die Art der Datenaufbereitung eingestellt. Der Sensor kann im Normal Powermodus
-	betrieben werden, oder aber in verschiedenen Low Powermoden. In den Low Powermoden ist die 
-	Abtastrate nicht konfigurierbar und tiefer als im Normal Powermodus. Die Beschleunigungsdaten des Sensors werden 
-	in zwei 8-bit Registern abgelegt. 
 	
-	Nachdem der Sensor konfiguriert ist, wechselt der Zustandsautomat in den Zustand "STARTUP". Hier wird
-	so lange gewartet, bis der SD-Karten-Task mit einer Task Notification bekannt gibt, dass er das File 
-	System gemounted hat. 
 	
-	Der Zustandsautomat im Sensor-Task hat grundsätzlich zwei Schlaufen. Zum einen kann durch einen 
-	Tastendruck des Buttons 2 die Messung gestartet w
-	\begin{figure}
-		\centering
-		%\vspace{-1cm}
-		\includegraphics[width=12cm]{img/sm_sd.png}
-		\caption{Zustandsdiagramm SD-Karten-Task}
-		\label{fig:sm_sd}
-	\end{figure}
+	
+	
