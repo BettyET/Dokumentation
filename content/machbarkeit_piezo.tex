@@ -25,7 +25,9 @@
 	Der Aufbau mit Versuchsuhr, Ladeverstärker und Oszilloskop ist in der
 	\autoref{fig:versuchsaufbau_piezo} dargestellt. Die Versuchsuhr ist liegend an der Wand befestigt,
 	so dass die Prüfmassen auf die Uhr fallen gelassen werden können. Im Innenraum der Uhr werden drei
-	Sensoren befestigt. Die Positionen dieser sind in der \autoref{fig:Sensorpositionen} ersichtlich.
+	Sensoren befestigt. Die Positionen dieser sind in der \autoref{fig:Sensorpositionen} ersichtlich. 
+	Die Sensorpositionen sind so ausgewählt, dass der Sensor von Aussen nicht sichtbar ist. Dies 
+	ist gemäss der Anforderungsliste in \autoref{chap:anforderungen} erforderlich. 
 	Das Signal mit wird mit dem Ladungsverstärker gewandelt. Der Signalverlauf wird mit einem
 	Oszilloskop aufgezeichnet. 	Die aufgenommenen Beschleunigungssignale werden als Bild und als Daten
 	für Matlab exportiert. Auf dem Computer können die Messungen ausgewertet werden.
@@ -71,7 +73,7 @@
 	g um. Dabei kann die eingestellte Verstärkung am Ladungsverstärker als Parameter mitgegeben werden. 
 	\lstset{
 		basicstyle=\small\ttfamily,
-		language=Matlab,               	    % choose the language of the code
+		language=Matlab,                % choose the language of the code
 		numbers=left,                   % where to put the line-numbers
 		stepnumber=1,                   % the step between two line-numbers.        
 		numbersep=5pt,                  % how far the line-numbers are from the code
@@ -83,9 +85,8 @@
 		captionpos=b,                   % sets the caption-position to bottom
 		breaklines=true,                % sets automatic line breaking
 		breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
-		frameround=tttt,
-		frame=single,
-		%basicstyle=\small,
+		frameround=tttt,				% sets round corners
+		frame=single,					% with frame
 		title=\lstname,                 % show the filename of files included with \lstinputlisting;
 	}
 	\lstinputlisting{code/readOszData.m}
@@ -179,7 +180,7 @@
 		Am Uhrwerk ist neben der Eigenschwingung der ganzen Uhr auch die Eigenschwingung des Ziffernblattes
 		sichtbar. 
 	\newpage	
-	\subsection{Beste Positionierung}
+	\subsection{Beste Positionierung} \label{subsec:bestPos}
 	
 		\paragraph{Vorgehensweise}
 		Für die Ermittlung der besten Positionierung eines Beschleunigungssensors wurde die schwerere Stahlkugel von 537g aus einer Höhe von 

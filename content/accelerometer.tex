@@ -1,0 +1,147 @@
+\chapter{Beschleunigungssensoren}
+	\section{Funktionsprinzip} \index{Beschleunigungssensor} 
+	Beschleunigungssensoren werden gebraucht, um durch externe Kräfte verursachte Beschleunigungen 
+	zu messen. Nach Newtons zweitem Axiom (vgl. \autoref{sec:impuls}) berechnet sich die Beschleunigung z
+	\begin{equation}
+	\vec{a} = \frac{\vec{F}}{m}
+	\end{equation}
+	wobei die Richtung der Beschleunigung die Selbe wie die der Kraft ist. Um eine Beschleunigung zu 
+	messen, muss man somit die einwirkende Kraft auf eine definierte Masse kennen. Ein wichtiger Teil 
+	eines Beschleunigungssensors ist somit der Kraftsensor. Der Kraftsensor besteht aus einer Feder, 
+	welche sich unter dem Einfluss der Kraft deformiert, und einem Deformationssensor, um den 
+	Betrag der Deformation zu messen. 
+	\begin{figure}
+		\centering
+		\captionsetup{width = 8cm}
+		\includegraphics[width=8cm]{img/prinzip_accel.png}
+		\caption{Prinzipieller Aufbau eines Beschleunigungssensors. Aus \cite{ModernSensor}}
+		\label{fig:prinzip_accel}
+	\end{figure}
+	Die \autoref{fig:prinzip_accel} zeigt den prinzipiellen Aufbau eines Beschleunigungssensors. 
+	Eine \textbf{Prüfmasse} (engl. proof mass), auch seismische Masse genannt, wird durch eine Feder (engl. \index{Prüfmasse} \index{Dämpfer} \index{Verschiebungssensor}
+	spring) getragen. Ausserdem ist die Masse an einen \textbf{Dämpfer} (engl. damper) und einen
+	\textbf{Verschiebungssensor} (engl. displacement sensor) gekoppelt. Der Dämpfer bremst die Bewegung der
+	Prüfmasse und der Verschiebungssensor misst die Veränderung der Lage der Prüfmasse in Bezug auf die
+	Ruhelage.
+	
+	\section{Eigenschaften}
+	Beginnt eine Bewegung nach oben, drückt die Prüfmasse wegen ihrer Trägheit die Feder zusammen. 
+	Die Feder wird durch den Steifigkeitsparameter $k$ charakterisiert. Die Feder drückt gegen 
+	die Prüfmasse, so dass 
+	\begin{equation}
+	F=ma=k\Delta x= k(x_2-x_1)
+	\end{equation}
+	gilt. Somit ist die Verschiebung der Prüfmasse 
+	\begin{equation}
+	x_2-x_1 = \frac{m}{k}a = Sa
+	\end{equation}
+	ein Mass für die Beschleunigung. Dabei ist $S$ die \index{Empfindlichkeit} \textbf{Empfindlichkeit} (engl. sensitivity) des Sensors und kann auch geschrieben 
+	werden als 
+	\begin{equation}
+	S=\frac{m}{k}=\frac{1}{(\omega_0)^2} = \frac{1}{(2\pi f_0)^2}. 
+	\end{equation}
+	Dabei ist $f_0$ die \index{Resonanzfrequenz} \textbf{Resonanzfrequenz} des Systems. Der Sensor muss für genaue Messungen in einem 
+	Frequenzbereich deutlich unter der Resonanzfrequenz betrieben werden. Um den Anwendungsbereich 
+	zu vergrössern, muss die Prüfmasse kleiner und die Feder steifer gewählt werden. Dies allerdings 
+	hat den Effekt, dass der Sensor weniger empfindlich ist. Die Empfindlichkeit wird normalerweise
+	bei einer Anregung mit einer harmonischen Schwingung bestimmter Frequenz gemessen. 
+	
+	Der \textbf{Frequenzgang} (engl. frequncy response) eines Sensors sollte im 
+	benutzten Frequenzbereich konstant sein, so dass der Sensor für alle Frequenzen 
+	gleich empfindlich ist. Im Datenblatt wird der Frequenzbereich angegeben, in welchem 
+	die Empfindlichkeit nicht mehr als beispielsweise 5\% von der Referenzempfindlichkeit 
+	abweicht. Die \autoref{fig:frequenzgang} zeigt einen Ausschnitt aus dem Datenblatt des piezoelektrischen 
+	Beschleunigungssensors KS93. Dargestellt ist der typische Frequenzgang und dazugehörige 
+	Frequenzen, bei welchen die Abweichung der Empfindlichkeit 3dB, 10\% und 5\% beträgt. 
+	\begin{figure}
+		\centering
+		\captionsetup{width = 8cm}
+		\includegraphics[width=8cm]{img/frequenzgang.png}
+		\caption{Typischer Frequenzgang des KS93 \cite{KS93}}
+		\label{fig:frequenzgang}
+	\end{figure}
+	
+	Der \textbf{Null-g-Output} (engl. zero stimulus output) ist der Ausgang des Sensors,  \index{Null-g-Output}
+	wenn der Sensor nicht beschleunigt ist. Dies ist der Fall, wenn die empfindliche Achse
+	des Sensors senkrecht zur Erdbeschleunigung gerichtet oder der Sensor im freien Fall ist. 
+	
+	Die \textbf{Bruchbeschleunigung} (engl. destruction limit) ist die maximale Beschleunigung, bei  \index{Bruchbeschleunigung}
+	welchem der Sensor nicht zerstört wird. Dies ist für viele Applikationen eine kritische Eigenschaft. 
+	
+	\section{Technologien} \index{Mikrominiaturisierung} \index{MEMS}
+	Ein Beschleunigungssensor gemäss dem Aufbau vorgestellt in \autoref{fig:prinzip_accel} ist 
+	auf viele verschiedene Arten realisierbar. Meistens ist es der Verschiebungssensor, welcher
+	die Verschiebung der Prüfmasse misst, oder der Wandler, welcher sich bei den verschiedenen
+	Sensortypen ändert. 
+	
+	Ein wichtiger Trend bei den Sensortechnologien ist die \textbf{Mikrominiaturisierung}. Eine Form
+	der Mikrominiaturisierung ist die \textbf{MEMS-Technologie} (engl. micro-electro-mechanical
+	systems). MEMS-Sensoren beinhalten elektronische und mechanische Komponenten. Meist sind ist dies
+	eine Einheit, welche die Daten verarbeitet (Mikroprozessor) und mindestens ein Mikrosensor welcher eine
+	mechanische Funktion ausübt. Die elektrische Schaltung und die mechanischen Komponenten sind alle
+	in einem Siliziumsubstrat integriert. Die Dimensionen der Komponenten liegen in der Grössenordnung von
+	Mikrometern. Die Vorteile der MEMS-Technologie sind tiefere Kosten, Zuverlässigkeit und die kleine
+	Grösse.
+	
+	\subsection{Kapazitive Beschleunigungssensoren} \index{Beschleunigungssensor!kapazitiv} \index{Beschleunigung!statische}
+		Bei kapazitiven Beschleunigungssensoren verursacht die Verschiebung der Prüfmasse eine Änderung
+		der Kapazität eines oder mehrerer Kondensatoren. Dies kann durch das Verändern der überlappenden
+		Fläche der Kondensatorplatten oder des Abstandes der Kondensatorplatten erreicht werden. Meist
+		werden kapazitive Beschleunigungssensoren aus zwei festen Elektroden welche zusammen mit der
+		Prüfmasse in der Mitte zwei Kondensatoren bilden. Bewegt sich die Prüfmasse unter Einwirkung einer
+		Kraft zur einen Elektrode hin, so entsteht eine Differenz zwischen den beiden Kapazitäten, welche
+		der Auslenkung der Prüfmasse und somit der Beschleunigung entspricht. Durch den
+		Differenzkondensator können diverse Störungen der Umgebung welche die Kapazität eines Kondensators
+		ändern eliminiert werden. Ein Besipiel eines kapazitiven Beschleunigungssensors mit MEMS-
+		Technologie zeigt \autoref{fig:kap_mems}. Die Vorteile kapazitiver Beschleunigungssensoren ist die
+		realisierbare hohe Empfindlichkeit, die Möglichkeit, Beschleunigungen mit der Frequenz null
+		(statische Beschleunigungen) zu messen, die günstige Produktion und die Mikrominiaturisierung.
+			\begin{SCfigure}
+				\centering
+				%\captionsetup{width = 8cm}
+				\includegraphics[width=7cm]{img/kap_mems.png}
+				\caption{Beispiel eines kapazitiven MEMS Beschleunigungssensors. Base und Cap bilden die festen
+					Elektroden, $C_{mc}$ und $C_{mb}$ sind die beiden Kapazitäten zwischen den Elektroden und der
+					Prüfmasse. Durch die Auf- oder Abbewegung der Prüfmasse verändern sich die Abstände $d_1$ und
+					$d_2$, was die Differenz der beiden Kapazitäten ändert \cite{ModernSensor}.}
+				\label{fig:kap_mems}
+			\end{SCfigure}	
+	  
+	\subsection{Piezoresresistive Beschleunigungssensoren} \index{Beschleunigungssensor!piezoresistiv} 
+		Piezoresistive Beschleunigungssensoren basieren auf dem Prinzip, die Belastung der Federn durch
+		die Verschiebung der Prüfmasse zu messen. Durch die mechanische Belastung oder Deformation des
+		piezoresistiven Materials ändert sich dessen elektrischer Widerstand. Piezoresistive Sensoren
+		haben eine grosse Bandbreite, können statische Beschleunigungen messen und halten Schocks bis zu
+		10'000g aus. Ausserdem ist auch dieses Wirkprinzip für Mikrominiaturisierung geeignet.
+		
+	\subsection{Piezoelektrsiche Beschleunigungssensoren} \index{Beschleunigungssensor!piezoelektrisch} \index{Piezoelektrischer Effekt}
+		Der piezoelektrische Effekt ist die Verschiebung von Ladungen durch die Belastung oder Deformation des kristallinen 
+		Materials. Um die Ladung zu messen, platziert man zwei Elektroden mit dem Piezokristall dazwischen. Dadurch entsteht
+		ein Kondensator, dessen Dielektrikum der Piezokristall ist. Wird der Piezokristall belastet, so lädt sich der 
+		Kondensator. In piezoelektrischen Beschleunigungssensoren drückt die Prüfmasse direkt auf den
+		Piezokristall. Es liegt keine Feder zwischen Prüfmasse und Piezokristall, der Piezokristall 
+		selber stellt die Feder dar. Da diese relativ steif ist, haben piezoelektrische Beschleunigungssensoren 
+		von Natur aus eine hohe Resonanzfrequenz. Es gibt viele verschiedene Möglichkeiten, Prüfmasse und 
+		piezoelektrischer Sensor im Gehäuse anzuordnen, wovon die \autoref{fig:piezoel_sens} einige zeigt. 
+		\begin{figure}
+			\centering
+			\captionsetup{width = 12cm}
+			\includegraphics[width=12cm]{img/piezoel_sens.png}
+			\caption{Verschiedene Anordnungsmöglichkeiten von Prüfmasse und piezoelektrischem Sensor im Gehäuse \cite{ModernSensor}.}
+			\label{fig:piezoel_sens}
+		\end{figure}	
+		Piezoelektrische Sensoren welche die Signalverarbeitung im Sensor integriert haben, heissen IEPE	\index{IEPE}
+		(engl. integrated electronics piezo electric) Beschleunigungssensoren. Sie wandeln das
+		Ladungssignal in eine Spannung um. So kann das Signal mittels langer Kabel ohne Problem übertragen
+		werden. Sensoren ohne integrierte Signalverarbeitung benötigen zusätzlich einen Ladungsverstärker. 
+		Das übermittelte Signal ist anfällig auf Störungen. Deshalb wird ein spezielles Kabel für die Übertragung
+		zum Ladungsverstärker verwendet. Der Vorteil von Sensoren ohne integrierte Signalverarbeitung ist eine
+		höhere Temperaturfestigkeit. 
+	\subsection{Thermische Beschleunigungssensoren} \index{Beschleunigungssensor!thermisch}
+		Bei thermischen Beschleunigungssensoren gilt es zwei Wirkprinzipien zu unterscheiden: 
+	
+	
+	
+	
+	
+	(Faden, 2016, \cite[S.393]{ModernSensor})

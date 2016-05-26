@@ -34,6 +34,7 @@
 \usepackage{pgfgantt}
 \usepackage{pdflscape}
 \usepackage{longtable}
+\usepackage{lscape}
 
 \usepackage{setspace} 
 \usepackage{caption}	% Beschriftungen in Breite einschränken
@@ -102,13 +103,12 @@
 \tableofcontents
 
 \include{vorwort}
-
+\include{content/einleitung}
 \part{Grundlagen}
-\include{content/anforderungen}
+
 \include{content/physik}
-\include{lösungsansätze}
-\include{beschleunigungsmessung}
-\include{messmethoden}
+\include{content/accelerometer}
+
 
 \part{Klärung der Machbarkeit}
 \include{content/machbarkeit_piezo}
@@ -126,8 +126,13 @@
 
 \begin{appendix}
 \part{Anhang}
+\includepdf[pages=1-2,addtotoc={1,chapter,0,Aufgabenstellung,chp:aufgabenstellung}]{pdf/aufgabenstellung.pdf}
+
+\include{content/anforderungen}
+
+\includepdf[page=1, angle=90, addtotoc={1,chapter,0,Stückliste,chap:stueckliste}]{pdf/stueckliste.pdf}
 %\include{anhang_ztrafo}
-\include{anhang_glossar}                 % anhang d, glossar (?)
+%\include{anhang_glossar}                 % anhang d, glossar (?)
 \end{appendix}
 
 {

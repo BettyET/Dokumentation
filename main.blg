@@ -4,21 +4,31 @@ A level-1 auxiliary file: titelblatt.aux
 A level-1 auxiliary file: erklaerung.aux
 A level-1 auxiliary file: abstract.aux
 A level-1 auxiliary file: vorwort.aux
-A level-1 auxiliary file: content/anforderungen.aux
+A level-1 auxiliary file: content/einleitung.aux
 A level-1 auxiliary file: content/physik.aux
-A level-1 auxiliary file: lösungsansätze.aux
-A level-1 auxiliary file: beschleunigungsmessung.aux
-A level-1 auxiliary file: messmethoden.aux
+A level-1 auxiliary file: content/accelerometer.aux
 A level-1 auxiliary file: content/machbarkeit_piezo.aux
 A level-1 auxiliary file: content/machbarkeit_mems.aux
 A level-1 auxiliary file: content/machbarkeit_fazit.aux
 A level-1 auxiliary file: content/umsetzung.aux
 A level-1 auxiliary file: schluss.aux
-A level-1 auxiliary file: anhang_glossar.aux
+A level-1 auxiliary file: content/anforderungen.aux
 Database file #1: bibliografie/bibliografie.bib
+Warning--to sort, need author or key in MSLeifi
 Warning--to sort, need author, organization, or key in H3L
 Warning--to sort, need author or key in TaskNotification
+`year' is a missing field, not a string, for entry ClockSet
+while executing---line 1254 of file bibliografie/ka-style.bst
+`year' is a missing field, not a string, for entry ClockSet
+while executing---line 1254 of file bibliografie/ka-style.bst
+Warning--to sort, need author, organization, or key in ClockSet
+Warning--to sort, need author, organization, or key in Atmel
+Warning--to sort, need author, organization, or key in FT232B
+Warning--to sort, need author, organization, or key in LM2936
+Warning--to sort, need author, organization, or key in Transil
+`author' is a missing field, not a string, for entry MSLeifi
+while executing---line 1323 of file bibliografie/ka-style.bst
 Warning--empty publisher in Ruhm
 `author' is a missing field, not a string, for entry TaskNotification
 while executing---line 1323 of file bibliografie/ka-style.bst
-(There was 1 error message)
+(There were 4 error messages)

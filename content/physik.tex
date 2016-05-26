@@ -5,47 +5,86 @@
 % $Date: 2013-12-23 21:15:48 +0100 (Mon, 23 Dec 2013) $
 %-------------------------------------------------------------------------------
 
-\chapter{Physikalischer Hintergrund} 
+\chapter{Physikalische Grundlagen} 
 
-Blabla \dots
+Dieses Kapitel beinhaltet eine Übersicht über die für die Arbeit wichtigen physikalischen Begriffe
+Schock, Beschleunigung, Impuls, Kraftstoss und mechanischen Schwingungen sowie über die Fourier Analyse
+analoger Signale. Die Abschnitte Beschleunigung \ref{sec:beschleunigung} und Impuls und Kraftstoss
+\ref{sec:impuls} basieren auf dem Unterrichtsskript des Physikunterrichts an der Hochschule Luzern
+\cite{Mechanik}.
 
-\section{Beschleunigung} 
-Dieser Abschnitt basiert auf dem Unterrichtsskript des Physikunterrichts an der Hochschule 
-Luzern \cite{Mechanik}. 
- 
-Der Ortsvektor $\vec{s}$, die Geschwindigkeit $\vec{v}$ und die Beschleunigung $\vec{a}$ sind
-Vektoren, welche einen geometrischen Zusammenhang haben. So ist die Geschwindigkeit die Weg- 
-Zuwachs-Rate dadurch die Steigung an die Weg-Zeit-Kurve. 
+\section{Definition eines Schocks} \index{Schock} 
+\begin{wrapfigure}[10]{r}{7cm}
+	\centering
+	\vspace{-0.8cm}
+	\includegraphics[width=7cm]{img/shock.png}
+	\caption{Beispiel eines Schocks aus \cite{VSH}}
+	\label{fig:def_shock}
+\end{wrapfigure}
+Nach de Silva et al. \cite{VSH} ist ein \textbf{Schock} erfolgt falls sich eine Kraft, eine Position, eine Geschwindigkeit oder eine 
+Beschleunigung abrupt ändert und das betrachtete System in einen transienten Zustand versetzt
+wird. Die Änderung wird als abrupt betrachtet, falls diese kürzer ist als eine natürlich 
+auftretende Änderung der betrachteten Grösse. Die Auswirkung eines Schocks hängt einerseits von der Charakteristik 
+des Schocks ab (Amplitude, Dauer und Form) und andererseits den dynamischen Eigenschaften des dem Schock 
+ausgesetzten Systems. 
+
+\section{Beschleunigung} \label{sec:beschleunigung} \index{Beschleunigung} \index{Mittlere Geschwindigkeit} \index{Momentane Geschwindigkeit}
+Der Ort, die Geschwindigkeit und die Beschleunigung eines sich bewegenden Objektes sind 
+Vektoren. Sie haben einen Betrag und eine Richtung. Bewegt sich ein Objekt entlang einer Linie x, 
+so ist die \textbf{mittlere Geschwindigkeit} das Verhältnis zwischen zurückgelegtem Weg und Zeit
 \begin{equation}
-\vec{v}=\frac{d\vec{s}}{dt}
+\bar{v}=\frac{\Delta x}{\Delta t}
 \end{equation}
-Die Beschleunigung ist die Geschwindigkeits-Zuwachs-Rate und somit die Steigung an die 
-Geschwin-digkeit-Zeit-Kurve. 
+wobei $\Delta x$ der zurückgelegte Weg und $\Delta t$ die verstrichene Zeit ist. 
+Zu einem beliebigen Zeitpunkt ist die \textbf{momentane Geschwindigkeit}  die Weg-Zuwachs-Rate und definiert zu:
 \begin{equation}
-\vec{a}=\frac{d\vec{v}}{dt}=\frac{d^2\vec{s}}{dt}
+\vec{v}=\frac{d\vec{x}}{dt}.
 \end{equation}
-Eine weitere Ableitung führt zum Ruck. Die Ableitungen können beliebig weitergeführt werden. 
-Umgekehrt kann die Geschwindigkeit oder die zurückgelegte Strecke durch Integration der 
-Beschleunigung bzw. Geschwindigkeit berechnet werden. 
 
-Bei der Bahnkurve zeigt der Geschwindigkeitsvektor immer tangential zur Bahnkurve. Der
-Beschleunigungsvektor zeigt immer nach innen. Bei einer Kreisförmigen Kreisbewegung
-zeit der Beschleunigungsvektor zur Mitte des Kreises hin. Diese Beschleunigung nennt
-sich Zentripetalbeschleunigung und berechnet sich zu 
+Bewegt sich ein Objekt nicht gleichmässig, sondern seine Geschwindigkeit ändert sich, so erfährt
+das Objekt eine \textbf{Beschleunigung}. Die Beschleunigung ist somit ein Mass der Geschwindigkeit der 
+Geschwindigkeit, die Geschwindigkeits-Zuwachs-Rate
+\begin{equation}
+\vec{a}=\frac{d\vec{v}}{dt}=\frac{d^2\vec{x}}{dt}.
+\end{equation}
+Die Änderung der Geschwindigkeit benötigt nach Newtons zweitem Axiom die Einwirkung einer 
+Kraft (vgl. \autoref{sec:impuls}).
+
+Der Zusammenhang der Grössen durch Differentation gilt auch umgekehrt. So kann die Geschwindigkeit
+oder die zurückgelegte Strecke durch Integration der Beschleunigung bzw. Geschwindigkeit berechnet
+werden.
+	
+Bewegt sich ein Objekt auf einer Bahnkurve, wird die Rotation durch die \textbf{Winkelgeschwindigkeit} \index{Winkelgeschwindigkeit}
+beschrieben. Sie ist das Verhältnis zwischen zurückgelegtem Winkel und verstrichener Zeit
+\begin{equation}
+\omega=\frac{d\Theta}{dt}.
+\end{equation}
+In jedem Moment besitzt das rotierende Objekt eine lineare Geschwindigkeit v, welche die Richtung
+tangential zur Bahnkurve hat. Sie hängt davon ab, wie weit das rotierende Objekt vom Zentrum der 
+Bahnkurve entfernt ist.  
+\begin{equation}
+\vec{v}=\omega r
+\end{equation}
+Bei einem rotierenden Objekt mit konstanter Winkelgeschwindigkeit ist der Betrag der Geschwindigkeit v konstant, die 
+Richtung ändert sich jedoch kontinuierlich. Deshalb erfährt das Objekt eine Beschleunigung, welche in die Richtung 
+des Zentrums der Bahnkurve zeigt, die \textbf{Zentripetalbeschleunigung.} \index{Zentripetalbeschleunigung} \index{Erdbeschleunigung}
 \begin{equation}
 a_{ZP}=\frac{v^2}{r}= \omega^2\cdot r 
 \end{equation} 
-mit $v$ der momentanen Geschwindigkeit und $r$ dem Radius des Kreises. 
-\newpage
-\section{Impuls und Kraftstoss}
+
+Die \textbf{Erdbeschleunigung} g setzt sich aus zwei Komponenten zusammen: die Anziehung der
+Massen und der Rotationsbeschleunigung aufgrund der Erdrotation. In dieser Arbeit 
+wird für g jeweils der mittlere Wert von 9.81$\frac{m}{s^2}$ angenommen (Faden,2016,\cite{ModernSensor}). 
+
+\section{Impuls und Kraftstoss} \label{sec:impuls} \index{Bewegungsgleichung} \index{Impuls} 
 Die Beschreibung, wie sich Körper bewegen, wird mit den drei Axiomen von Newton 
 erweitert. Dabei wird die Frage beantwortet, warum sich etwas bewegt. Ein 
 Körper ändert seine Geschwindigkeit (Beschleunigung) unter Einwirkung einer
-Kraft. Dies widerspiegelt sich in der Bewegungsgleichung (zweites Axiom)
+Kraft. Dies widerspiegelt sich in der \textbf{Bewegungsgleichung} (zweites Axiom)
 \begin{equation}
 \vec{F}=m\cdot \vec{a}.
 \end{equation}
-Eine weitere Beschreibung der Bewegung eines Körpers ist der Impuls. Er ist das 
+Eine weitere Beschreibung der Bewegung eines Körpers ist der \textbf{Impuls}. Er ist das 
 Produkt von Masse und Geschwindigkeit. 
 \begin{equation}
 \vec{p}=m\cdot\vec{v} 
@@ -54,7 +93,7 @@ Das erweiterte Newtonsche Gesetz lautet somit
 \begin{equation}
 \vec{F}=m\cdot \vec{a} = m\frac{d\vec{v}}{dt}=\frac{d\vec{p}}{dt}
 \end{equation}
-und lässt nun auch veränderbare Massen zu. Der Kraftstoss $\vec{J}$ ist 
+und lässt nun auch veränderbare Massen zu. Der \textbf{Kraftstoss} $\vec{J}$ ist \index{Kraftstoss}
 die Fläche unter der Kraft-Zeit-Kurve. Er entspricht der Impulsübertragung. 
 \begin{equation}
 \vec{J} = \int_{t_1}^{t_2} \! \vec{F}(t) \, \mathrm{d}t = \vec{p}_2 - \vec{p}_1
@@ -63,34 +102,106 @@ Aus dem Kraftstoss lässt sich eine durchschnittlich wirkende Kraft berechnen (\a
 \begin{equation}
 \vec{F}_{average} = \frac{\vec{J}}{\Delta t} = \frac{\vec{p}_2 - \vec{p}_1}{t_2- t_1} . 
 \end{equation}
-	\begin{figure}
-		\centering
-		\includegraphics[width=5.5cm]{img/durchschnittskraft.png}
-		\caption[Durchschnittliche Kraft $F_{av}$]{Durchschnittliche Kraft $F_{av}$ \cite{Mechanik}}
-		\label{fig:druchschnittskraft}
-	\end{figure}
+	
 Ein Impulsübertrag kann bei kurzen, heftigen Stössen oder langen, sanften Stössen 
-gleich gross sein. Die Form des Impulses hängt von der Steifigkeit der Materialien ab, welche
-aufeinander treffen. Ein steiferes Material erzeugt einen schmaleren Impuls. Die durchschnittliche 
+gleich gross sein. Die Form des Impulses hängt von der Steifigkeit der Materialien ab, welche aufeinander treffen. 
+\begin{wrapfigure}[0]{r}{4.55cm}
+	\vspace{1.2cm}
+	\centering
+	\includegraphics[width=4.55cm]{img/durchschnittskraft.png}
+	\caption[Durchschnittliche Kraft $F_{av}$]{Durchschnittliche Kraft $F_{av}$ \cite{Mechanik}}
+	\label{fig:druchschnittskraft}
+\end{wrapfigure}
+Ein steiferes Material erzeugt einen schmaleren Impuls. Die durchschnittliche 
 Kraft $F_av$ wird dadurch grösser. Das Energiedichtespektrum wird umso breiter, je schmaler der 
 Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
-	\begin{figure}
+	\begin{SCfigure}
+		\vspace{0.2cm}
 		\centering
-		\captionsetup{width=10cm}
 		\includegraphics[width=10cm]{img/kraftstoss.png}
 		\caption[Kraftstoss]{Die Form des Impulses hängt von der Steifigkeit des Materials ab. 
 			Je steifer ein Material, desto schmaler der Impuls. Daraus folgt, dass das Energiedichtespektrum
 			breiter wird \cite{Ruhm}.}
 		\label{fig:kraftstoss}
-	\end{figure}
-
-
-%\section{Mechanische Schwingungen}
-%
-%\section{Elektromechanische Analogie}
-
+	\end{SCfigure}
 \newpage
-\section{Sog-Druckwellen eines Zuges}
+\section{Schwingungen} \index{Periodische Bewegung} \index{Schwingung} \index{Rücktreibende Kraft} \index{Elongation} \index{Amplitude} \index{Harmonische Schwingung}
+	Ein Körper bewegt sich \textbf{periodisch}, wenn er nach gleichlangen Zeitabschnitten immer wieder den 
+	gleichen Bewegungszustand einnimmt. Dies heisst, der Körper erreicht periodisch den gleichen Ort
+	mit der gleichen Geschwindigkeit und Beschleunigung. Die Bewegung des Körpers heisst Schwingung, 
+	wenn zusätzlich eine stabile Gleichgewichtslage vorhanden ist. Ohne äussere Einflüsse kehrt 
+	der Körper immer wieder in die Gleichgewichtslage zurück. Eine \textbf{Schwingung} kommt zustande, wenn eine 
+	\textbf{rücktreibende Kraft} den Körper in Richtung der Gleichgewichtslage bewegt. Ist diese rücktreibende 
+	Kraft proportional zur Elongation, so entsteht eine \textbf{harmonische Schwingung}
+	\begin{equation}
+	x(t) = \hat{x} \cdot cos(\omega t \pm \phi).
+	\end{equation}
+	Die Periodendauer $T$ ist die Dauer, bis 
+	der Körper wieder den gleichen Bewegungszustand einnimmt. Die Frequenz ist der Kehrwert der Periodendauer
+	$f=\frac{1}{T}$ mit der Einheit Herz Hz. Die Kreisfrequenz $\omega$ ergibt sich aus 
+	\begin{equation}
+	\omega = 2\cdot \pi \cdot f. 
+	\end{equation}
+	Die \textbf{Elongation} $x(t)$ ist der von der Ruhelage aus gemessene
+	Abstand. Die Amplitude $\hat{x}$ ist der maximal Wert der Elongation und ist immer positiv. (Aus
+	\cite{MSLeifi} und \cite{Schwingungen})
+	
+\section{Grundmodell des Masse-Dämpfer-Feder-Prozesses} \index{Masse-Dämpfer-Feder-Prozess}
+	Das Grundmodell des Masse-Dämpfer-Feder-Prozesses ist ein lineares System zweiter Ordnung. Es ist
+	die Grundlage aller schwingungsfähigen Prozesse höherer Ordnung. Es ist in
+	\ref{fig:feder_masse_daempfer} dargestellt. Die Eingangsgrösse ist eine angreifende Kraft $f(t)$,
+	welche berührungslos auf das System einwirkt.
+	\begin{figure}
+		\centering
+		\includegraphics[width=10cm]{img/feder_masse_daempfer.png}
+		\caption{Einfachster Masse-Dämpfer-Feder Prozess \cite{Ruhm}}
+		\label{fig:feder_masse_daempfer}
+	\end{figure} 
+	\begin{figure}
+		\centering
+		\includegraphics[width=10cm]{img/wirkungsplan.png}
+		\caption{Wirkungsplan, in Anlehnung an \cite{Ruhm}}
+		\label{fig:wirkungsplan}
+	\end{figure} 
+	Das Modell besteht aus physikalischen Grössen ($a$,$v$,$h$,$f$) und physikalischen Eigenschaften
+	als Parameter ($c$, $\kappa$, $m$). Um das Modell herzuleiten, wird eine Kräftebilanz bei
+	oszillierenden Massen durchgeführt. Diese besagt, dass zu jedem Zeitpunkt die angreifenden Kräfte
+	im Gleichgewicht sein müssen. Dies sind die Massenkräfte $f_M(t)$ nach Newton, die zur
+	Geschwindigkeit proportionalen Dämpfungskräfte $f_D(t)$, die rücktreibenden Federkräfte $f_F(t)$
+	und die externen Kräfte $f(t)$.
+	\begin{equation}
+	f_M(t) + f_D(t) + f_F(t) = f_F(t) = m\ddot{h}(t)+c\dot{h}(t)+\kappa h(t) = ma(t)+cv(t)+\kappa h(t) = f(t)
+	\end{equation}
+	\begin{equation}
+	a(t) + \frac{c}{m}v(t)+\frac{\kappa}{m}h(t) = \frac{1}{m}f(t)
+	\end{equation}
+	Der Wirkungsplan ist in \ref{fig:wirkungsplan} abgebildet. Die Struktur bei Mehrmassensystemen, Systemen 
+	höherer Ordnung, ändert sich nicht. Die ursprüngliche Bewegungsgleichung wird als Matrix-Vektor-Gleichung
+	dargestellt: 
+	\begin{equation}
+	 \boldsymbol{M\ddot{h}(t)+C\dot{h}(t)+K h(t) = f(t)}. 
+	\end{equation}
+	(In Anlehnung an \cite{Ruhm})
+	
+\section{Fourier Analyse analoger Signale} \index{Satz von Fourier} \index{Spektrum} \index{Grundfrequenz} \index{Spektrum!kontinuierliches} \index{Spektrum!diskretes}
+	Der Satz von Fourier besagt, dass sich jede periodische Schwingung aus mehreren harmonischen Schwingungen 
+	zusammensetzen lässt. Die Periode der Schwingung heisst \textbf{Grundfrequenz $f_0$}. Alle weiteren enthaltenen 
+	harmonischen Schwingungen haben eine Frequenz $f_n> f_0$ und sind ein Vielfaches von $f_0$. Das Betragsspektrum 
+	zeigt, welche Frequenzen mit welcher Amplitude in der Schwingung enthalten sind. Das Spektrum einer periodischen 
+	Schwingung ist ein \textbf{diskretes Linienspektrum}. Das diskrete Linienspektrum der periodischen Rechteckfunktion ist
+	im rechten Teilbild von \autoref{fig:dis_spec_rect}.
+	\begin{figure}
+		\centering
+		\includegraphics[width=12cm]{img/spektrum.png}
+		\caption{Diskretes Linienspektrum einer periodischen Schwiungung \cite{Wassner}}
+		\label{fig:dis_spec_rect}
+	\end{figure} 
+	Aus der Erweiterung der obigen Überlegungen auf aperiodische Signale folgt, dass das Spektrum 
+	aperiodischer Signale kontinuierlich ist. Aperiodisch bedeutet, dass die Periode $T$ gegen 
+	unendlich strebt, somit $f_0$ gegen null strebt. Die diskreten Frequenzen rücken deshalb unendlich
+	dicht aneinander. (In Anlehnung an \cite{Wassner})
+
+\section{Sog-Druckwellen eines Zuges} \index{Sog-Druck Feld}
 	Ein vorbeifahrender Zug erzeugt ein Sog-Druck Feld. Dieses ist in der \autoref{fig:SogDruckFeld}
 	dargestellt. Die roten Wellen bezeichnen den Überdruck, die blauen Wellen den Unterdruck. Das
 	Sog-Druck Feld ist mit dem Zug verbunden und bewegt sich mit der gleichen Geschwindigkeit voran.
@@ -116,7 +227,6 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 	\end{SCfigure}
 	Der Abstand zwischen Durck- und Sogwelle L hängt nich von der Zugsgeschwindigkeit $v_{Zug}$ ab,
 	jedoch vom Wandabstand zur Gleisachse $a_g$. 
-	\newpage
 	Der Zusammenhang zwischen Wandabstand $a_g$ und Abstand L wurde von Niemann et. Al \cite{Niemann} hergeleitet: 
 	\begin{equation}
 	L=6.9 \cdot (\frac{a_g}{3.8})^{0.65} 

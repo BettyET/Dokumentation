@@ -1,40 +1,273 @@
 \chapter{Realisierung}
+	Zusätzlich zur Abklärung, ob eine Schock Detektion möglich ist, sollen verschiedene Ideen für die 
+	Realisierung einer solchen zusammengetragen werden. Vorgegeben ist dabei der Aufbau des Clock Set, beschrieben 
+	in \autoref{sec:clockset}. Die verschiedenen Realisierungsideen werden in \autoref{sec:ideen}
+	aufgelistet und die jeweiligen Vor- und Nachteile diskutiert. In \autoref{sec:modul} wird die im Rahmen 
+	dieser Arbeit umgesetzte Idee vorgestellt. 
+	
+	\section{Aufbau des Clock Sets} \label{sec:clockset}
+		\vspace{-0.75cm}
+		\begin{figure}	
+			\centering
+			\captionsetup{width=8cm}
+			
+			\begin{tikzpicture}
+			\node[above right] (img) at (0,0) {\includegraphics[width=8cm]{img/clockset.png}};
+			
+			\draw[line width=1pt]				
+			(1.2, 5) node[left=1mm] {Uhrwerk}
+			-- (3.6, 3.3);
+			\fill (3.6, 3.3) circle (2pt);
+			
+			\draw[line width=1pt]
+			(6,1.5) node[below=1mm] {Clock Controller}
+			-- (5.0, 3.7);
+			\fill (5.0, 3.7) circle (2pt);
+			
+			\draw[line width=1pt]
+			(1.6,5.5) node[above=1mm] {LED-Beleuchtung}
+			-- (2.9, 4.7);
+			\fill (2.9, 4.7) circle (2pt);
+			
+			\draw[line width=1pt]
+			(4,0.5) node[right=1mm] {Ziffernblatt und Zeiger}
+			-- (3,1.6);
+			\fill (3,1.6) circle (2pt);
+			\end{tikzpicture}
+			\caption[Aufbau des Clock Set]{Aufbau des Clock Set, Ausschnitt aus Datenblatt \cite{ClockSet}}
+			\label{fig:clockset}
+		\end{figure}
+	Der Aufbau des Clock Set besteht aus einem Uhrwerk, einer LED-Beleuchtung, einem Clock Controller
+	und bis zu zwei Uhrwerken mit Ziffernblatt und Zeigern \cite{ClockSet}. Die \autoref{fig:clockset}
+	zeigt die genannten Komponenten. Das Uhrwerk immer das Selbe. 
+	Der Clock Controller variiert je Synchronisationsart des Uhrwerkes (DCF, GPS, Mobaline, NTP) und der
+	Speisungsart. Auf dem Uhrwerk und dem Clock Controller ist jeweils ein ATMEL- Kontroller bestückt.
+	 Ein Zweidrahtbus verbindet
+	den Clock Controller und das Uhrwerk. Dabei ist die Kommunikation zwischen den beiden Komponenten grundsätzlich 
+	unidirektional, vom Clock Controller zum Uhrwerk. Die Schnittstelle zum Netzwerk stellt der Clock 
+	Controller her. 
 
-\newpage
-\begin{figure}[H]
-	\begin{minipage}[hbt]{7cm}
-		\centering
-		\includegraphics[width=7cm,]{img/HW/top.png}
-		\caption{Top Layer}
-		\label{fig:TopBot}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[hbt]{7cm}
-		\centering
-		\includegraphics[width=7cm]{img/HW/bottom.png}
-		\caption{Bottom Layer}
-		\label{fig:TopBez}
-	\end{minipage}
-	\\[4ex]
-	\begin{minipage}[hbt]{7cm}
-		\centering
-		\includegraphics[width=7cm]{img/HW/designator.png}
-		\caption{Bezeichnungen Top Layer}
-		\label{fig:BotBez}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[hbt]{7cm}
-		\centering
-		\includegraphics[width=7cm]{img/HW/comment.png}
-		\caption{Werte Top Layer}
-		\label{fig:BotVal}
-	\end{minipage}
-\end{figure}
+	
+	\section{Realisierungsideen} \label{sec:ideen}
+	Es gibt verschiedene Möglichkeiten, wie ein Shock Detector in den bestehenden Aufbau des Clock Set
+	integriert werden kann. Diese haben jeweils verschiedene Vor- und Nachteile. In der
+	\autoref{tab:ideen_realisierung} sind fünf Ideen für die Realisierung mit den jeweiligen Vor- und
+	Nachteilen aufgelistet.
+	
+	Der Sensor wird gemäss \autoref{subsec:bestPos} am Uhrwerk positioniert, da dort die grössten 
+	Beschleunigungssignale und die für die Unterscheidung zwischen Zugdurchfahrt und Shock Event 
+	wichtige Eigenfrequenz des Ziffernblattes gemessen werden kann. Der Sensor kann somit entweder
+	auf der Platine des Uhrwerks oder auf einem externen Print (folgend auch Modul genannt) platziert werden. 
+	%\newpage
+	Ein zusätzliches Modul wird an der Rückseite des Uhrwerkgehäuses geklebt oder geschraubt. 
+	Bei einer doppelseitigen Uhr bleiben ungefähr 70mm Platz zwischen den beiden Uhrwerken
+	(METRO-Uhr mit zwei SEM 100t Uhrwerken). Ein externes Modul sollte somit eine maximale 
+	Höhe von 30mm nicht überschreiten.  
+	
+	Für die Konfiguration und das Auslesen der Beschleunigungsdaten bieten sich drei Möglichkeiten an. 
+	Der Mikrokontroller auf dem Uhrwerk und jener auf dem Clock Controller haben beide I2C, SPI und UART.
+	Auf beiden Mikorkontrollern läuft ein Betriebssystem. Jenes auf dem Uhrwerk ist mit den bestehenden Tasks
+	stärker ausgelastet als das Betriebssystem auf dem Clock Controller. 
+	Die dritte Möglichkeit ist ein zusätzlicher Mikrokontroller welcher als einzige Aufgabe den 
+	Sensor konfiguriert, ausliest und mit dem Clock Controller oder dem Uhrwerk kommuniziert. 
+	
+	
+	In jedem Fall muss das Shock Event Signal über den Clock Controller abgesetzt werden, 
+	da dies die Schnittstelle zum Netzwerk ist. Wird der Sensor mit dem ATMEL Kontroller
+	auf dem Uhrwerk oder dem externen Modul ausgewertet, wäre eine Eindrahtverbindung 
+	denkbar, welche ein Shock Event signalisiert. Soll jedoch die Auswertung mit dem 
+	ATMEL Kontroller auf dem Clock Controller erfolgen, so muss I2C oder SPI mittels einer
+	Kabelverbindung zum Clock Controller geführt werden. Typischerweise wird I2C oder SPI 
+	bei on-board Anwendungen verwendet, d.h. innerhalb einer Platine. Bei längeren Kabelverbindungen 
+	wird der Kommunikationskanal schlechter und die Bitfehlerrate erhöht sich. Bei der Platzierung
+	des Sensors auf der Platine im Uhrwerk in Kombination mit einer Kabelverbindung auf den Clock Controller ist eine 
+	Abänderung des Gehäuses des Uhrwerkes nötig, damit die Kabel hinausgeführt werden können. 
+	Die Abänderung der Gusswerkzeuge kann mehrere tausend Franken kosten. Die Möglichkeit, 
+	ein Shock Event Signal über den bestehenden Zweidrahtbus abzusetzen, müsste untersucht werden. 
+	Dies bedeutet weiteren Entwicklungsaufwand. 
+	
+	
+	Gemeinsam mit der Firma Moser-Baer AG wurde entschieden, in einem ersten Schritt die 
+	Realisierungsidee Nr. 4 zu realisieren. Diese ermöglicht eine hohe Flexibilität um weiter
+	Messungen durchzuführen. Es ist denkbar, bei Kundenwünschen das Modul bereits einzusetzen. 
+	Sollte sich der Shock Detector bewähren, kann dieser in einem weiteren Schritt weiter in den 
+	bestehenden Aufbau integriert werden. 
+	
+	\newgeometry{
+		left=2cm,
+		right=2cm,
+		top=1cm,
+		bottom=1cm,
+		bindingoffset=5mm
+	}	
+\begin{landscape}
+	\begin{longtable}{p{0.5cm} p{6cm} p{2.5cm} p{6cm} p{8cm}} \toprule
+		\textbf{Nr.}	& \textbf{Beschreibung} & \textbf{Benötigte Komponenten} 	& \textbf{Pro} 	& \textbf{Contra} \\	
+		\midrule
+		\endhead
+		\multicolumn{2}{l}{\emph{Fortsetzung auf nächster Seite}}	\\ \bottomrule \endfoot \endlastfoot 
+		1 & Sensor auf Platine Uhrwerk, 
+			Auswertung auf ATMEL Uhrwerk, 
+			Signal über Mobaline an Clock 
+			Controller							& Sensor 							& $\bullet$ Elegante Lösung da 
+																					  wenige Komponenten benötigt
+																					  $\Rightarrow$ günstig\newline	
+																					  $\bullet$ keine zusätzliche Montage\newline
+																					  $\bullet$keine Kabelverbindung I2C oder SPI		& $\bullet$ Auslastung ATMEL Uhrwerk bereits hoch 
+																																		  $\Rightarrow$ Auswertung mit Sensorregistern\newline
+																																		  $\bullet$ zwei Hardwareversionen des Uhrwerks\newline
+																																		  $\bullet$ Hardwareänderung Uhrwerk\newline 
+																																		  $\bullet$ ev. Konflikt auf Mobaline $\Rightarrow$ 
+																																		  zusätzlicher Entwicklungsaufwand \\ \midrule 
+		2 & Sensor auf Platine Uhrwerk, 
+			Auswertung auf zusätzlichem 
+			Kontroller, Signal über Mobaline
+			an Clock Controller					& Sensor und Kontroller				& $\bullet$ relativ wenig Komponenten \newline
+																					  $\bullet$ wie in Nr. 1 Pkt. 2 \& 3
+																									  									& $\bullet$ zusätzlicher Kontroller $\Rightarrow$ teurer als Nr. 1 \newline
+																																		  $\bullet$ wie in Nr. 1 Pkt. 2-4 \\ \midrule		
+		3 & Sensor auf Modul extern an Uhrwerk, 
+			I2C / SPI Kabelverbindung auf Clock-
+			Controller, Auswertung auf Clock-
+			Controller							& Sensor, zusätzliche Platine, 
+												  Montagematerial					& $\bullet$ keine Hardwareänderung \newline
+																					  $\bullet$ nicht über Mobaline \newline				
+																					  $\bullet$ flexibel einbaubar						& $\bullet$ Kabelverbindung I2C/SPI\newline
+																																		  $\bullet$ zusätzlicher Montageaufwand \newline
+																																		  $\bullet$ Speisung über Kabel \newline
+																																		  $\bullet$ mehr Komponenten $\Rightarrow$ teurer \\ \midrule
+		4 & Sensor auf Modul extern an Uhrwerk, 
+			zusätzlicher Kontroller auf Modul 
+			für die Auswertung					& Sensor, Kontroller, zusätzliche 
+												  Platine, Montagematerial			& $\bullet$ wie Nr. 3 \newline
+																					  $\bullet$ keine Kabelverbindung I2C oder SPI \newline
+																					  $\bullet$ flexibel für weitere Experimente und 
+																					  Messungen											& $\bullet$ wie in Nr. 3 Pkt. 2-4 \\ \midrule
+		5 & Sensor auf Layout Uhrwerk, 
+			Kabelverbindung I2C / SPI auf 
+			Clock Controller 					& Sensor 							& $\bullet$ keine zusätzliche Montage \newline
+																					  $\bullet$ wenig Komponenten						& $\bullet$ zwei Hardwareversionen des Uhrwerks \newline
+																																		  $\bullet$ Kabelverbindung I2C / SPI \newline
+																																		  $\bullet$ Abänderung Gehäuse wegen zusätzlicher Kabelführung 
+																																		  $\Rightarrow$ hohe Kosten für Gusswerkzeugabänderung \\ \bottomrule			 	
+		\caption{Ideen für die Ralisierung des Shock Detectors} 
+		\label{tab:ideen_realisierung}
+	\end{longtable}%
+\end{landscape}
+\restoregeometry
+	\newpage
 
-\begin{figure}
-	\centering
-	%\vspace{-1cm}
-	\includegraphics[width=13cm]{img/HW/3d_w.png}
-	\caption{3D Ansicht des Printes}
-	\label{fig:3d}
-\end{figure}
+	\section{Shock Detector Modul}	\label{sec:modul}
+	Die Realisierung des Shock Detectors erfolgt gemäss der Realisierungsidee Nr. 4 in der
+	\autoref{tab:ideen_realisierung}. Der Sensor wird auf einer externen Platine mit einem
+	Mikrokontroller konfiguriert und ausgelesen. Zusätzlich zu den erwähnten Komponenten in der Realisierungsidee
+	Nr. 4 soll eine Anbindung an den Computer realisiert werden. So kann das Modul konfiguriert werden
+	und Beschleunigungsdaten aufgezeichnet werden. 
+	
+	Um das Modul am Uhrwerk zu montieren, sind zwei Möglichkeiten vorgesehen. Einerseits sollen nur SMD
+	Bauteile verwendet werden, so dass der Sensor an das Uhrwerk geklebt werden kann. Der Vorteil davon
+	ist, dass dazu das Gehäuse des Uhrwerks nicht modifiziert werden muss. Andererseits sind vier Löcher
+	im Print, um das Modul am Uhrwerk anzuschrauben.
+	
+	\paragraph{Schema}
+	\autoref{fig:schema} zeigt das Schema des Shock Detector Moduls. Grundsätzlich wurde darauf geachtet, 
+	geeignete Bauteile aus dem Lagerbestand der Moser-Baer AG zu wählen. Andernfalls wurden möglichst
+	günstige Bauteile bestellbar bei einem bekannten Distributor wie Mouser oder Distrelec verwendet. 
+	Die Datenblätter der verwendeten Bauteile sind im Literaturverzeichnis mit einer Verlinkung 
+	auf eine Onlineversion aufgelistet und zusätzlich auf der CD.
+	
+	Es wird der gleiche Mikrokontroller wie auf dem Uhrwerk eingesetzt, ATxmega32A4U \cite{Atmel} von
+	ATMEL. Dieser wird mit einem externen Quarzoszillator mit einer Frequenz von 12MHz betrieben. Der
+	Mikrokontroller wird über die Programmierschnittstelle PDI programmiert. Der Sensor wird über I2C
+	angesprochen. Der Sensor kann aus der Produktreihe der High-g Beschleunigungssensoren von
+	STMicroelectronics gewählt werden. So kann der im Versuch verwendete  H3LIS100DLTR oder auch der
+	pinkompatible und halb so teure H3LIS200DLTR bestückt werden.
+	
+	Die Anbindung an den Computer wird mit dem USB zu UART Interface FT232B \cite{FT232B} von FTDI realisiert. Dieses
+	IC kann verschieden gespeist werden. Die beim Shock Detector Modul verwendete Konfiguration ist Bus
+	Powered, d.h. von der USB Schnittstelle her gespeist. 
+	
+	Für die Speisung des Shock Detection Moduls sind zwei Möglichkeiten vorgesehen. Einerseits kann
+	vom Clock Controller die 3.3V Speisung an den Anschlussblock X2 angeschlossen werden. Andererseits
+	kann das Modul über die USB Schnittstelle gespeist werden. Mit einem Jumper wird die jeweilige
+	Speisungsart konfiguriert. Da der Beschleunigungssensor mit einer Speisespannung von 2.16 bis 3.6V
+	und der ATMEL Mikrokontroller mit 1.6 bis 3.6V arbeitet, wird bei Speisung über USB einen
+	zusätzlichen Spannungsregler benötigt. Der FT232B hat intern einen eigenen Spannungsregler, dieser
+	kann jedoch maximal 5mA liefern und ist daher für diese Anwendung nicht geeignet. Es wird deshalb
+	der lineare low-dropout (LDO) Spannungsregler LM2936 \cite{LM2936} mit einer fixen Ausgangsspannung
+	von 3V verwendet.
+		
+	Verschiedene LEDs zeigen den Zustand des Shock Detecotor Moduls an. Die LED D4 zeigt an, ob die USB
+	5V Speisung vorhanden ist. Die LED D1 und D2 signalisieren eine laufende Kommunikation zwischen
+	Computer und Shock Detector Modul. Eine viert LED D3 signalisiert, dass ein Shock Event detektiert
+	wurde. Zusätzlich kann bei einem Shock Event ein Warnsignal an den Clcok Controller gesendet
+	werden. Dafür ist am Anschlussblock X2 ein Anschluss vorgesehen. Eine Supressordiode (Transil)
+	schützt den Mikrokontroller vor Spannungsimpulsen. Ein Taster dient der Konfiguration oder für
+	Testzwecke und wurde als Reserve vorgesehen.
+	
+	
+	\begin{figure}
+		\centering
+		%\vspace{-1cm}
+		\includegraphics[width=23cm, angle=90]{img/HW/schema.png}
+		\caption{Schema}
+		\label{fig:schema}
+	\end{figure}
+	
+	\paragraph{Layout}
+	Das Layout besteht aus zwei Layern. Auf dem Top Layer werden die Bauteile platziert und die
+	Leiterbahnen geführt. Der Bottom Layer besteht grösstenteils aus einer Groundfläche. Diese ist mit
+	Vias zum Top Layer verbunden. Auskreuzungen auf dem Bottom Layer werden möglichst vermieden und so
+	kurz wie möglich gehalten. Neben den Auskreuzungen befinden sich Beschriftungen der Anschlüsse und
+	der wichtigsten Testpunkte auf dem Bottom Layer. Unter und neben dem Spannungsregler ist eine
+	Kupferfläche, so dass die Wärme abgeleitet werden kann. Die Transildiode wird möglichst nahe am
+	Anschlussblock X2 und die Leiterbahn direkt über das Pad der Transildiode geführt (Application Note
+	\cite{Transil}). Allgemein werden die Bauteile kompakt angeordnet und die Leiterbahnführung kurz
+	gehalten. Die Stützkondensatoren werden möglichst nahe an den ICs platziert.
+
+	Top Layer, Bottom Layer und der Top Overlay (Bestückung) sind in den Abbildungen \ref{fig:TopBot}
+	bis \ref{fig:BotVal} abgebildet. Zusätzlich wurde der Print in der 3D-Ansicht kontrolliert. Dazu
+	konnten einige Step-Modelle von den Bauteileherstellern in Altium eingebunden werden. Von den
+	restlichen Bauteilen wurde selber ein vereinfachtes 3D- Modell gezeichnet. Die \autoref{fig:3d}
+	zeigt die 3D Ansicht des Prints. Die Stückliste ist im Anhang \ref{chap:stueckliste} angefügt. Die
+	Stückliste wurde eingeteilt in Bauteile, welche extern bestellt werden müssen, und solche, welche
+	im Lagerbestand der Moser-Baer AG sind. Der Preis für extern zu bestellende Bauteile beträgt
+	ungefähr Fr. 7.65 pro Shock Detector Modul.
+		
+	\begin{figure}[H]
+		\begin{minipage}[hbt]{7cm}
+			\centering
+			\includegraphics[width=7cm,]{img/HW/top.png}
+			\caption{Top Layer}
+			\label{fig:TopBot}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[hbt]{7cm}
+			\centering
+			\includegraphics[width=7cm]{img/HW/bottom.png}
+			\caption{Bottom Layer}
+			\label{fig:TopBez}
+		\end{minipage}
+		\\[4ex]
+		\begin{minipage}[hbt]{7cm}
+			\centering
+			\includegraphics[width=7cm]{img/HW/designator.png}
+			\caption{Bezeichnungen Top Layer}
+			\label{fig:BotBez}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[hbt]{7cm}
+			\centering
+			\includegraphics[width=7cm]{img/HW/comment.png}
+			\caption{Werte Top Layer}
+			\label{fig:BotVal}
+		\end{minipage}
+	\end{figure}
+	
+	\begin{figure}
+		\centering
+		%\vspace{-1cm}
+		\includegraphics[width=13cm]{img/HW/3d_w.png}
+		\caption{3D Ansicht des Printes}
+		\label{fig:3d}
+	\end{figure}
