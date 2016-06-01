@@ -11,10 +11,20 @@ A level-1 auxiliary file: content/machbarkeit_piezo.aux
 A level-1 auxiliary file: content/machbarkeit_mems.aux
 A level-1 auxiliary file: content/machbarkeit_fazit.aux
 A level-1 auxiliary file: content/umsetzung.aux
-A level-1 auxiliary file: schluss.aux
-A level-1 auxiliary file: content/anforderungen.aux
+A level-1 auxiliary file: content/schluss.aux
 Database file #1: bibliografie/bibliografie.bib
+Warning--entry type for "Buchner" isn't style-file defined
+--line 147 of file bibliografie/bibliografie.bib
+Illegal end of database file---line 159 of file bibliografie/bibliografie.bib
+ : 
+ : 
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in MSLeifi
+`year' is a missing field, not a string, for entry diffdruck
+while executing---line 1254 of file bibliografie/ka-style.bst
+`year' is a missing field, not a string, for entry diffdruck
+while executing---line 1254 of file bibliografie/ka-style.bst
 Warning--to sort, need author, organization, or key in H3L
 Warning--to sort, need author or key in TaskNotification
 `year' is a missing field, not a string, for entry ClockSet
@@ -31,4 +41,4 @@ while executing---line 1323 of file bibliografie/ka-style.bst
 Warning--empty publisher in Ruhm
 `author' is a missing field, not a string, for entry TaskNotification
 while executing---line 1323 of file bibliografie/ka-style.bst
-(There were 4 error messages)
+(There were 7 error messages)

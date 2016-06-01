@@ -1,76 +1,81 @@
 \chapter{Versuche mit piezoelektrischen Sensoren} \label{chap:piezo}
-	In einem ersten Schritt wurden Versuche mit piezoelektrischen Sensoren durchgeführt. Der Versuchsaufbau 
-	wird in \ref{chap:Versuchsaufbau} beschrieben. Es folgen drei Versuche: der erste hat das Ziel, 
-	eine Vorstellung von zu messenden Beschleunigungssignalen bei Vandalismus zu geben. Der zweite 
-	Versuch untersucht die beste Positionierung von Beschleunigungssensoren in einer Uhr. Der dritte Versuch
-	soll zeigen, ob die Unterscheidung zwischen einer Sog-Druckwelle eines Zuges und Vandalismus 
-	anhand von Beschleunigungssignalen möglich ist. Die Versuche sind jeweils in drei Abschnitte geteilt. 
-	Dies sind Vorgehen, Messresultate und Fazit.  
+	In einem ersten Schritt wurden Versuche mit piezoelektrischen Sensoren durchgeführt. Der
+	Versuchsaufbau wird in \autoref{chap:Versuchsaufbau} beschrieben. Es folgen drei Versuche in den
+	Abschnitten \ref{subsec:signale} bis \ref{sec:Unterscheidung}: Der erste hat das Ziel, eine
+	Vorstellung von den zu messenden Beschleunigungssignalen bei Vandalismus zu geben. Der zweite
+	Versuch untersucht die beste Positionierung eines Beschleunigungssensors in der Aussenuhr. Der
+	dritte Versuch soll zeigen, ob die Unterscheidung zwischen einer Sog-Druckwelle eines Zuges und
+	Vandalismus anhand von Beschleunigungssignalen möglich ist. Die Versuche sind jeweils in drei
+	Abschnitte Vorgehen, Messresultate und Fazit eingeteilt.
 
 	\section{Versuchsaufbau mit piezoelektrsichen Sensoren} \label{chap:Versuchsaufbau}
 	\begin{wrapfigure}[10]{r}{6.5cm}
 		\centering
 		\vspace{-1cm}
-		\includegraphics[width=6cm]{img/ks93.png}
+		\includegraphics[width=5.5cm]{img/ks93.png}
 		\caption{Miniatursensor KS93}
 		\label{fig:ks93}
 	\end{wrapfigure}
+   
 	Für die ersten Versuche werden piezoelektrische Sensoren des Typs KS93 verwendet. Dieser
-	Miniatur-Beschleunigungsaufnehmer hat einen Messbereich von $\pm 6000$g und einen linearen
-	Frequenzbereich bis 22kHz. Am Sensorausgang ändert sich je nach Beschleunigung die Ladung Q. Diese
-	muss mit einem Ladungsverstärker in eine Spannung umgewandelt und verstärkt werden. Der
-	Ladungsübertragungsfaktor beträgt 4.875 pC/g. Weiter Eigenschaften des Sensors sind dem Datenblatt
-	zu entnehmen \cite{KS93}.
-	
+	\index{Beschleunigungssensor!piezoelektrisch} Miniatur-Beschleunigungsaufnehmer hat einen
+	Messbereich von $\pm 6000$g und einen linearen Frequenzbereich bis 22kHz. Der Sensor hält
+	Beschleunigungen bis maximal 8'000g aus. Am Sensorausgang ändert sich je nach Beschleunigung die
+	Ladung Q. Diese muss mit einem Ladungsverstärker in eine Spannung umgewandelt und verstärkt werden.
+	Der Ladungsübertragungsfaktor beträgt 4.875 pC/g. Weiter Eigenschaften des Sensors KS93 sind dem
+	Datenblatt zu entnehmen \cite{KS93}. Der Aufbau und die Funktionsweise von piezoelektrischen 
+	Beschleunigungssensoren findet man im Grundlagenteil Beschleunigungssensoren \autoref{chap:acc_sens}. 
+
 	Der Aufbau mit Versuchsuhr, Ladeverstärker und Oszilloskop ist in der
 	\autoref{fig:versuchsaufbau_piezo} dargestellt. Die Versuchsuhr ist liegend an der Wand befestigt,
 	so dass die Prüfmassen auf die Uhr fallen gelassen werden können. Im Innenraum der Uhr werden drei
-	Sensoren befestigt. Die Positionen dieser sind in der \autoref{fig:Sensorpositionen} ersichtlich. 
-	Die Sensorpositionen sind so ausgewählt, dass der Sensor von Aussen nicht sichtbar ist. Dies 
+	Sensoren befestigt. Die Positionen dieser sind in der \autoref{fig:Sensorpositionen} ersichtlich.  
+	Die Sensorpositionen sind so ausgewählt, dass der Sensor von aussen nicht sichtbar ist. Dies 
 	ist gemäss der Anforderungsliste in \autoref{chap:anforderungen} erforderlich. 
-	Das Signal mit wird mit dem Ladungsverstärker gewandelt. Der Signalverlauf wird mit einem
-	Oszilloskop aufgezeichnet. 	Die aufgenommenen Beschleunigungssignale werden als Bild und als Daten
+	Das Signal wird mit dem Ladungsverstärker M68D3 gewandelt. Für die Aufzeichnung des Signalverlaufs 
+	wird ein Oszilloskop verwendet.	Die aufgenommenen Beschleunigungssignale werden als Bilddatei und als Daten
 	für Matlab exportiert. Auf dem Computer können die Messungen ausgewertet werden.
+	
 	\begin{figure}
 		\centering
 		%\vspace{-1cm}
-		\captionsetup{width=7cm}
-		\includegraphics[width=7cm]{img/versuchsaufbau_piezo.png}
+		%\captionsetup{width=10cm}
+		\includegraphics[width=10cm]{img/versuchsaufbau_piezo.png}
 		\caption{Versuchsaufbau mit piezoelektrischen Sensoren}
 		\label{fig:versuchsaufbau_piezo}
 	\end{figure}
-
+	
 	\begin{figure}
+		%\vspace{1cm}
 		\centering
-		\captionsetup{width=7cm}
-		\vspace{0.5cm}
-		\includegraphics[width=7cm]{img/PosSensoren.png}
-		\caption{Sensorpositionen:\\\\
+		\captionsetup{width=8cm}
+		\includegraphics[width=8cm]{img/PosSensoren.png}
+		\caption[Sensorpositionen]{Sensorpositionen:\\\\
 			1) An der Montageleiste der Uhr innen, nahe der Konsole (Channel 1, grün)\\\\
 			2) Am Uhrwerk, welches am Ziffernblatt befestigt ist (Channel 2, rot)\\\\
 			3) Am Rahmen der Uhr aussen (Channel 3, blau)}
 		\label{fig:Sensorpositionen}
 	\end{figure}
 	
-	\begin{longtable}{p{3cm} p{5cm} p{3cm}} \toprule
-		\textbf{Gerät}	& \textbf{Bezeichnung} & \textbf{Serinummer} \\	
-		\midrule
-		\endhead
-		\multicolumn{2}{l}{\emph{Fortsetzung auf nächster Seite}}	\\ \bottomrule \endfoot \endlastfoot 
-		Piezoelektrsiche Sensoren	&Miniatur-Beschleunigungsaufnehmer 	KS93&		\\ 
-		Ladungsverstärker			&Messverstärker M68D3					&		\\
-		Oszilloskop					&LeCroy									&		\\
-		\bottomrule					 	
-		\caption{Verwendete Sensoren und Geräte} 
-		\label{tab:SensorenGeräte}
-	\end{longtable}
+%	\begin{longtable}{p{3cm} p{6cm} p{1.5cm}} \toprule
+%		\textbf{Gerät}	& \textbf{Bezeichnung} & \textbf{Anzahl} \\	
+%		\midrule
+%		\endhead
+%		\multicolumn{2}{l}{\emph{Fortsetzung auf nächster Seite}}	\\ \bottomrule \endfoot \endlastfoot 
+%		Piezoelektrsiche Sensoren	&Miniatur-Beschleunigungsaufnehmer 	KS93&	3	\\ 
+%		Ladungsverstärker			&Messverstärker M68D3 3 Kanäle			&	1	\\
+%		Oszilloskop					&LeCroy									&	1	\\
+%		\bottomrule					 	
+%		\caption{Verwendete Sensoren und Geräte} 
+%		\label{tab:SensorenGeräte}
+%	\end{longtable}
 	
+	Die vom Oszilloskop exportierten Daten werden in Matlab importiert. Damit nicht bei jeder
+	Auswertung die Daten manuell importiert werden müssen, wurde eine Funktion readOszData()
+	implementiert. Der Code der Matlabfunktion ist im Folgenden abgebildet. Mit der Funktion wird die
+	gewünschte Textdatei geöffnet (Zeile 12-15) und Daten in einer Datenstruktur gespeichert (Zeile
+	18-22).
 	\newpage
-	
-	Für die Verarbeitung der Daten in Matlab wurden zwei Funktionen geschrieben: readOszData() und 
-	volt2acc(). Erstere liest die exportierten Daten des Oszilloskopes für jeden Kanal ein und speichert 
-	diese in einer Datenstruktur. Die zweite rechnet die gemessenen Spannungen in die Beschleunigung in 
-	g um. Dabei kann die eingestellte Verstärkung am Ladungsverstärker als Parameter mitgegeben werden. 
 	\lstset{
 		basicstyle=\small\ttfamily,
 		language=Matlab,                % choose the language of the code
@@ -89,73 +94,81 @@
 		frame=single,					% with frame
 		title=\lstname,                 % show the filename of files included with \lstinputlisting;
 	}
-	\lstinputlisting{code/readOszData.m}
+	\lstinputlisting[]{code/readOszData.m}
+	Der am Oszilloskop aufgenommen Verlauf ist ein Spannungsverlauf welcher dem Beschleunigungsverlauf entspricht. 
+	Die Spannung ist Abhängig vom Ladungsübertragungsfaktor und der eingestellten Verstärkung am Ladungsverstärker ab. 
+	Die Umrechnung von der Spannung in die Beschleunigung in g wird mit der Matlabfunktion 
+	volt2acc() automatisiert. Dabei kann die eingestellte Verstärkung am Ladungsverstärker als Parameter mitgegeben werden. 
 	\lstinputlisting{code/volt2acc.m}
+	In Matlab werden die Daten dargestellt und beschriftet. Das Frequenzspektrum wird mit Hilfe des 
+	Matlab Tools SPTool erzeugt und analysiert. 
 \newpage		
-\section{Ergebnisse der Versuche mit piezoelektrischen Sensoren}
-	\subsection{Zu erwartende Signale bei Vandalismus} \label{subsec:signale}
+	\section{Zu erwartende Signale bei Vandalismus} \label{subsec:signale}
 		\paragraph{Vorgehensweise}
 		Unter Vandalismus wird die mutwillige Zerstörung verstanden, bei der es um eine Zerstörungslust
 		ohne weiteren Zweck geht. So lautet die Definition von Vandalismus auch \flqq absichtliche
 		grundlose Zerstörung \frqq. Nach dem Sprayen (62.5\%, absolut 4726 Fälle im Jahr 2015 im Kanton
 		Bern) ist das Ein- und Zerschlagen (8\%, absolut 605 Fälle im Jahr 2016 im Kanton Bern) die
 		häufigste bekannte Vorgehensweise bei Vandalismus \cite{KSB}. Es wird davon ausgegangen, dass in
-		den meisten Fällen von Vandalismus an Bahnhofsuhren mit Steinen oder ähnlichen Gegenständen auf
-		die Uhr geworfen wird.  Die zu erwartenden Signale werden folglich mit zwei verschieden schweren 
-		Stahlkugeln und einem Softball erzeugt und ausgewertet.
+		den meisten Fällen die Aussenuhr mit Steinen oder ähnlichen Gegenständen beworfen oder geschlagen wird. 
+		Deshalb wird der folgende Versuch mit zwei verschieden schweren 
+		Stahlkugeln durchgeführt. Die beiden Kugeln haben eine Masse von 256g und 537g und entsprechen 
+		somit einem kleineren und grösseren Stein. 
 
 		\paragraph{Messresultate}
-		Die maximal gemessenen Beschleunigungssignale ohne Scheibenbruch sind in \autoref{fig:max}
-		abgebildet. Der Sensor am Uhrwerk misst einen maximalen Beschleunigungspeak von -660g! Im Spektrum
-		in \autoref{fig:spect_all} sind zwei Frequenzen deutlich zu erkennen. Die eine liegt bei ca. 50Hz,
-		die andere bei ca. 13Hz. Durch die Videoanalyse erkennt man, welche Teile der Uhr mit
+		Die grössten gemessenen Beschleunigungssignale ohne Scheibenbruch sind in \autoref{fig:max}
+		dargestellt. Der Beschleunigungssensor am Uhrwerk misst einen maximalen Beschleunigungspeak von -660g! 
+		Betrachtet man die Signale im Frequenzbereich, stechen zwei Frequenzen bei ungefähr 13Hz und 50Hz deutlich hervor. 
+		Das Spektrum der drei gemessenen Beschleunigungssignale ist in \autoref{fig:spect_all} dargestellt. 
+		
+		Durch die Videoanalyse mit einer Highspeedkamera erkennt man, welche Teile der Uhr mit
 		diesen Frequenzen schwingen. Dies ist zum einen die ganze Uhr, welche mit ca. 13Hz auf und ab
-		schwingt. Zum anderen ist es das Ziffernblatt, welches mit ca. 50Hz schwingt. Diese beiden 
-		Schwingungen sind in \autoref{fig:darst_frequ} dargestellt. Bei dieser Messung
-		war nur eine Scheibe mit Ziffernblatt montiert. 
+		schwingt. Zum anderen ist es das Ziffernblatt, welches mit ca. 50Hz schwingt. Die \autoref{fig:darst_frequ} 
+		stellt diese beiden Schwingungen dar. Zu bemerken ist, dass bei dieser Messung
+		nur eine Scheibe mit Ziffernblatt montiert wurde. Durch die Montage der zweiten Scheibe verschieben 
+		sich diese beiden charakteristischen Frequenzen um einige Herz. 
 		\begin{SCfigure}
 			\centering
-			\vspace{-1cm}
 			\includegraphics[width=7cm]{img/msg5/frequenzen.png}
-			\caption{Die beiden stark vertretenen Frequenzen im Spektrum: Ziffernblatt ca. 50Hz, ganze Uhr ca. 13Hz}
+			\caption[Darstellung Schwingung der Aussenuhr]{Die beiden stark vertretenen Frequenzen im Spektrum: Ziffernblatt ca. 50Hz, ganze Uhr ca. 13Hz}
 			\label{fig:darst_frequ}
 		\end{SCfigure}
-		
-		\begin{SCfigure}
-			%\centering
-			\hspace{-0.8cm}
-			\vspace{-1cm}
-			\includegraphics[width=10cm]{img/msg5/max.png}
-			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus einem Meter Höhe. \\\\
-			Grün: Sensor Rahmen innen \\
-			Rot: Sensor Uhrwerk \\
-			Blau: Sensor Rahmen aussen	}
-			\label{fig:max}
-		\end{SCfigure}
-		\vspace{2cm}
+		Besonders deutlich treten diese oben erwähnten beiden Frequenzen im Beschleunigungssignal gemessen am Uhrwerk auf. 
+		Das Beschleunigungssignal des Sensors am Rahmen aussen weist bei 50Hz einen deutlich kleineren Signalanteil 
+		auf. Dafür ist die Schwigung der ganzen Uhr von ungefähr 13Hz gut im Spektrum ersichtlich. Das Beschleunigungssignal
+		innen an der Uhr ist über alle Frequenzen deutlich kleiner als die anderen beiden. 
 		\begin{figure}
 			\centering
-			\captionsetup{width=14cm}
+			\includegraphics[width=14cm]{img/msg5/max.png}
+			\caption[Maximal gemessene Beschleunigungen]{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus einem Meter Höhe.
+%			Grün: Sensor Rahmen innen \\
+%			Rot: Sensor Uhrwerk \\
+%			Blau: Sensor Rahmen aussen	
+			}
+			\label{fig:max}
+		\end{figure}
+		\begin{figure}
+			\centering
+			%\captionsetup{width=15.5cm}
 			\includegraphics[width=15.5cm]{img/msg5/spektrum.png}
-			\caption{Spektren der Sensoren bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus einem Meter Höhe. \\\\
-				Grün: Spektrum Sensor Rahmen innen \\
-				Rot: Spektrum Sensor Uhrwerk \\
-				Blau: Spektrum Sensor Rahmen aussen}
+			\caption[Spektren der maximal gemessenen Beschleunigungssignale]{Spektren der Sensoren bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus einem Meter Höhe. 
+				Grün: Spektrum Sensor Rahmen innen.
+				Rot: Spektrum Sensor Uhrwerk.
+				Blau: Spektrum Sensor Rahmen aussen.
+				}
 			\label{fig:spect_all}
 		\end{figure}
-		Beim Beschleunigungssignal gemessen am Uhrwerk sind die Frequenzen des Ziffernblattes (ca. 50Hz)
-		und der ganzen Uhr (ca. 13Hz) stark vertreten. Bei jenem am Rahmen aussen ist die Frequenz der
-		ganzen Uhr stark vertreten. Diese ist etwas grösser als am Uhrwerk. Das Beschleunigungssignal
-		innen an der Uhr ist über alle Frequenzen deutlich kleiner. Dies lässt sich dadurch erklären, dass
+		
+		Dies lässt sich dadurch erklären, dass
 		weiter weg von der Befestigung an der Wand die Auslenkung der Uhr grösser ist. Da die Periode der
 		Schwingung an jedem Punkt dieselbe ist, ist die Geschwindigkeit weiter aussen grösser. Daraus
-		folgt, dass auch die Beschleunigung grösser ist.
+		folgt, dass auch die Beschleunigung an diesem Punkt grösser ist.
 		
 		\begin{SCfigure}
 			\centering
 			\vspace{-1cm}
 			\includegraphics[width=10cm]{img/msg2/break.png}
-			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus zwei Meter Höhe. Die Scheibe bricht 
+			\caption[Scheibenbruch]{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g und aus zwei Meter Höhe. Die Scheibe bricht 
 					 in Folge des Aufpralls.}
 			\label{fig:bruch}
 		\end{SCfigure}
@@ -169,23 +182,27 @@
 		
 		\paragraph{Fazit}
 		Durch schwache Schläge aus einem Meter Höhe lassen sich Beschleunigungssignale grösser als 600g am
-		Uhrwerk messen. Die Kugel hat beim Aufprall eine Geschwindigkeit von 4.4 m/s und eine Energie von
-		5.3J. Ein Amateur- Handballer erreicht beim Werfen von einem Ball mit einer Masse von ca. 480g aus
+		Uhrwerk messen. Die Kugel hat beim Aufprall eine Geschwindigkeit $v=\sqrt{2gh} = 4.4 \frac{m}{s}$ und eine Energie 
+		$E_{kin}=\frac{1}{2} m v^2 = 5.3J$. Ein Amateur-Handballer erreicht beim Werfen von einem Ball mit einer Masse von ca. 480g aus
 		dem Stand Abwurfgeschwindigkeiten von über 20 m/s \cite{Gorostiaga}. Die bombierte Scheibe ging
-		bereits bei einer Abwurfhöhe von 2m und somit einer Aufprallgeschwindigkeit von 6.62m/s in die Brüche.
-		Es darf somit mit einem Beschleunigungssignalen im Bereich der dargestellten Messungen gerechnet
+		bereits bei einer Abwurfhöhe von 2m und somit einer Aufprallgeschwindigkeit von $6.3\frac{m}{s}$ in die Brüche.
+		Es darf somit mit Beschleunigungssignalen im Bereich der dargestellten Messungen gerechnet
 		werden.
 		
-		Nicht nur die Amplitude ist abhängig von der Position des Sensors, sondern auch das Frequenzspektrum. 
-		Am Uhrwerk ist neben der Eigenschwingung der ganzen Uhr auch die Eigenschwingung des Ziffernblattes
-		sichtbar. 
+		Im Frequenzspektrum erkennt man zwei Frequenzen, welche besonders stark vertreten sind. Dies ist einerseits
+		die Frequenz, mit welcher das Ziffernblatt schwingt, andererseits die Frequenz, mit welcher die ganze Uhr 
+		auf- und abschwingt.
 	\newpage	
-	\subsection{Beste Positionierung} \label{subsec:bestPos}
+	\section{Ermittlung der besten Sensorposition} \label{subsec:bestPos}
 	
 		\paragraph{Vorgehensweise}
-		Für die Ermittlung der besten Positionierung eines Beschleunigungssensors wurde die schwerere Stahlkugel von 537g aus einer Höhe von 
-		50cm an verschiedenen Stellen auf die Uhr fallen gelassen. Es wurde gleichzeitig an drei Positionen an der
-		Uhr gemessen. Diese sind auch im \autoref{chap:Versuchsaufbau} ersichtlich:  
+		Die Position den Sensors an der Aussenuhr ist insofern eingeschränkt, dass dieser von aussen nicht 
+		sichtbar sein darf. Dies wurde in der Anforderungsliste im Schlussteil \ref{chap:anforderungen} festgehalten. 
+		An drei der in Frage kommenden Positionen wurden die piezoelektrischen Sensoren befestigt. 
+		Dann wurde die schwerere Stahlkugel mit einer Masse von 537g aus einer Höhe von 
+		50cm an verschiedenen Stellen auf die Uhr fallen gelassen. Es wurde gleichzeitig mit den drei 
+		Beschleunigungssensoren an der Uhr gemessen. Die drei Positionen sind im \autoref{chap:Versuchsaufbau}
+		in der \autoref{fig:versuchsaufbau_piezo} ersichtlich:  
 		\begin{itemize}
 			\item An der Montageleiste der Uhr innen, nahe der Konsole (Channel 1, grün)
 			\item Am Uhrwerk, welches am Ziffernblatt befestigt ist (Channel 2, rot)
@@ -200,32 +217,38 @@
 		\end{itemize}
 		
 		\paragraph{Messresultate}
-		Die grössten Beschleunigungssignale sind am Sensor am Uhrwerk zu messen. Die Beschleunigung erreicht
-		Werte über 200g. Die zweitgrössten Beschleunigungssignale  sind am Sensor am Rahmen aussen zu messen. Die Beschleunigung
-		liegt in einem Bereich bis 100g.  Am Sensor innen sind die kleinsten Ausschläge messbar. Diese Beschleunigungen
-		überschreiten maximal 10g. Der Sensor am Uhrwerk detektiert bei Aufprallen weiter von der Mitte
-		entfernt kleinere, aber im Vergleich zu den beiden anderen Sensoren dennoch grosse Messwerte. 
+		Die Abbildungen \ref{fig:mittig} bis \ref{fig:innen} zeigen die Messresultate der 4 Messungen mit
+		jeweils drei Beschleunigungssignalen aufgezeichnet an der Uhr innen, am Uhrwerk und am Rahmen aussen. 
+		Dabei wurden die Achsen bewusst bei allen Messungen gleich
+		gross skaliert, damit die Unterschiede der Amplituden gut ersichtlich sind. 
+		
+		Die grössten Beschleunigungssignale sind am Sensor am Uhrwerk zu messen. Der gemessene Maximalwert erreicht
+		mehr als 200g. Die zweitgrössten Beschleunigungssignale  sind am Sensor am Rahmen aussen zu messen. Die
+		Beschleunigung liegt in einem Bereich bis 100g.  Am Sensor innen sind die kleinsten Ausschläge
+		messbar. Diese Beschleunigungen überschreiten maximal 10g. Der Sensor am Uhrwerk detektiert bei
+		Aufprallen weiter von der Mitte entfernt kleinere, aber im Vergleich zu den beiden anderen
+		Sensoren dennoch grosse Messwerte.
 		
 		\paragraph{Fazit}
 		Unabhängig davon, wo die Kugel auf der Scheibe aufprallt, können am Uhrwerk die grössten
 		Beschleunigungssignale gemessen werden. Ein	weiterer Vorteil der Messung am Uhrwerk zeigt sich in
 		der Unterscheidung zwischen einem Wurf und einer Druck-Sogwelle eines Zuges in
-		\autoref{sec:Unterscheidung}: Im Signal am Uhrwerk ist die Eigenfrequenz der ganzen Uhr, aber auch
-		die Eigenfrequenz des Ziffernblatts erkennbar. Die beste Position für den Sensor ist demnach am
+		\autoref{sec:Unterscheidung}: Im Signal am Uhrwerk ist die Schwingung der ganzen Uhr, aber auch
+		die Schwingung des Ziffernblatts erkennbar. Die beste Position für den Sensor ist demnach am
 		Uhrwerk.
 			\begin{figure}[H]
 			\hspace{-0.8cm}
-				\begin{minipage}[hbt]{8cm}
+				\begin{minipage}[hbt]{8.2cm}
 					\centering
-					\includegraphics[width=8.5cm]{img/msg2/mittig.png}
+					\includegraphics[width=9cm]{img/msg2/mittig.png}
 					\vspace{-1cm}
 					\caption{Aufprall mittig}
 					\label{fig:mittig}
 				\end{minipage}
 				\hfill
-				\begin{minipage}[hbt]{8cm}
+				\begin{minipage}[hbt]{8.2cm}
 					\centering
-					\includegraphics[width=8.5cm]{img/msg2/seitlich.png}
+					\includegraphics[width=9cm]{img/msg2/seitlich.png}
 					\vspace{-1cm}
 					\caption{Aufprall seitlich}
 					\label{fig:seitlich}
@@ -233,17 +256,17 @@
 			\end{figure}
 			\begin{figure}[H]
 				\hspace{-0.8cm}
-				\begin{minipage}[hbt]{8cm}
+				\begin{minipage}[hbt]{8.2cm}
 					\centering
-					\includegraphics[width=8.5cm]{img/msg2/aussen.png}
+					\includegraphics[width=9cm]{img/msg2/aussen.png}
 					\vspace{-1cm}
 					\caption{Aufprall aussen}
 					\label{fig:aussen}
 				\end{minipage}
 				\hfill
-				\begin{minipage}[hbt]{8cm}
+				\begin{minipage}[hbt]{8.2cm}
 					\centering
-					\includegraphics[width=8.5cm]{img/msg2/innen.png}
+					\includegraphics[width=9cm]{img/msg2/innen.png}
 					\vspace{-1cm}
 					\caption{Aufprall innen}
 					\label{fig:innen}
@@ -251,41 +274,82 @@
 			\end{figure}
 	\clearpage	
 	\newpage
-	\subsection{Unterscheidung Druck-Sogwelle des Zuges und Wurf} \label{sec:Unterscheidung}
+	\section{Unterscheidung von der Druck-Sogwelle des Zuges} \label{sec:Unterscheidung}
 		\paragraph{Vorgehensweise}
+			Ein wichtiger Punkt der Machbarkeitsstudie ist es, abzuklären, inwiefern die 
+			Druck-Sogwelle eines Zuges einen Einfluss auf die Beschleunigung der Aussenuhr hat. 
+			Da es sehr zeitaufwändig ist, eine Bewilligung für Messungen auf Perrons im Fahrleitungsbereich
+			zu erhalten, musste eine andere Vorgehensweise gewählt werden.
+			
 			Die auf die Uhr einwirkenden Kräfte unterscheiden sich bei einem Wurf oder einer Zugdruchfahrt
 			primär durch folgende Faktoren:
 			\begin{itemize}
 				\item Grösse der Kontaktfläche
 				\item Dauer der Einwirkung
 			\end{itemize}
-			Da es sehr zeitaufwändig ist, eine Bewilligung für Messungen auf Perrons im Fahrleitungsbereich
-			zu erhalten, musste eine andere Vorgehensweise gewählt werden. Wie in den obigen Abschnitten
-			beschrieben, wurde mit zwei verschieden schweren Stahlkugeln Messungen gemacht. Um die
-			Krafteinwirkung eines Zuges zu simulieren, wurden zusätzlich Messungen mit einem Softball
-			durchgeführt. Dieser hat eine ähnliche Masse (180g) wie die leichtere Stahlkugel (256g). 
+			Aus Differenzdruckmessungen an Fassadenplatten bei der Durchfahrt einer S-Bahn mit
+			$v=80\frac{km}{h}$ \cite{diffdruck} ergibt sich eine Dauer von 215ms für den Druck-Sog-Wechsel.
+			Die dynamische Anregung durch diesen Druck-Sog-Wechsel hat eine Frequenz von 4.65Hz. 
+			\begin{figure}[H]
+				\centering
+				%\captionsetup{width=15.5cm}
+				\includegraphics[width=15cm]{img/differenzdruck.png}
+				\caption[Differenzdruckmessung]{Differenzdruck gemessen bei Durchfahrt einer S-Bahn mit $v=80\frac{km}{h}$ \cite{diffdruck}. Der Wechsel von Durck zu Sog passiert
+					innerhalb von 215ms. Dies entspricht einer Anregung mit einer Frequenz von 4.65Hz.}
+				\label{fig:differenzdruck}
+			\end{figure}
+			Der zeitliche Abstand zwischen Sog-und Druckwelle ist, wie im \autoref{Durck-Sogfeld} aus dem
+			Grundlagenteil ersichtlich wird, vom Abstand zum Zug und von der Zuggeschwindigkeit $v$
+			abhängig. Im erwähnten Abschnitt ist empirisch ein Zusammenhang zwischen den Grössen Abstand zum
+			Zug und Druck-Sog-Abstand hergeleitet worden. Im Worst-Case berechnet mit der
+			\autoref{calc:DruckSogAbstand} ergibt sich ein theoretischer zeitlicher Abstand des
+			Durck-Sog-Wechsels von 124ms und somit eine dynamische Anregung mit der Frequenz 8Hz. Aus den
+			Highspeed Aufnahmen der vorangehenden Versuche konnte die Kontaktzeit der Stahlkugel mit der
+			Scheibe ermittelt werden. Sie beträgt im Mittel ungefähr 20ms. Die Berechnung und die
+			Differenzdruckmessung führen zum Schluss, dass durch die grössere Dauer der Einwirkung bei einer
+			Zugdurchfahrt sogar im Worst-Case die Aussenuhr als Ganzes und das Ziffernblatt nicht angeregt
+			werden, da die Eigenfrequenzen höher liegen und somit keine Schwingung zustande kommt. Um diese
+			Überlegungen zu überprüfen, wurden mit der Highspeedkamera Aufnahmen von Bahnhofsuhren bei
+			vorbeifahrenden Zügen gemacht.
+		
+			Wie in den vorangehenden Versuchen beschrieben, wurde mit zwei verschieden schweren Stahlkugeln
+			Messungen gemacht. Um die Krafteinwirkung eines Zuges zu simulieren, wurden zusätzlich Messungen
+			mit einem Softball durchgeführt. Dieser hat eine ähnliche Masse (180g) wie die leichtere
+			Stahlkugel (256g). Er ist jedoch weich und verformt sich beim Aufprall. Dadurch wird die 
+			Kontaktfläche zwischen Ball und Scheibe grösser. Mit dem folgenden Versuch soll der Einfluss
+			einer grösseren Kontaktfläche untersucht werden. 
 			
 		\paragraph{Messresultate}
-			In der \autoref{fig:sb_k_time_vergl} sind im oberen Teilbild die Beschleunigungssignale 
-			abgebildet, welche durch den Aufprall eines Softballs hervorgerufen werden. Im unteren Teilbild 
-			sind die Beschleunigungssignale beim Aufprall einer Stahlkugel mit ähnlichem Gewicht dargestellt. 
-			Dabei wurde das rote Signal am Uhrwerk, das blaue Signal am Rahmen aussen an der Uhr gemessen. 
-			Es wird ersichtlich, dass die Amplitude der Beschleunigungssignale gemessen am Uhrwerk beim
-			Aufprall eines Softballs mehr als um den Faktor zehn kleiner sind als beim Aufprall der Kugel.
-			Es fällt auf, dass beim Aufprall des Softballs die beiden gemessenen Signale am Uhrwerk und am 
-			Rahmen aussen die gleiche Frequenz aufweisen. 
+			Die Aufnahmen mit der Highspeedkamera haben die Vermutungen aus dem obigen Abschnitt bestätigt. 
+			Zwei verschiedene Bahnhofsuhren bei zwei vorbeifahrenden Personenzügen und einem Güterzug zeigten 
+			keine sichtbaren Bewegungen. Die Geschwindigkeit der Züge betrug wie in den Differenzdruckmessungen \cite{diffdruck}
+			ungefähr 80km/h. Es wurde am Bahnhof Aarburg-Oftringen und Rothrist gemessen. Die Aufnahmen sind 
+			auf der CD beigefügt. 
+			
+			Die Versuche mit dem Softball haben gezeigt, dass eine grössere Kontaktfläche beim Aufprall des Softballs
+			zu einer um Faktoren kleineren Beschleunigung am Uhrwerk führt. In der
+			\autoref{fig:sb_k_time_vergl} sind im oberen Teilbild die Beschleunigungssignale abgebildet,
+			welche durch den Aufprall eines Softballs hervorgerufen werden. Sie übersteigen nie $\pm$6g. Im unteren Teilbild sind die
+			Beschleunigungssignale beim Aufprall einer Stahlkugel mit ähnlichem Gewicht dargestellt. Dabei werden 
+			ohne weiteres Beschleunigungen grösser als $\pm$100g erreicht. Das rote Signal wurde am Uhrwerk, das blaue Signal am Rahmen aussen an der Uhr gemessen.
 			\begin{SCfigure}
 				\centering
-				\vspace{-1cm}
-				\includegraphics[width=10cm]{img/msg5/vergl_sb_k.png}
-				\caption{Oberes Teilbild: 
-						Softball 180g aus 1m Höhe. Unteres Teilbild:\\ 
-						Kugel 256g aus 1m Höhe.\\\\
-						Rot: Sensorsignal Uhrwerk\\
-						Blau: Sensorsignal Rahmen aussen}
+				\vspace{-0.5cm}
+				\includegraphics[width=9cm]{img/msg5/vergl_sb_k.png}
+				\caption[Vergleich Beschleunigungen Kugel und Softball]{Oberes Teilbild: 
+					Softball 180g aus 1m Höhe. Unteres Teilbild:\\ 
+					Kugel 256g aus 1m Höhe.\\\\
+					Rot: Sensorsignal Uhrwerk\\
+					Blau: Sensorsignal Rahmen aussen}
 				\label{fig:sb_k_time_vergl}
-			\end{SCfigure}
-
+			\end{SCfigure} 
+			 
+			Es fällt auf, dass beim Aufprall des Softballs die beiden gemessenen Signale am Uhrwerk und am 
+			Rahmen aussen die gleiche Frequenz aufweisen. Ausserdem sind die Beschleunigungen beim Aufprall 
+			des Softballs am Uhrwerk und am Rahmen aussen ähnlich gross. Die Schwingungsdauer beträgt 63ms 
+			und entspricht einer Frequenz von ungefähr 16Hz. Daraus ist zu schliessen, 
+			in diesem Fall fast ausschliesslich die ganze Uhr schwingt. Das Ziffernblatt wurde nicht angeregt. 
+			
 			Die am Signal im Zeitbereich beobachteten Eigenschaften können auch im Frequenzspektrum
 			festgestellt werden. Dieses ist in \autoref{fig:spect_vergl} dargestellt. Rot ist das Spektrum
 			des Beschleunigungssignals beim Aufprall einer Kugel mit einer Masse von 256g aus einem Meter
@@ -304,7 +368,7 @@
 				\centering
 				\captionsetup{width=14cm}
 				\includegraphics[width=15.5cm]{img/msg5/vergl_sek_sb_k_w.png}
-				\caption{Spektren der Signale vom Sensor am Uhrwerk: \\\\
+				\caption[Vergleich Spektrum Beschleunigung Aufprall Kugel und Softball]{Spektren der Signale vom Sensor am Uhrwerk: \\\\
 					Blau: Spektrum Sensorsignal bei Aufprall des Softballs 188g aus 1m Höhe\\
 					Rot: Spektrum Sensorsignal bei Aufprall der Kugel 256g aus 1m Höhe \\
 					Grün: Spektrum Sensorsignal bei Aufprall des Softballs 188g aus 2m Höhe
@@ -325,21 +389,66 @@
 				\item Einbuchtung (Deformation) in der Scheibe
 			\end{itemize}
 			
-			Da die Stahlkugel neben der Verbiegung der ganzen Uhr eine Einbuchtung der Scheibe zur Folge hat, 
+			Da der Aufprall der Stahlkugel neben der Verbiegung der ganzen Uhr eine Einbuchtung der Scheibe zur Folge hat, 
 			wird das Ziffernblatt stärker angeregt. Diese Anregung wird durch die komprimierte Luft zwischen 
 			Scheibe und Ziffernblatt übertragen. 
 			
-			Im Folgenden sind je vier Bilder aus den Highspeedaufnahmen des Aufpralls einer Stahlkugel und 
-			eines Softballs dargestellt. 
-%			Die rote Linie zeigt den Schatten auf der Uhr, wessen Kante sich 
-%			durch die Einbuchtung der Kugel verformt. Beim Aufprall des Softballs verändert sich die 
-%			Schattenkante nicht. 
-			%\clearpage
-			%\newpage
+			Auf der Folgeseite sind je fünf Bilder aus den Highspeedaufnahmen des Aufpralls der Stahlkugel und 
+			des Softballs dargestellt. Der Zeitabstand zwischen den Bildern beträgt 3 Frames oder umgerechnet 6.25ms. 
+			Der Softball wird beim Aufprall zusammengestaucht und hat eine grössere Kontaktfläche mit der Scheibe als
+			die Kugel. In der Scheibe entsteht durch den Aufprall des Softballs keine sichtbare Einbuchtung. Die Luft zwischen 
+			Scheibe und Ziffernblatt wird somit weniger komprimiert und das Ziffernblatt weniger angeregt, als es beim Aufprall
+			der Kugel der Fall ist. Wie im Abschnitt Vorgehensweise erläutert wird, greift die auf die Scheibe drückende Luft bei 
+			einem vorbeifahrenden Zug auf der ganzen Scheibe gleichmässig an. Es ist wahrscheinlich, dass das Ziffernblatt 
+			in Folge der Druck-Sogwelle eines Zuges weniger als beim Softball angeregt wird, da die Kontaktfläche noch grösser ist. 
+			
+			Die \autoref{fig:mod_mfd} zeigt ein Masse-Feder-Dämpfermodell der Aussenuhr. Das Modell wird schnell komplex.
+			Bereits dieses stark vereinfachte Modell entspricht einem System 7. Ordnung. Deshalb, und weil die Weiterverfolgung 
+			dieses theoretischen Ansatz für diese Anwendung nicht zielführend ist, wird das Modell 
+			nur benutzt, um die Wege der Kraftübertragung innerhalb der Uhr zu verdeutlichen: die Kraft greift an der Scheibe an. 
+			Sie wirkt einerseits direkt über $k_3$ auf den Rahmen der Uhr, andererseits wird durch die komprimierte Luft
+			$k_2$ das Ziffernblatt angeregt. 
+			
+			\begin{figure}
+				\begin{tikzpicture}[every node/.style={draw,outer sep=0pt,thick}]
+				\tikzstyle{spring}=[thick,decorate,decoration={zigzag,pre length=0.3cm,post length=0.3cm,segment length=6,amplitude=1.5mm}]
+				\tikzstyle{damper}=[thick,decoration={markings,  
+					mark connection node=dmp,
+					mark=at position 0.5 with 
+					{
+						\node (dmp) [thick,inner sep=0pt,transform shape,rotate=-90,minimum width=15pt,minimum height=3pt,draw=none] {};
+						\draw [thick] ($(dmp.north east)+(2pt,0)$) -- (dmp.south east) -- (dmp.south west) -- ($(dmp.north west)+(2pt,0)$);
+						\draw [thick] ($(dmp.north)+(0,-5pt)$) -- ($(dmp.north)+(0,5pt)$);
+					}
+				}, decorate]
+				\tikzstyle{ground}=[fill,pattern=north east lines,draw=none,minimum width=1cm,minimum height=0.3cm]
+				
+				\node (M1) [minimum width=2cm, minimum height=2.5cm,draw,outer sep=0pt,thick] {$m1$};				% Masse 1
+				
+				\node (wall) [ground, rotate=-90, minimum width=4cm,yshift=2.5cm] {};								% Mauer
+				\draw[thick] (wall.south east) -- (wall.south west);												% Strich an Mauer
+				
+				\draw [spring] (wall.south) -- node[above=2mm,draw=none]{$k_1$}($(M1.south east)!(wall.100)!(M1.north east)$);	% Befestigung Mauer
+				
+				\node (M2) [minimum width=0.5cm, minimum height =1cm,yshift=-0.75cm, xshift=-2.5cm] {$m2$};
+				\draw [spring](M2.east) -- node[below=2mm,draw=none]{$k_4$} ($(M1.north west)!(M2.west)!(M1.south west)$);		% 
+				
+				\node (M3) [minimum width=0.5cm, minimum height =2.5cm,yshift=0cm, xshift=-4.5cm] {$m3$};
+				\draw [spring] (M2.west) -- node[below=2mm,draw=none]{$k_2$}($(M3.north east)!(M2.east)!(M3.south east)$);		% Komprimierte Luft
+				\draw [spring] (M3.60) -- node[above=2mm,draw=none]{$k_3$}($(M1.north west)!(M3.60)!(M1.south west)$);
+				
+				
+				\draw [latex-, thick] (M3.west) ++ (-0.2cm,0) --node[above=2mm,draw=none]{$F$} +(-1cm,0);
+				\node [rectangle,text width=6.5cm,align=left, draw=none] at ( $ (current bounding box.center) + (8,0) $ ) {$m_1$: Rahmen, Montageleiste\\ $m_2$: Zifferblatt \\$m_3$: Scheibe \\ $k_1$: Befestigung an Wand\\ $k_2$: komprimierte Luft\\ $k_4$ Verbindung Zifferblatt zu Rahmen \\ $k_3$: Verbindung Scheibenrand zu Zifferblatt} ;		
+				\end{tikzpicture}
+				\caption{Masse-Feder-Dämpfermodell}
+				\label{fig:mod_mfd}
+			\end{figure}
+			\newpage
 			\begin{SCfigure}[]
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/K1_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/K1.png}
 					\vspace{-1cm}
 					%\caption{Aufprall mittig}
 					%\label{fig:mittig}
@@ -347,7 +456,7 @@
 				\hfill
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/B1_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/B1.png}
 					\vspace{-1cm}
 					%\caption{Aufprall seitlich}
 					%\label{fig:seitlich}
@@ -356,7 +465,7 @@
 			\begin{SCfigure}[]
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/K2_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/K2.png}
 					\vspace{-1cm}
 					%\caption{Aufprall mittig}
 					%\label{fig:mittig}
@@ -364,7 +473,7 @@
 				\hfill
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/B2_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/B2.png}
 					\vspace{-1cm}
 					%\caption{Aufprall seitlich}
 					%\label{fig:seitlich}
@@ -373,7 +482,7 @@
 			\begin{SCfigure}[]
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/K3_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/K3.png}
 					\vspace{-1cm}
 					%\caption{Aufprall mittig}
 					%\label{fig:mittig}
@@ -381,17 +490,16 @@
 				\hfill
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/B3_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/B3.png}
 					\vspace{-1cm}
 					%\caption{Aufprall seitlich}
 					%\label{fig:seitlich}
 				\end{minipage}	
 			\end{SCfigure}
-			
 			\begin{SCfigure}[]
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/K4_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/K4.png}
 					\vspace{-1cm}
 					%\caption{Aufprall mittig}
 					%\label{fig:mittig}
@@ -399,56 +507,34 @@
 				\hfill
 				\begin{minipage}[hbt]{5cm}
 					\centering
-					\includegraphics[width=5cm]{img/aufprallVergl/B4_r.png}
+					\includegraphics[width=5cm]{img/aufprallVergl/B4.png}
 					\vspace{-1cm}
 					%\caption{Aufprall seitlich}
 					%\label{fig:seitlich}
-				\end{minipage}		
-		\end{SCfigure}
-		
-		Der Softball wird beim Aufprall zusammengestaucht und hat eine grössere Kontaktfläche mit der Scheibe als beim Aufprall
-		der Stahlkugel. In der Scheibe entsteht dadurch keine sichtbare Einbuchtung. Dadurch wird die Luft zwischen Scheibe und Ziffernblatt weniger
-		komprimiert und das Ziffernblatt dadurch weniger angeregt. 
-		
-		Die auf die Scheibe drückende Luft bei einem vorbeifahrenden Zug greift auf der ganzen Scheibe gleichmässig an. Es wird
-		daher angenommen, dass das Ziffernblatt dadurch noch weniger als beim Softball angeregt wird. 
-		
-		Highspeedaufnahmen verschiedener Bahnhofsuhren bei zwei vorbeifahrenden Personenzügen und einem Güterzug haben keine Bewegung der ganzen Uhr 
-		gezeigt. Die Geschwindigkeit der Züge betrug ungefähr 80km/h. Es wurde am Bahnhof Aarburg-Oftringen und Rothrist gemessen. 
-		Diese Resultate bestätigen weiter, dass eine Unterscheidung zwischen Vandalismus und vorbeifahrendem Zug machbar ist. 
-		
-		
-	\begin{tikzpicture}[every node/.style={draw,outer sep=0pt,thick}]
-		\tikzstyle{spring}=[thick,decorate,decoration={zigzag,pre length=0.3cm,post length=0.3cm,segment length=6,amplitude=1.5mm}]
-		\tikzstyle{damper}=[thick,decoration={markings,  
-			mark connection node=dmp,
-			mark=at position 0.5 with 
-			{
-				\node (dmp) [thick,inner sep=0pt,transform shape,rotate=-90,minimum width=15pt,minimum height=3pt,draw=none] {};
-				\draw [thick] ($(dmp.north east)+(2pt,0)$) -- (dmp.south east) -- (dmp.south west) -- ($(dmp.north west)+(2pt,0)$);
-				\draw [thick] ($(dmp.north)+(0,-5pt)$) -- ($(dmp.north)+(0,5pt)$);
-			}
-		}, decorate]
-		\tikzstyle{ground}=[fill,pattern=north east lines,draw=none,minimum width=1cm,minimum height=0.3cm]
-		
-		\node (M1) [minimum width=2cm, minimum height=2.5cm,draw,outer sep=0pt,thick] {$m1$};				% Masse 1
-		
-		\node (wall) [ground, rotate=-90, minimum width=4cm,yshift=2.5cm] {};								% Mauer
-		\draw[thick] (wall.south east) -- (wall.south west);												% Strich an Mauer
-		
-		\draw [spring] (wall.south) -- node[above=2mm,draw=none]{$k_1$}($(M1.south east)!(wall.100)!(M1.north east)$);	% Befestigung Mauer
-		
-		\node (M2) [minimum width=0.5cm, minimum height =1cm,yshift=-0.75cm, xshift=-2.5cm] {$m2$};
-		%\draw [spring](M2.east) -- node[below=2mm,draw=none]{$k_4$} ($(M1.north west)!(M2.west)!(M1.south west)$);		% 
-		
-		\node (M3) [minimum width=0.5cm, minimum height =2.5cm,yshift=0cm, xshift=-4.5cm] {$m3$};
-		\draw [spring] (M2.west) -- node[below=2mm,draw=none]{$k_2$}($(M3.north east)!(M2.east)!(M3.south east)$);		% Komprimierte Luft
-		\draw [spring] (M3.60) -- node[above=2mm,draw=none]{$k_3$}($(M1.north west)!(M3.60)!(M1.south west)$);
+				\end{minipage}	
+			\end{SCfigure}		
+			\begin{SCfigure}[]
+				\begin{minipage}[hbt]{5cm}
+					\centering
+					\includegraphics[width=5cm]{img/aufprallVergl/K5.png}
+					\vspace{-1cm}
+					%\caption{Aufprall mittig}
+					%\label{fig:mittig}
+				\end{minipage}
+				\hfill
+				\begin{minipage}[hbt]{5cm}
+					\centering
+					\includegraphics[width=5cm]{img/aufprallVergl/B5.png}
+					\vspace{-1cm}
+					%\caption{Aufprall seitlich}
+					%\label{fig:seitlich}
+				\end{minipage}	
+			\end{SCfigure}
+		Die Einbuchtung der Scheibe durch die Kugel ist besonders gut an der Schattenlinie im Bild erkennbar. Die Kante des Schattens verformt sich beim Aufprall 
+		der Kugel, beim Softball sieht man keine Veränderung.
+		 
 		
 		
-		\draw [latex-, thick] (M3.west) ++ (-0.2cm,0) --node[above=2mm,draw=none]{$F$} +(-1cm,0);
-		\node [rectangle,text width=6.5cm,align=left, draw=none] at ( $ (current bounding box.center) + (8,0) $ ) {$m_1$: Rahmen, Montageleiste\\ $m_2$: Ziffernblatt \\$m_3$: Scheibe \\ $k_1$: Befestigung an Wand\\ $k_2$: komprimierte Luft\\ $k_3$: Kraftübertragung über Scheibenrand\\ };		
-		
-	\end{tikzpicture}
+	
 		
 	

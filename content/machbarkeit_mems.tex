@@ -1,17 +1,26 @@
-\chapter{Versuche mit dem MEMS-Sensor Datenlogger} 
-	In einem weiteren Schritt soll ein MEMS-Sensor in Betrieb genommen werden, welcher im Produkt
-	angewendet wird. 
+\chapter{Versuche mit dem MEMS Sensor Datenlogger} 
+	In einem weiteren Schritt wird der MEMS Beschleunigungssensor H3LIS331DL von STMicroelectronics 
+	in einer Datenloggeranwendung in Betrieb genommen werden. Auch die pinkompatiblen und etwas 
+	günstigeren Beschleunigungssensoren der gleichen Produktreihe eignen sich bestens für das Endprodukt. 
 	
 	\section{Hardware} 
+				\begin{wrapfigure}[10]{r}{4cm}
+					%\centering
+					%\captionsetup{width=4cm}
+					\vspace{-1cm}
+					\includegraphics[width=4cm]{img/mems_axes.png}
+					\caption[Achsen des H3LIS331DL]{Achsen des H3LIS331DL aus \cite{H3L}}
+					\label{fig:mems_axes}
+				\end{wrapfigure}
 		Die Versuche mit den piezoelektrischen Sensoren in \autoref{subsec:signale} haben gezeigt, dass
 		Beschleunigungen über 100g gemessen werden. Deshalb wurde besonders auf einen grossen
 		Dynamikbereich geachtet. Ausserdem muss die Abtastfrequenz über 100Hz liegen. Es wurde der Sensor
 		H3LIS331DL von STMicroelectronics eingesetzt. Dieser hat einen einstellbaren Bereich von $\pm100g$,
 		$\pm200g$ und $\pm400g$. Die Daten werden digitalisiert. Es kann über I2C
-			\footnote{engl. \emph{Inter-Integrated Circuit}. I2C ist ein serieller Datenbus. Es
+			\footnote{engl. \emph{Inter-Integrated Circuit}. I2C ist ein serieller Datenbus. Es	\index{SPI} \index{I2C}
 				werden zwei Leitungen verwendet, Clock (SCL) und Daten (SDA) } 
 		oder SPI 
-			\footnote{engl. \emph{Serial Peripheral Interface}. SPI ist ebenfalls ein serieller Datenbus, 
+			\footnote{engl. \emph{Serial Peripheral Interface}. SPI ist ebenfalls ein serieller Datenbus, 	
 				dabei werden vier Leitungen verwendet: Clock (SCLK), Master Output Slave Input (MOSI), 
 				Master Input Slave Output (MISO) und Chip Select (CS). }
 		mit dem Sensor kommuniziert werden. Die Abtastfrequenz kann zwischen 0.5Hz bis 1kHz konfiguriert
@@ -23,12 +32,13 @@
 		Mit einer Power Bank kann das Freedom Board und der Sensor gespeist werden. So bleibt die
 		Messeinheit mobil. In der \autoref{fig:mems_aufbau} sind die drei Komponenten des Aufbaus
 		dargestellt.
-		
+		%\begin{wrapfigure}[11]{r}{5.5cm}
+
 		\begin{figure}
 			\centering
 			%\vspace{-1cm}
 			\includegraphics[width=15cm]{img/mems_aufbau.png}
-			\caption{Der Aufbau mit Power Bank, Freedom Board und MEMS-Sensor}
+			\caption[Aufbau Datenlogger]{Der Aufbau mit Power Bank, Freedom Board und MEMS-Sensor}
 			\label{fig:mems_aufbau}
 		\end{figure}
 	
@@ -54,7 +64,7 @@
 		durch Tastendrücke oder Interne Signale beeinflusst werden. Die Kommunikation zwischen dem Main-Task,
 		dem Sensor-Task und dem SD-Karten-Task erfolgt dabei mittels Task Notifications. 
 		
-		Task Notifications gibt es ab FreeRTOS V8.2.0 (Release 16. Januar 2015). Sie dienen dienen der
+		Task Notifications gibt es ab FreeRTOS V8.2.0 (Release 16. Januar 2015). Sie dienen der
 		Inter-Task-Kommunikation und Synchronisation, ähnlich den Semaphoren. Jeder Task hat dabei einen
 		32-bit Notification Value. Jedes dieser Bits des Notification Values kann von einem anderen Task
 		gesetzt, überschrieben oder inkrementiert werden. Es können auch mehrere Bits gleichzeitig
@@ -106,7 +116,7 @@
 		Zustand "'IDLE"` gewechselt. 
 		
 		Dieser Zustand wird verlassen, falls die Messung gestartet wurde und dies dem SD-Karten-Task durch eine 
-		Task Notification vom Sensor-Task mitgeteilt wird. Der Zustandsautomat erreicht den Zustand "'OPEN FilE"'
+		Task Notification vom Sensor-Task mitgeteilt wird. Der Zustandsautomat erreicht den Zustand "'OPEN FILE"'
 		in welchem entweder ein bereits vorhandenes Text Dokument geöffnet oder sonst ein neues angelegt. Danach 
 		wird in den Zustand "'Buffer"' gewechselt. 
 		
@@ -125,14 +135,13 @@
 			\caption{Zustandsdiagramm SD-Karten-Task}
 			\label{fig:sm_sd}
 		\end{figure}
-		
+		\vspace{-1.2cm}
 		\paragraph{Sensor Treiber}
 		Mittels I2C oder SPI kann auf die Register des Sensors H3LIS331DL zugegriffen werden. Die Register
 		dienen einerseits der Konfiguration des Sensors, anderseits um die Beschleunigungsdaten und 
 		den Status des Sensors auszulesen. Für die Datenloggeranwendung wurde ein Treiber erstellt. Dieser
 		enthält Funktionen, um die Sensor internen Register zu beschreiben oder auszulesen. Hier soll an zwei Beispielen 
 		gezeigt werden, wie die Treiberfunktionen aufgebaut sind. 
-		
 		Beim ersten Beispiel soll der Messbereich des Sensors konfiguriert werden. Einstellbar sind
 		$\pm100g$, $\pm200g$ und $\pm400g$. Dies kann mittels beschreiben der Bits 4 (FS0) und 5 (FS1) des
 		Kontrollregisters CTRL\_REG4 erreicht werden. Dieses Register wird über die Registeradresse 0x23
@@ -142,7 +151,7 @@
 			\centering
 			%\vspace{-1cm}
 			\includegraphics[width=13cm]{img/kontrollregister.png}
-			\caption[Kontrollregister 4, Ausschnitt aus dem Datenblatt des H3LIS331DL]{Kontrollregister 4, Ausschnitt aus dem Datenblatt des H3LIS331DL \cite{H3L}}
+			\caption[Kontrollregister 4 des H3LIS331DL]{Kontrollregister 4, Ausschnitt aus dem Datenblatt des H3LIS331DL \cite{H3L}}
 			\label{fig:sm_sd}
 		\end{figure}
 	
@@ -171,42 +180,43 @@
 		zusammengeführt werden (Zeile 10). Der so interpretierte Wert ist nun, da nur 12 Bit lang, eigentlich um den 
 		Faktor 16 zu gross. Dieser Faktor kann beispielsweise in die Umrechnung in m/s$^2$ integriert 
 		werden. 
-	\section{Versuch mit dem Datenlogger}
+	\newpage
+	\section{Versuch Datenlogger}
 		\paragraph{Vorgehensweise}
 	
 		Der MEMS-Sensor wird am Uhrwerk mit doppelseitigem Klebeband befestigt. Zusätzlich wird mit dem 
 		piezoelektrischen Sensor gemessen (vgl. \autoref{chap:piezo}) um einen Referenzwert zu erhalten. 
 		Die \autoref{fig:mems_montage} zeigt die beiden Sensoren montiert in der Uhr. Wie im \autoref{chap:piezo}
 		wird die Stahlkugel mit einer Masse von 537g mittig aus einem Meter Höhe auf die Uhr fallen gelassen. 
-		\newpage
+	
 		\paragraph{Messresultate}
 		\begin{wrapfigure}[17]{r}{9cm}
 			\centering
 			\vspace{-0.8cm}
 			\includegraphics[width=8.5cm]{img/mems_montage2.jpg}
-			\caption{Montage des MEMS-Sensors und des pizeoelektrischen Sensors am Uhrwerk}
+			\caption[Montage Sensoren]{Montage des MEMS Sensors und des pizeoelektrischen Sensors am Uhrwerk}
 			\label{fig:mems_montage}
 		\end{wrapfigure}
 		Die \autoref{fig:vergl_mems_piezo} zeigt die Beschleunigungssignale am Uhrwerk gemessen mit dem
 		piezoelektrischen Sensor (blau) wie in \autoref{chap:piezo} und jenen gemessen mit dem MEMS-Sensor
 		(rot). Die beiden Messungen unterscheiden sich in der Abtastrate. Der Signalverlauf des
 		piezoelektrischen Sensors wird mit dem Oszilloskop mit einer Frequenz von 500kHz abgetastet. Die
-		Abtastrate des MEMS-Sensor hingegen kann maximal 1kHz betragen. Das Beschleunigungssignal gemessen
+		Abtastrate des MEMS Sensor hingegen kann maximal 1kHz betragen. Das Beschleunigungssignal gemessen
 		mit dem piezoelektrischen Sensor hat Frequenzanteile, welche durch die tiefere Abtastrate des
-		MEMS- Sensors nicht mehr vorhanden sind. Diesen Unterschied erkennt man darin, dass die sehr
-		kurzen, hohen Beschleunigungspeaks mit dem MEMS-Sensor nicht erfasst werden. Mit der Abtastrate
-		des MEMS-Sensors von 400Hz wird jedoch die für diese Anwendung interessante Eigenfrequenz des
+		MEMS Sensors nicht mehr vorhanden sind. Diesen Unterschied erkennt man darin, dass die sehr
+		kurzen, hohen Beschleunigungspeaks mit dem MEMS Sensor nicht erfasst werden. Mit der Abtastrate
+		des MEMS Sensors von 400Hz wird jedoch die für diese Anwendung interessante Eigenfrequenz des
 		Ziffernblattes von 50Hz erfolgreich sichtbar. Nach dem Nyquist-Shannon-Abtasttheorem muss die
 		Abtastfrequenz mindestens doppelt so hoch sein wie die maximale im Signal vorkommende Frequenz. 
-		\begin{figure}
-			%\centering
+		\begin{SCfigure}
+			\centering
 			%\vspace{-1cm}
 			%\captionsetup{width=10cm}
 			\includegraphics[width=10cm]{img/msg8/vergl_sensoren.png}
-			\caption{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g aus einer Höhe von einem Meter gemessen mit piezoelektrischem Sensor (500kHz, blau)  und dem MEMS-Sensor (400Hz, rot)}
+			\caption[Vergleich Messung piezoelektrischer und MEMS Sensor]{Beschleunigung bei Aufprall einer Stahlkugel mit einer Masse von 537g aus einer Höhe von einem Meter gemessen mit piezoelektrischem Sensor (500kHz, blau)  und dem MEMS-Sensor (400Hz, rot)}
 			\label{fig:vergl_mems_piezo}
-		\end{figure}
-		\newpage
+		\end{SCfigure}
+		
 		\paragraph{Fazit}
 		Mit dem MEMS-Sensor kann mit einer minimalen Abtastfrequenz von 400Hz ein Schock, beispielsweise
 		ausgelöst durch einen Steinschlag, detektiert werden. Der Versuch zeigt, dass der mit dem
@@ -219,8 +229,95 @@
 		Produktreihe H3LIS200DLTR eingesetzt werden. Dieser hat einen Messbereich bis $\pm 200g$ und 
 		eine maximale Abtastfrequenz von 1kHz. Ausserdem ist dieser mit dem für den Versuch verwendeten 
 		Sensor H3LIS100DLTR pinkompatibel. 
-
-	
-			
+	\newpage	
+	\section{Versuch Schock Detektion}
+		\paragraph{Vorgehensweise}
+		In einem weiteren Schritt wird eine Schock Detektion implementiert und getestet. Der Sensor
+		H3LIS331DL hat zwei interne Interrupts. Die beiden Interrupts können für die jeweilige Anwendung 
+		konfiguriert werden. Im Kontrollregister wird beispielsweise eingestellt, ob beim Über- oder 
+		Unterschreiten eines bestimmten Schwellwerts der Interrupt ausgelöst werden soll. Optional ist das 
+		definieren einer minimalen Zeitdauer, während derer der Schwellwert überschritten werden muss. 
+		Für die Schock Detektion Anwendung wird der Interrupt 1 so konfiguriert, dass
+		er beim Überschreiten der Beschleunigung auf der z-Achse auslöst. Der Schwellwert
+		und die minimale Dauer des Beschleunigungspeaks werden mittels zweier Registern INT1\_THS und
+		INT1\_DURATION gewählt. Der Mikrokontroller hat zwei Möglichkeiten, zu erkennen, wann ein
+		Interrupt ausgelöst wurde. Einerseits kann der Interrupt Pin des Sensors ausgewertet
+		oder das Interrupt Register des Sensors über I2C abgefragt werden. Zusammengefasst werden für die Schock 
+		Detektion folgende Konfigurationen am Sensor vorgenommen: 
+		\begin{itemize}
+			\item CTRL\_REG3: 0x24. Interrupt Pin high aktiv, push-pull, Interrupts einschalten, Interrupt Signal auf Interrupt Pins verbinden. 
+			\item INT1\_CFG: 0x20. Interrupt bei Übersteigen eines Schwellwerts für die z-Achse auslösen. 
+			\item INT1\_THS: gewünschter Schwellwert für die Auslösung des Interrupts, 7 bit. 
+			\item INT1\_DURATION: gewünschte Dauer für die Auslösung des Interrupts, 7 bit. 
+		\end{itemize}
+		Das Register INT1\_THS wird mit einem 7-bit Wert beschrieben. Der Schwellwert ist abhängig vom gewählten Messbereich. Er berechnet sich zu 
+		\begin{equation}
+		Threshold = \frac{Range}{2^7-1} \cdot N = \frac{Range}{127} \cdot N \label{calc:LSBvalue}
+		\end{equation}	
+		wobei N der im Register INT1\_THS eingetragene Wert ist. 	
+		Ein negativer Schwellwert kann nicht definiert werden. Ähnlich verhält es sich mit dem Register INT1\_DURATION. 
+		Es kann ebenfalls mit 7 bit beschrieben werden und kann somit einen maximalen Wert von 127 annehmen. Die Dauer ist abhängig von 
+		der gewählten Abtastfrequenz und berechnet sich zu
+		\begin{equation}
+		t_{dur} = \frac{N}{ODR}. 
+		\end{equation}
+		N ist der im Register eingetragene Wert und ODR entspricht der Abtastfrequenz. 
+		
+		Für den Versuch wird jeweils das Register INT1\_SRC gepollt und das für die z-Achse entsprechende
+		Bit abgefragt, welches bei einem Interrupt gesetzt wird. Die Interrupt Bits werden durch 
+		einen Lesezugriff auf INT1\_SRC automatisch gelöscht.
+		
+		\paragraph{Messresultate}
+		Um die Schock Detektion zu testen, wurde der Schwellwert durch das Beschreiben des Registers
+		INT1\_THS mit dem Wert 4 auf ca. 6g und die minimale Dauer durch das Beschreiben des Registers
+		INT1\_DURATION mit dem Wert 1 auf 2.5ms eingestellt. Mit einem Buzzer wird bei einem Schock Event
+		akustisch alarmiert und der Schock Event auf die SD-Karte geloggt. In der Software des Mikrokontrollers
+		kann eine weitere Bedingung konfiguriert werden. Nach erfolgreicher Detektion eines Schock Events kann für 500ms kein
+		weiterer Schock mehr geloggt werden. Damit soll verhindert werden, dass ein Schock fälschlicherweise als mehrere 
+		Schocks geloggt wird. Zusammenfassend kann der Schock mit drei Parametern definiert werden: die Höhe des Schocks, die Dauer
+		des Schocks und die minimal vergangene Zeit seit dem letzten Schock. Die \autoref{fig:test_shockdetect} zeigt einen durch Auf- und Abbewegen des Sensors 
+		erzeugten Beschleunigungsverlauf.
+		\begin{figure}
+			\centering
+			\includegraphics[width=10.5cm]{img/msg9/test.png}
+			\caption{Test der Schock Detektion}
+			\label{fig:test_shockdetect}
+		\end{figure}
+		
+		 Die roten Punkte markieren die Zeitpunkte, an denen ein Schock detektiert 
+		wurde. Die nicht detektierten Beschleunigungspeaks folgen zu schnell auf einen letzten Peak, oder sind zu 
+		gering. Es fällt auf, dass zum Zeitpunkt der Auslösung die Beschleunigungswerte jeweils unter 6g liegen.
+		Dies liegt daran, dass der Sensor einen Offset aufweist, welcher durch die Software auf dem Mikrokontroller 
+		korrigiert wird. Dieser Offset beträgt ungefähr 1.7g. Da der Schwellwert jedoch im Sensor intern ausgewertet
+		wird, wird entgegen der obigen Berechnung \ref{calc:LSBvalue} der Interrupt um ungefähr 1.7g zu früh ausgelöst. Da bei 
+		der Anwendung in der Uhr in einem viel grösseren Messbereich gearbeitet wird, spielt dieser Fehler keine Rolle. 
+		
+		Für den Test an der Aussenuhr wurden die Parameter Schwellwert und Dauer belassen, nur die minimal vergangene 
+		Zeit seit dem letzten Schock wurde auf 200ms reduziert. Für den Test wurde zweimal die schwere, zweimal die 
+		leichte Stahlkugel auf die Aussenuhr fallen gelassen. Nach dreimaligem Aufprall des Softballs und Rütteln 
+		an der Uhr, wurde mit der Faust auf die Scheibe geschlagen. Wie in \autoref{fig:shockdetect_uhr} zu sehen 
+		ist, verhielt sich der Schock Detektor wie erwartet. Die Kugeln und Faustschläge wurden detektiert. 
+		Der Aufprall des Softballs (Annäherung an die Sog-Druckwelle des Zuges) und das Rütteln wurden wie gewünscht
+		nicht detektiert. Dieser Versuch wurde mit der Kamera gefilmt. Bei detektiertem Schock ertönt ein akustisches
+		Signal. Das Video befindet sich auf der CD. 
+		\begin{figure}
+			\centering
+			\includegraphics[width=15.5cm]{img/msg10/test_uhr.png}
+			\caption{Test der Schock Detektion an der Aussenuhr}
+			\label{fig:shockdetect_uhr}
+		\end{figure}
+		\vspace{-1.5cm}
+		\paragraph{Fazit}
+		Es wurde ein einfacher Algorithmus implementiert, um ein Schock Event zu detektieren. Dabei wurde die 
+		Schock Detektion des Sensors benutzt. Der Sensor bietet die Möglichkeit, einen Schwellwert und eine
+		minimale Dauer zu konfigurieren. Erkennt der Sensor einen Schock, so wird ein Interrupt gesetzt. Der
+		Mikrokontroller erkennt den Schock indem er das Interrupt Register ausliest oder den Interrupt Pin des
+		Sensors abfragt. Zusätzlich wurde ein dritter Parameter in der Software auf dem Mikrokontroller 
+		hinzugefügt. Dies ist die minimale Dauer seit dem letzten Schock Event. 
+		
+		Mit diesem einfachen Algorithmus ist es gelungen, Schläge zu detektieren. Der Aufprall eines Softballs, welcher 
+		eine grössere Kontaktfläche als zur Folge hat, oder das Rütteln am Rahmen, löst keine Schockerkennung aus. 
+		Es werden nur Einwirkungen auf die Scheibe detektiert. Die Scheibe ist jene Komponente an der Aussenuhr, 
+		welche am ehesten beschädigt wird. 
 	
 	

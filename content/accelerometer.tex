@@ -1,11 +1,11 @@
-\chapter{Beschleunigungssensoren}
+\chapter{Beschleunigungssensoren} \label{chap:acc_sens}
 	\section{Funktionsprinzip} \index{Beschleunigungssensor} 
-	Beschleunigungssensoren werden gebraucht, um durch externe Kräfte verursachte Beschleunigungen 
+	Beschleunigungssensoren werden eingesetzt, um durch externe Kräfte verursachte Beschleunigungen 
 	zu messen. Nach Newtons zweitem Axiom (vgl. \autoref{sec:impuls}) berechnet sich die Beschleunigung z
 	\begin{equation}
 	\vec{a} = \frac{\vec{F}}{m}
 	\end{equation}
-	wobei die Richtung der Beschleunigung die Selbe wie die der Kraft ist. Um eine Beschleunigung zu 
+	wobei die Richtung der Beschleunigung dieselbe wie die der Kraft ist. Um eine Beschleunigung zu 
 	messen, muss man somit die einwirkende Kraft auf eine definierte Masse kennen. Ein wichtiger Teil 
 	eines Beschleunigungssensors ist somit der Kraftsensor. Der Kraftsensor besteht aus einer Feder, 
 	welche sich unter dem Einfluss der Kraft deformiert, und einem Deformationssensor, um den 
@@ -14,7 +14,7 @@
 		\centering
 		\captionsetup{width = 8cm}
 		\includegraphics[width=8cm]{img/prinzip_accel.png}
-		\caption{Prinzipieller Aufbau eines Beschleunigungssensors. Aus \cite{ModernSensor}}
+		\caption[Prinzipieller Aufbau eines Beschleunigungssensors]{Prinzipieller Aufbau eines Beschleunigungssensors. Aus \cite{ModernSensor}}
 		\label{fig:prinzip_accel}
 	\end{figure}
 	Die \autoref{fig:prinzip_accel} zeigt den prinzipiellen Aufbau eines Beschleunigungssensors. 
@@ -46,7 +46,7 @@
 	hat den Effekt, dass der Sensor weniger empfindlich ist. Die Empfindlichkeit wird normalerweise
 	bei einer Anregung mit einer harmonischen Schwingung bestimmter Frequenz gemessen. 
 	
-	Der \textbf{Frequenzgang} (engl. frequncy response) eines Sensors sollte im 
+	Der \textbf{Frequenzgang} (engl. frequency response) eines Sensors sollte im 
 	benutzten Frequenzbereich konstant sein, so dass der Sensor für alle Frequenzen 
 	gleich empfindlich ist. Im Datenblatt wird der Frequenzbereich angegeben, in welchem 
 	die Empfindlichkeit nicht mehr als beispielsweise 5\% von der Referenzempfindlichkeit 
@@ -57,7 +57,7 @@
 		\centering
 		\captionsetup{width = 8cm}
 		\includegraphics[width=8cm]{img/frequenzgang.png}
-		\caption{Typischer Frequenzgang des KS93 \cite{KS93}}
+		\caption[Typischer Frequenzgang des KS93]{Typischer Frequenzgang des KS93 \cite{KS93}}
 		\label{fig:frequenzgang}
 	\end{figure}
 	
@@ -76,7 +76,7 @@
 	
 	Ein wichtiger Trend bei den Sensortechnologien ist die \textbf{Mikrominiaturisierung}. Eine Form
 	der Mikrominiaturisierung ist die \textbf{MEMS-Technologie} (engl. micro-electro-mechanical
-	systems). MEMS-Sensoren beinhalten elektronische und mechanische Komponenten. Meist sind ist dies
+	systems). MEMS Sensoren beinhalten elektronische und mechanische Komponenten. Meist sind ist dies
 	eine Einheit, welche die Daten verarbeitet (Mikroprozessor) und mindestens ein Mikrosensor welcher eine
 	mechanische Funktion ausübt. Die elektrische Schaltung und die mechanischen Komponenten sind alle
 	in einem Siliziumsubstrat integriert. Die Dimensionen der Komponenten liegen in der Grössenordnung von
@@ -92,7 +92,7 @@
 		Kraft zur einen Elektrode hin, so entsteht eine Differenz zwischen den beiden Kapazitäten, welche
 		der Auslenkung der Prüfmasse und somit der Beschleunigung entspricht. Durch den
 		Differenzkondensator können diverse Störungen der Umgebung welche die Kapazität eines Kondensators
-		ändern eliminiert werden. Ein Besipiel eines kapazitiven Beschleunigungssensors mit MEMS-
+		ändern eliminiert werden. Ein Beispiel eines kapazitiven Beschleunigungssensors mit MEMS-
 		Technologie zeigt \autoref{fig:kap_mems}. Die Vorteile kapazitiver Beschleunigungssensoren ist die
 		realisierbare hohe Empfindlichkeit, die Möglichkeit, Beschleunigungen mit der Frequenz null
 		(statische Beschleunigungen) zu messen, die günstige Produktion und die Mikrominiaturisierung.
@@ -100,7 +100,7 @@
 				\centering
 				%\captionsetup{width = 8cm}
 				\includegraphics[width=7cm]{img/kap_mems.png}
-				\caption{Beispiel eines kapazitiven MEMS Beschleunigungssensors. Base und Cap bilden die festen
+				\caption[Beispiel eines kapazitiven MEMS Beschleunigungssensors]{Beispiel eines kapazitiven MEMS Beschleunigungssensors. Base und Cap bilden die festen
 					Elektroden, $C_{mc}$ und $C_{mb}$ sind die beiden Kapazitäten zwischen den Elektroden und der
 					Prüfmasse. Durch die Auf- oder Abbewegung der Prüfmasse verändern sich die Abstände $d_1$ und
 					$d_2$, was die Differenz der beiden Kapazitäten ändert \cite{ModernSensor}.}
@@ -114,7 +114,7 @@
 		haben eine grosse Bandbreite, können statische Beschleunigungen messen und halten Schocks bis zu
 		10'000g aus. Ausserdem ist auch dieses Wirkprinzip für Mikrominiaturisierung geeignet.
 		
-	\subsection{Piezoelektrsiche Beschleunigungssensoren} \index{Beschleunigungssensor!piezoelektrisch} \index{Piezoelektrischer Effekt}
+	\subsection{Piezoelektrsiche Beschleunigungssensoren} \label{acc_piezoel} \index{Beschleunigungssensor!piezoelektrisch} \index{Piezoelektrischer Effekt}
 		Der piezoelektrische Effekt ist die Verschiebung von Ladungen durch die Belastung oder Deformation des kristallinen 
 		Materials. Um die Ladung zu messen, platziert man zwei Elektroden mit dem Piezokristall dazwischen. Dadurch entsteht
 		ein Kondensator, dessen Dielektrikum der Piezokristall ist. Wird der Piezokristall belastet, so lädt sich der 
@@ -127,7 +127,7 @@
 			\centering
 			\captionsetup{width = 12cm}
 			\includegraphics[width=12cm]{img/piezoel_sens.png}
-			\caption{Verschiedene Anordnungsmöglichkeiten von Prüfmasse und piezoelektrischem Sensor im Gehäuse \cite{ModernSensor}.}
+			\caption[Verschiedene Anordnungsmöglichkeiten von Prüfmasse und piezoelektrischem Sensor im Gehäuse]{Verschiedene Anordnungsmöglichkeiten von Prüfmasse und piezoelektrischem Sensor im Gehäuse \cite{ModernSensor}.}
 			\label{fig:piezoel_sens}
 		\end{figure}	
 		Piezoelektrische Sensoren welche die Signalverarbeitung im Sensor integriert haben, heissen IEPE	\index{IEPE}
@@ -137,11 +137,36 @@
 		Das übermittelte Signal ist anfällig auf Störungen. Deshalb wird ein spezielles Kabel für die Übertragung
 		zum Ladungsverstärker verwendet. Der Vorteil von Sensoren ohne integrierte Signalverarbeitung ist eine
 		höhere Temperaturfestigkeit. 
+		\newpage
 	\subsection{Thermische Beschleunigungssensoren} \index{Beschleunigungssensor!thermisch}
-		Bei thermischen Beschleunigungssensoren gilt es zwei Wirkprinzipien zu unterscheiden: 
-	
-	
-	
-	
-	
-	(Faden, 2016, \cite[S.393]{ModernSensor})
+		Bei thermischen Beschleunigungssensoren gilt es zwei Wirkprinzipien zu unterscheiden. Der Heated
+		Plate Accelerometer besteht aus einer seismischen Masse, welche aufgeheizt wird, und mindestens
+		einer thermischen Senke. Der Raum dazwischen wird mit Wärme leitendem Gas gefüllt. Die von der
+		Wärmequelle zur Senke abfliessende Wäre ist abhängig vom Abstand der Wärmequelle zur Senke. Die
+		Verschiebung der seismischen Masse kann nun mit Temperatursensoren bestimmt werden. Heated Plate
+		Accelerometer sind weniger genau als kapazitive oder piezoelektrische Sensoren. Der Vorteil dieser
+		Technologie ist die Robustheit gegenüber Umgebungstemperaturschwankungen und EMV. Die zweite Art
+		von thermischen Beschleunigungssensoren sind Heated Gas Accelerometer (HGA). Die seismische Masse bei
+		diesem Sensor ist Gas. Es ist unter einer Kuppel gefangen. Unter der Kuppel befindet sich in
+		der Mitte eine Heizung und in gleichen Abständen zur Heizung vier Temperatursensoren. Erfährt der
+		Sensor keine Beschleunigung, ist die Verteilung des Gases unter der Kuppel symmetrisch. Ist
+		hingegen der Sensor beschleunigt, bewegen sich die wärmeren Moleküle schneller als die kälteren,
+		trägeren Moleküle. Die Verteilung des Gases ändert sich und die Temperatursensoren messen eine
+		Temperaturdifferenz. Damit kann die Richtung und Grösse der Beschleunigung bestimmt werden. Heated
+		Gas Accelerometer sind demnach zweiachsig. Die Vorteile von Heated Gas Accelerometer sind die hohe
+		Robustheit gegenüber Schocks bis 50'000g, das Messen von dynamischen und statischen
+		Beschleunigungen, die kleine Grösse und der Preis. Als Nachteil ist die relativ geringe
+		Reaktionsgeschwindigkeit aufgrund der Trägheit des Gases zu nennen. Für viele Anwendungen wie
+		beispielsweise in Smartphones oder Kameras ist eine schnellere Reaktion jedoch nicht nötig.
+		\begin{figure}
+			\centering
+			\captionsetup{width = 12cm}
+			\includegraphics[width=12cm]{img/HGA.png}
+			\caption[Prinzip von HGAs]{Prinzip von HGAs: bei a) ist das Gas symmetrisch verteilt. Erfährt der Sensor eine Beschleunigung, 
+					wird das Gas asymmetrisch verteilt und die Temperatursensoren messen eine Temperaturdifferenz \cite{ModernSensor}.}
+			\label{fig:piezoel_sens}
+		\end{figure}
+		
+		Das \autoref{chap:acc_sens} Beschleunigungssensoren basiert grösstenteils auf dem Buch 
+		\emph{Handbook of Modern Sensors}  \cite{ModernSensor}. Weitere Quellen 
+		sind \cite{STH} und \cite{Buchner}. 

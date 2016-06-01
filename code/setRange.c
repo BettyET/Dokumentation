@@ -16,8 +16,7 @@ void setRange(RANGE_t rg){
 	}
 	reg &= 0xCF;				/* mask */
 	reg |= rg <<4;
-	/* strange error: need to wait a moment after reading a register before writing */
-	WAIT1_WaitOSms(1);	
+	WAIT1_WaitOSms(1);	/* need to wait after reading a register before writing */
 	res = H3LI_WriteReg(CTRL_REG_4, reg);
 	if (res != ERR_OK){
 		for(;;);					/* error */

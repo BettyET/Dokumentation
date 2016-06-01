@@ -1,0 +1,102 @@
+\chapter{Zusammenfassung}
+	Im Rahmen der vorliegenden Arbeit wurde die Machbarkeit einer Schock Detektor mittels Beschleunigungssensoren 
+	für vernetzte Aussenuhren geklärt. 
+	
+	Die Schock Detektor für vernetzte Aussenuhren ist mittels Beschleunigungsmessung grundsätzlich
+	möglich. Die Versuche mit piezoelektrischen Beschleunigungssensoren haben gezeigt, dass durch
+	optimale Platzierung des Sensors am oder im Uhrwerk eine Unterscheidung zwischen Schock Event und
+	Druck-Sogwelle eines Zuges realisierbar ist. Schläge auf die Scheibe haben grosse
+	Beschleunigungen im dreistelligen Bereich am Uhrwerk zur
+	Folge. Im Gegensatz dazu misst der an dieser Position befestigte Sensor bei Kräften, welche auf
+	einer grösseren Fläche wirken, nur kleine Beschleunigungen. Dies ist beispielsweise bei der Druck-Sogwelle eines Zuges
+	der Fall. 
+	
+	In einem weiteren Schritt wurde ein Datenlogger mit dem MEMS Sensor H3LIS331DL entwickelt. Der 
+	funktionierende Datenlogger hat gezeigt, dass die Realisierung eines Schock Detektors 
+	günstig und einfach möglich ist. Ein Algorithmus mit drei Parametern Schwellwert, 
+	minimale Dauer und minimale vergangene Zeit seit dem letzten Schock wurde implementiert und
+	erfolgreich an der Versuchsuhr getestet. 
+	
+	Zum Schluss wurden die verschiedenen Möglichkeiten, einen Schock Detektor im bestehenden 
+	Clock Set zu integrieren, zusammengetragen. Die Vor- und Nachteile der Lösungen wurden diskutiert. 
+	Die beste Realisierungsidee wurde umgesetzt. Das Schock Detektor Modul kann an die Rückseite des Uhrwerks montiert werden
+	und dient als Datenlogger mit Schnittstelle an einen Computer, kann aber auch an den Clock Controller angeschlossen 
+	werden. Messungen an Bahnhöfen und über längere Zeit sind unumgänglich. Die Uhren haben 
+	verschiedene Durchmesser und sind verschieden montiert. Mit dem Schock Detektor Modul 
+	kann eine umfassendere Messreihe an verschiedenen Bahnhöfen und Aussenuhren durchgeführt werden. 
+	
+	Die folgende Anforderungsliste zeigt die zu Beginn der Arbeit definierten Anforderungen und deren Erfüllungsgrad 
+	am Schluss der Arbeit. Die Anforderungen an das Produkt sind zwar Forderungen, mussten jedoch noch nicht
+	zwingend im Rahmen dieser Arbeit erfüllt werden. So ist es nicht schlimm, so dass die Zeit nicht gereicht hat, 
+	die Software so zu erweitern, dass der Alarm über SNMP abgesetzt werden kann. Abklärungen 
+	zur Realisierung auf den bestehenden ATMEL- Kontrollern wurden insofern gemacht, dass die ungefähre
+	Auslastung der Betriebssysteme bekannt sind. Genauere Untersuchungen folgen, sobald die 
+	Software auf dem Schock Detektor Modul in Betrieb ist. Zusammenfassend lässt sich sagen, dass die 
+	zu Beginn der Arbeit definierten Ziele erreicht wurden. Darüber hinaus wurde ein erster Prototyp 
+	der Schock Detektor als "'Schock Detektor Modul"' realisiert. 
+	\newpage
+	
+	\paragraph{Anforderungsliste}	\label{chap:anforderungen}
+	\begin{longtable}{p{0.5cm} p{0.5cm} p{8.5cm} p{0.75cm} p{1.5cm}} \toprule
+		\textbf{Nr.}	&  &\textbf{Anforderung} & \textbf{Prio} & \textbf{Erfül-lungsgrad}\\	
+		\midrule
+		\endhead
+		\multicolumn{3}{l}{\emph{Fortsetzung auf nächster Seite}}	\\ \bottomrule \endfoot \endlastfoot
+		\\
+		&		&\multicolumn{2}{l}{\textbf{Anforderungen an die Machbarkeitsstudie}}							
+		\\
+		1 & 	&	Es ist zu überprüfen, ob mit einem Beschleunigungssensor 
+		Vandalismus an einer Uhr (Beschädigung Scheibe, Uhrwerk) 
+		erkannt werden kann												& F & \cellcolor{green}erfüllt \\ 
+		2 &  	& 	Der Vandalismus muss von Windböen und der Sog-Druckwelle 
+		eines Zuges unterschieden werden können. 						& F & \cellcolor{green}erfüllt \\		
+		3 & 	& 	Es sollen verschiedene Schock-Situationen getestet werden.		& F & \cellcolor{green}erfüllt \\
+		& 3.1	&	Es soll ein geeigneter Messaufbau entwickelt werden, um 
+		die Schock-Situationen zu simulieren. 							&F & \cellcolor{green}erfüllt \\
+		& 3.2 & 	Der Messaufbau muss so gewählt werden, dass die Messungen 
+		reproduzierbar sind. 											&F & \cellcolor{green}erfüllt \\
+		4 & 	&	Falls die Detektion möglich ist, soll ein geeigneter 
+		Algorithmus entwickelt werden (z.B. in MATLAB). 				& F & \cellcolor{green}erfüllt \\
+		5 & 	& 	Es soll abgeklärt werden, ob die Implementierung auf dem
+		vorhandenem ATMEL- Kontroller realisiert werden kann.			& F & \cellcolor{orange}teilweise erfüllt \\
+		&	5.1	&	Falls die Implementierung auf dem ATMEL- Kontroller nicht
+		realisiert werden kann, muss abgeklärt werden, welche
+		anderen Komponenten benötigt werden.							& F &\cellcolor{green}erfüllt \\
+		6 &		& 	Der Stromverbrauch der Produkterweiterung soll abgeklärt und
+		dokumentiert werden.											& F &\cellcolor{green} erfüllt \\
+		7 & 	& 	Es soll abgeklärt werden, ob eine vorhandene Schnittstelle 
+		(SPI, I2C, UART) verwendet werden kann.							& W &\cellcolor{green}erfüllt \\
+		\\
+		&		&\multicolumn{2}{l}{\textbf{Anforderungen an das Produkt}}								
+		\\
+		1 &		& 	Die Sensorik darf von aussen nicht sichtbar sein.	& F &\cellcolor{green}erfüllt \\
+		2 & 	& 	Der Alarm soll mittels SNMP über die bestehende Uhrsteuerung
+		abgesetzt werden können.										& F &\cellcolor{red}nicht erfüllt \\
+		3 &		&	Die Kosten für den Sensor liegen im Bereich von 5 bis maximal 10 Fr.
+		pro Stück.														& F & \cellcolor{green}erfüllt \\
+		4 & 	& 	Das Sensormodul soll einfach in der Uhr montiert werden können.
+		Die Platzverhältnisse sind insofern beschränkt, dass die
+		Beleuchtung der Uhr nicht gestört wird (siehe Anforderung
+		Produkt Nr. 1)													& F & \cellcolor{green}erfüllt \\
+		5 & 	&	Das Produkt muss bei einer Betriebstemperatur von -30 bis +70°C 
+		arbeiten.  														& F & \cellcolor{green}erfüllt \\
+		\bottomrule					 	
+		\caption{Anforderungen an die Machbarkeitsstudie und an das Produkt} 
+		\label{tab:Anforderungen}
+	\end{longtable}
+	
+	\paragraph{Lessons Learned}
+	%\chapter{Lessons Learned}
+		Eine Herausforderung dieser Arbeit war, dass Messungen auf dem Perron nicht möglich waren.
+		Deshalb musst eine andere Lösung gefunden werden, abzuschätzen, was für einen Einfluss
+		Durck-Sogwellen eines Zuges auf die Beschleunigung in der Aussenuhr hat. Dies hat gezeigt,
+		dass nicht nur der auf den ersten Blick offensichtliche Weg zum Ziel führt, sondern mit Geduld ein
+		anderer Ansatz gefunden werden kann.
+		
+		Bei Inbetriebnahme des MEMS Beschleunigungssensors lag die Schwierigkeit darin, dass das
+		Datenblatt des Öfteren Fragen unbeantwortet liess. So war es zu Beginn nicht klar, wie genau die
+		Beschleunigungsdaten interpretiert werden müssen.
+		
+		Bei der Softwareentwicklung des Datenloggers wurde das Gelernte über das Betriebssystem
+		FreeRTOS das erste Mal richtig angewendet. Die effizientere Inter-Task-Kommunikation mittels Task
+		Notifications war jedoch ein neuer Ansatz. Es ist nie ausgelernt!

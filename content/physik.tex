@@ -9,16 +9,14 @@
 
 Dieses Kapitel beinhaltet eine Übersicht über die für die Arbeit wichtigen physikalischen Begriffe
 Schock, Beschleunigung, Impuls, Kraftstoss und mechanischen Schwingungen sowie über die Fourier Analyse
-analoger Signale. Die Abschnitte Beschleunigung \ref{sec:beschleunigung} und Impuls und Kraftstoss
-\ref{sec:impuls} basieren auf dem Unterrichtsskript des Physikunterrichts an der Hochschule Luzern
-\cite{Mechanik}.
+analoger Signale. 
 
 \section{Definition eines Schocks} \index{Schock} 
 \begin{wrapfigure}[10]{r}{7cm}
 	\centering
 	\vspace{-0.8cm}
 	\includegraphics[width=7cm]{img/shock.png}
-	\caption{Beispiel eines Schocks aus \cite{VSH}}
+	\caption[Beispiel eines Schocks]{Beispiel eines Schocks aus \cite{VSH}}
 	\label{fig:def_shock}
 \end{wrapfigure}
 Nach de Silva et al. \cite{VSH} ist ein \textbf{Schock} erfolgt falls sich eine Kraft, eine Position, eine Geschwindigkeit oder eine 
@@ -50,7 +48,7 @@ Geschwindigkeit, die Geschwindigkeits-Zuwachs-Rate
 Die Änderung der Geschwindigkeit benötigt nach Newtons zweitem Axiom die Einwirkung einer 
 Kraft (vgl. \autoref{sec:impuls}).
 
-Der Zusammenhang der Grössen durch Differentation gilt auch umgekehrt. So kann die Geschwindigkeit
+Der Zusammenhang der Grössen durch Differentiation gilt auch umgekehrt. So kann die Geschwindigkeit
 oder die zurückgelegte Strecke durch Integration der Beschleunigung bzw. Geschwindigkeit berechnet
 werden.
 	
@@ -74,8 +72,8 @@ a_{ZP}=\frac{v^2}{r}= \omega^2\cdot r
 
 Die \textbf{Erdbeschleunigung} g setzt sich aus zwei Komponenten zusammen: die Anziehung der
 Massen und der Rotationsbeschleunigung aufgrund der Erdrotation. In dieser Arbeit 
-wird für g jeweils der mittlere Wert von 9.81$\frac{m}{s^2}$ angenommen (Faden,2016,\cite{ModernSensor}). 
-
+wird für g jeweils der mittlere Wert von 9.81$\frac{m}{s^2}$ angenommen.  
+(Aus \cite{ModernSensor})
 \section{Impuls und Kraftstoss} \label{sec:impuls} \index{Bewegungsgleichung} \index{Impuls} 
 Die Beschreibung, wie sich Körper bewegen, wird mit den drei Axiomen von Newton 
 erweitert. Dabei wird die Frage beantwortet, warum sich etwas bewegt. Ein 
@@ -99,24 +97,30 @@ die Fläche unter der Kraft-Zeit-Kurve. Er entspricht der Impulsübertragung.
 \vec{J} = \int_{t_1}^{t_2} \! \vec{F}(t) \, \mathrm{d}t = \vec{p}_2 - \vec{p}_1
 \end{equation}
 Aus dem Kraftstoss lässt sich eine durchschnittlich wirkende Kraft berechnen (\autoref{fig:druchschnittskraft})
+	\begin{figure}
+		\centering
+		\includegraphics[width=4.5cm]{img/durchschnittskraft.png}
+		\caption[Durchschnittliche Kraft $F_{av}$]{Durchschnittliche Kraft $F_{av}$ \cite{Mechanik}}
+		\label{fig:druchschnittskraft}
+	\end{figure}
+	\vspace{-1cm}
 \begin{equation}
 \vec{F}_{average} = \frac{\vec{J}}{\Delta t} = \frac{\vec{p}_2 - \vec{p}_1}{t_2- t_1} . 
 \end{equation}
-	
 Ein Impulsübertrag kann bei kurzen, heftigen Stössen oder langen, sanften Stössen 
 gleich gross sein. Die Form des Impulses hängt von der Steifigkeit der Materialien ab, welche aufeinander treffen. 
-\begin{wrapfigure}[0]{r}{4.55cm}
-	\vspace{1.2cm}
-	\centering
-	\includegraphics[width=4.55cm]{img/durchschnittskraft.png}
-	\caption[Durchschnittliche Kraft $F_{av}$]{Durchschnittliche Kraft $F_{av}$ \cite{Mechanik}}
-	\label{fig:druchschnittskraft}
-\end{wrapfigure}
+%\begin{wrapfigure}[0]{r}{4.55cm}
+%	\vspace{1.2cm}
+%	\centering
+%	\includegraphics[width=4.55cm]{img/durchschnittskraft.png}
+%	\caption[Durchschnittliche Kraft $F_{av}$]{Durchschnittliche Kraft $F_{av}$ \cite{Mechanik}}
+%	\label{fig:druchschnittskraft}
+%\end{wrapfigure}
 Ein steiferes Material erzeugt einen schmaleren Impuls. Die durchschnittliche 
 Kraft $F_av$ wird dadurch grösser. Das Energiedichtespektrum wird umso breiter, je schmaler der 
-Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
+Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}. (Abschnitt basierend auf dem Unterrichtsskript Physik der Hochschule Luzern \cite{Mechanik} und \cite{Ruhm})
 	\begin{SCfigure}
-		\vspace{0.2cm}
+		%\vspace{0.2cm}
 		\centering
 		\includegraphics[width=10cm]{img/kraftstoss.png}
 		\caption[Kraftstoss]{Die Form des Impulses hängt von der Steifigkeit des Materials ab. 
@@ -124,6 +128,8 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 			breiter wird \cite{Ruhm}.}
 		\label{fig:kraftstoss}
 	\end{SCfigure}
+	
+	
 \newpage
 \section{Schwingungen} \index{Periodische Bewegung} \index{Schwingung} \index{Rücktreibende Kraft} \index{Elongation} \index{Amplitude} \index{Harmonische Schwingung}
 	Ein Körper bewegt sich \textbf{periodisch}, wenn er nach gleichlangen Zeitabschnitten immer wieder den 
@@ -154,13 +160,13 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 	\begin{figure}
 		\centering
 		\includegraphics[width=10cm]{img/feder_masse_daempfer.png}
-		\caption{Einfachster Masse-Dämpfer-Feder Prozess \cite{Ruhm}}
+		\caption[Einfachster Masse-Dämpfer-Feder Prozess]{Einfachster Masse-Dämpfer-Feder Prozess \cite{Ruhm}}
 		\label{fig:feder_masse_daempfer}
 	\end{figure} 
 	\begin{figure}
 		\centering
 		\includegraphics[width=10cm]{img/wirkungsplan.png}
-		\caption{Wirkungsplan, in Anlehnung an \cite{Ruhm}}
+		\caption[Wirkungsplan]{Wirkungsplan, in Anlehnung an \cite{Ruhm}}
 		\label{fig:wirkungsplan}
 	\end{figure} 
 	Das Modell besteht aus physikalischen Grössen ($a$,$v$,$h$,$f$) und physikalischen Eigenschaften
@@ -193,7 +199,7 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 	\begin{figure}
 		\centering
 		\includegraphics[width=12cm]{img/spektrum.png}
-		\caption{Diskretes Linienspektrum einer periodischen Schwiungung \cite{Wassner}}
+		\caption[Diskretes Linienspektrum einer periodischen Schwingung]{Diskretes Linienspektrum einer periodischen Schwingung \cite{Wassner}}
 		\label{fig:dis_spec_rect}
 	\end{figure} 
 	Aus der Erweiterung der obigen Überlegungen auf aperiodische Signale folgt, dass das Spektrum 
@@ -201,8 +207,8 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 	unendlich strebt, somit $f_0$ gegen null strebt. Die diskreten Frequenzen rücken deshalb unendlich
 	dicht aneinander. (In Anlehnung an \cite{Wassner})
 
-\section{Sog-Druckwellen eines Zuges} \index{Sog-Druck Feld}
-	Ein vorbeifahrender Zug erzeugt ein Sog-Druck Feld. Dieses ist in der \autoref{fig:SogDruckFeld}
+\section{Druck-Sogwellen eines Zuges} \label{Durck-Sogfeld} \index{Sog-Druck Feld}
+	Ein vorbeifahrender Zug erzeugt ein Druck-Sogfeld. Dieses ist in der \autoref{fig:SogDruckFeld}
 	dargestellt. Die roten Wellen bezeichnen den Überdruck, die blauen Wellen den Unterdruck. Das
 	Sog-Druck Feld ist mit dem Zug verbunden und bewegt sich mit der gleichen Geschwindigkeit voran.
 	Das Druckfeld nimmt mit der Zuggeschwindigkeit im Quadrat zu. Es ist umso kleiner, je grösser der
@@ -215,8 +221,8 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 		\label{fig:SogDruckFeld}
 	\end{figure}	
 	Ein typischer Druckverlauf bei einem vorbeifahrenden Zug ist in der \autoref{fig:verlaufDruckwelle}
-	gezeigt. Bei der Anfahrt des Zuges wird ein Druck-Sogwechsel gemessen, bei der Ausfahrt der Zuges
-	einen Sog-Druckwechsel. Dort entstehen die grössten Druckdifferenzen. Ebenfalls grosse
+	gezeigt. Bei der Anfahrt des Zuges wird ein Druck-Sogwechsel gemessen, bei der Ausfahrt des Zuges
+	einen Sog-Druckwechsel. In diesen Momenten entstehen die grössten Druckdifferenzen. Ebenfalls grosse
 	Druckdifferenzen können bei den Kupplungsstellen der Zugzeile gemessen werden \cite{Niemann}.
 	\begin{SCfigure}
 		\centering
@@ -225,13 +231,21 @@ Impuls ist. Diese Zusammenhänge zeigt die \autoref{fig:kraftstoss}.
 		\caption[Typische Druck-Sog-Welle um einen Zug]{Typischer Druckverlauf bei einem vorbeifahrenden Zug aus \cite{Niemann}}
 		\label{fig:verlaufDruckwelle}
 	\end{SCfigure}
-	Der Abstand zwischen Durck- und Sogwelle L hängt nich von der Zugsgeschwindigkeit $v_{Zug}$ ab,
+	Der Abstand zwischen Durck- und Sogwelle L hängt nicht von der Zugsgeschwindigkeit $v_{Zug}$ ab,
 	jedoch vom Wandabstand zur Gleisachse $a_g$. 
-	Der Zusammenhang zwischen Wandabstand $a_g$ und Abstand L wurde von Niemann et. Al \cite{Niemann} hergeleitet: 
+	Der empirische Zusammenhang zwischen Wandabstand $a_g$ und Abstand L wurde von Niemann et. Al \cite{Niemann} hergeleitet: 
 	\begin{equation}
-	L=6.9 \cdot (\frac{a_g}{3.8})^{0.65} 
+	L=6.9 \cdot (\frac{a_g}{3.8})^{0.65} \label{calc:DruckSogAbstand}
 	\end{equation}
-	Bei zugnahen Wänden wird von L=6.9m ausgegangen. 
-	Der zeitliche Abstand ist von $v_{Zug}$ abhängig und beträgt bei zugnahen Wänden und der maximalen 
-	Durchfahrtsgeschwindigkeit an Bahnhöfen von 200km/h 12ms. Je grösser der Wandabstand, desto grösser der Abstand 
-	zwischen Durck- und Sogwelle und desto länger wird auch der zeitliche Abstand.  
+	Die \autoref{fig:drucksog} zeigt den Zusammenhang graphisch. 
+	\begin{SCfigure}
+		\centering
+		\includegraphics[width=6cm]{img/drucksog.png}
+		\caption[Empirischer Zusammenhang zwischen Wandabstand und Druck-Sog-Abstand]{Empirischer Zusammenhang zwischen Wandabstand und Druck-Sog-Abstand aus \cite{Niemann}.}
+		\label{fig:drucksog}
+	\end{SCfigure}
+	Bei zugnahen Wänden wird von $L=6.9m$ ausgegangen. 
+	Im Gegensatz zum Abstand L ist der zeitliche Abstand von $v_{Zug}$ abhängig. Bei der maximalen Durchfahrtsgeschwindigkeit an Bahnhöfen von 200km/h
+	beträgt diese somit im Minimum $\Delta t = \frac{s}{v}=124ms$. Je grösser der Wandabstand, desto grösser der Abstand 
+	zwischen Durck- und Sogwelle und desto länger wird auch der zeitliche Abstand. Somit wird die dynamische Anregung verlängert \cite{Niemann}. 
+	Für Systeme mit einer Eigenfrequenz oberhalb der dynamischen Anregung sinkt dadurch die Gefahr zu schwingen. 

@@ -1697,11 +1697,18 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
                   \leftmark\hfil}
    \def\@oddhead{\runheadsize\runheadstyle\hfil\rightmark\customizhead
                   \llap{\thepage}}
-   \def\chaptermark##1{\markboth{{\ifnum\c@secnumdepth>\m@ne
-      \thechapter\thechapterend\hskip\betweenumberspace\fi ##1}}{{\ifnum %!!!
-      \c@secnumdepth>\m@ne\thechapter\thechapterend\hskip\betweenumberspace\fi ##1}}}%!!!
-   \def\sectionmark##1{\markright{{\ifnum\c@secnumdepth>\z@
-      \thesection\seccounterend\hskip\betweenumberspace\fi ##1}}}}
+   \def\chaptermark##1{\markboth{{
+%   	\ifnum\c@secnumdepth>\m@ne
+%      \thechapter\thechapterend\hskip\betweenumberspace\fi ##1
+      }}
+      {{
+%      	\ifnum %!!!
+%      \c@secnumdepth>\m@ne\thechapter\thechapterend\hskip\betweenumberspace\fi ##1
+      }}}%!!!
+   \def\sectionmark##1{\markright{{
+%   			\ifnum\c@secnumdepth>\z@
+%      \thesection\seccounterend\hskip\betweenumberspace\fi ##1
+      }}}}
 
 \def\ps@myheadings{\let\@mkboth\@gobbletwo
    \let\@oddfoot\@empty\let\@evenfoot\@empty
